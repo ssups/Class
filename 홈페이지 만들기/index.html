@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+/>
+<link rel="stylesheet"  href="index.css">
+
+<body>
+    <div class='pageWrap'>
+
+        <!-- 스크롤 미니메뉴 -->
+        <div class="scrollMini">
+            <ul class="scrollMiniWrap">
+               <li><a class="reservationBtn" href="">예매하기</a></li>
+                <li><a id="topBtn" class="topBtn" href="">↑</a></li>
+            </ul>
+        </div>
+        <!-- 스크롤 미니메뉴 끝 -->
+        <!-- 맨위광고 -->
+        <div id='top_ad'>
+            <div class="banner">
+                <button id="topAdBtn"yQ>x</button>
+            </div>
+            
+        
+        </div>
+
+        <div class="header">
+            <!-- 상단 일반 메뉴 -->
+            <div class='header_contents'>
+                <div class='contents'>
+                    <h1>
+                        <a style="text-decoration:none" href="">
+                            <img src="./images/logoRed.png" height="60px" width="120px" alt="CGV">
+                        </a>
+                        <span>C U L T U R E P L E X</span>
+
+                    </h1>
+
+                    <ul class='memberItems'>
+                        <div><a href=""><img src="./images/hyundaicard.png"></a></div>
+                        <li><a href=""><img src="./images/login.png" alt=""><span>로그인</span></a></li>
+                        <li><a href=""><img src="./images/join.png" alt=""><span>회원가입</span></a></li>
+                        <li><a href=""><img src="./images/Member.png" alt=""><span>MY CGV</span></a></li>
+                        <li><a href=""><img src="./images/CS.png" alt=""><span>고객센터</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 상단 일반 메뉴 끝 -->
+            <!-- 상단 네브 메뉴 -->
+            <div class='nav'>
+                <div class='navMenuWrap'>
+                    <a class="cgv" href=""><img src="./images/logoWhite.png" alt=""></a></li>
+                    <ul class='navMenu'>
+                        <li class='menuName'>
+                            <a href="">
+                                <h3>영화</h3>
+                            </a>
+                        </li>
+                        <li class='menuName'>
+                            <a href="">
+                                <h3>극장</h3>
+                            </a>
+                        </li>
+                        <li class='menuName'>
+                            <a href="">
+                                <h3>예매</h3>
+                            </a>
+                        </li>
+                        <li class='menuName'>
+                            <a href="">
+                                <h3>스토어</h3>
+                            </a>
+                        </li>
+                        <li class='menuName'>
+                            <a href="">
+                                <h3>이벤트</h3>
+                            </a>
+                        </li>
+                        <li class='menuName'>
+                            <a href="">
+                                <h3>혜택</h3>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <div class="Search">
+                        <input class="SearchText" type="text">
+                        <button  class="SearchImg"></button>
+                    </div>
+                </div>
+                <!-- contents 끝 -->
+                <div id='navHidden'>
+                    <div class="contents">
+                        <ul>
+                            <h3>영화</h3>
+                            <li>무비차트</li>
+                            <li>아트하우스</li>
+                            <li>ICECON</li>
+                        </ul>
+                        <ul>
+                            <h3>극장</h3>
+                            <li>CGV극장</li>
+                            <li>특별관</li>
+                        </ul>
+                        <ul>
+                            <h3>예매</h3>
+                            <li>빠른예매</li>
+                            <li>상영스케줄</li>
+                            <li>English Ticketing</li>
+                            <li>Englsih Schedule</li>
+                        </ul>
+                        <ul>
+                            <h3>스토어</h3>
+                            <li>영화관람권</li>
+                            <li>기프트카드</li>
+                            <li>콤보</li>
+                            <li>팝콘</li>
+                            <li>음료</li>
+                            <li>스낵</li>
+                            <li>플레이존</li>
+                            <li>씨네샵</li>
+                        </ul>
+                        <ul>
+                            <h3>이벤트</h3>
+                            <li>SPECIAL</li>
+                            <li>영화/예매</li>
+                            <li>멤버십/CLUB</li>
+                            <li>CGV 극장별</li>
+                            <li>제휴할인</li>
+                            <li>당첨자 발표</li>
+                            <li>종료된 이벤트</li>
+                        </ul>
+                        <ul>
+                            <h3>혜택</h3>
+                            <li>CGV 할인정보</li>
+                            <li>CLUB 서비스</li>
+                            <li>VIP 라운지</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- navHidden 끝 -->
+            </div>
+            <!-- nav 끝 -->
+        </div>
+        <!-- header 끝 -->
+        <!-- main_ad 시작 -->
+        <div class='main_ad'>
+            <div class='contents'>
+                <div class="videoWrap">
+                    <video id="videoAd" autoplay muted>
+                        <source src="https://adimg.cgv.co.kr/images/202205/Witch2/220527_Witch2_1080x608.mp4"
+                            type="video/mp4">
+                    </video>
+                    <strong id="ctl00_PlaceHolderContent_AD_MOVIE_NM" class="movieSelection_title">마녀(魔女) Part2. The
+                        Other One</strong>
+                    <span id="ctl00_PlaceHolderContent_AD_DESCRIPTION_NM" class="movieSelection_txt"><p>모든 것의 시작,</p><p>또 다른
+                        존재가 깨어난다!</p></span>
+                    </div>
+                </div>
+
+        </div>
+        <!-- main_ad 끝 -->
+        <!-- 무비차트 스와이퍼 -->
+        <div class="chartSwiper">
+            <div class="contents">
+                <div class="top">
+                    <div class="index">
+                        <a id = 'indexBtnLeft'>
+                            <h2>무비차트</h2>
+                        </a>    
+                        <a id = 'indexBtnRight'>
+                            <h2>상영예정작</h2>
+                        </a>
+                        
+                    </div>
+                    <div class='btn'>전체보기</div>
+                <!-- 스와이퍼 시작 -->
+                </div>
+                <!-- 무비차트 -->
+                <div class="swiper mySwiper" id="chartSwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <ul>
+                                <li>
+                                    <img src="./images/movie1.jpeg" alt="">
+                                    <h1>1</h1>
+                                    <h4>브로커</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie2.jpeg" alt="">
+                                    <h1>2</h1>
+                                    <h4>범죄도시</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie3.jpeg" alt="">
+                                    <h1>3</h1>
+                                    <h4>쥬라기 월드-도미니언</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie4.jpeg" alt="">
+                                    <h1>4</h1>
+                                    <h4>마녀(魔女) Part2.…</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie5.jpeg" alt="">
+                                    <h1>5</h1>
+                                    <h4>극장판 포켓몬스터D…</h4>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li>
+                                    <img src="./images/movie6.jpeg" alt="">
+                                    <h1>6</h1>
+                                    <h4>탑건-매버릭</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie7.jpeg" alt="">
+                                    <h1>7</h1>
+                                    <h4>버즈 라이트이어</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie8.jpeg" alt="">
+                                    <h1>8</h1>
+                                    <h4>(라이브뷰잉)Ense…</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie9.jpeg" alt="">
+                                    <h1>9</h1>
+                                    <h4>애프터 양</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie10.jpeg" alt="">
+                                    <h1>10</h1>
+                                    <h4>닥터 스트레인지-대…</h4>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li>
+                                    <img src="./images/movie11.jpeg" alt="">
+                                    <h1>11</h1>
+                                    <h4>베르마네 부인의 장미…</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie12.jpeg" alt="">
+                                    <h1>12</h1>
+                                    <h4>그대가 조국</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie13.jpeg" alt="">
+                                    <h1>13</h1>
+                                    <h4>윤시내가 사라졌다</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie14.jpeg" alt="">
+                                    <h1>14</h1>
+                                    <h4>이공삼칠</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie15.jpeg" alt="">
+                                    <h1>15</h1>
+                                    <h4>2022 뮤지컬 태양의…</h4>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li>
+                                    <img src="./images/movie15.jpeg" alt="">
+                                    <h1>15</h1>
+                                    <h4>2022 뮤지컬 태양의…</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie16.jpeg" alt="">
+                                    <h1>16</h1>
+                                    <h4>[한밤의 미술관]2n…</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie17.jpeg" alt="">
+                                    <h1>17</h1>
+                                    <h4>라이프 해커 자청의…</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie18.jpeg" alt="">
+                                    <h1>18</h1>
+                                    <h4>실종</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/movie19.jpeg" alt="">
+                                    <h1>19</h1>
+                                    <h4>카시오페아</h4>
+                                </li>
+                            </ul>          
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                  </div>
+
+                    <!-- 상영예정작  -->
+                  <div class="swiper mySwiper" id="anotherSwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <ul>
+                                <li>
+                                    <img src="./images/another1.jpeg" alt="">
+                                    <h1>1</h1>
+                                    <h4>[한밤의 미술관]2n…</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another2.jpeg" alt="">
+                                    <h1>2</h1>
+                                    <h4>라이브 해커 자청의…</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another3.jpeg" alt="">
+                                    <h1>3</h1>
+                                    <h4>[LIVE CLASS 씨네…]</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another4.jpeg" alt="">
+                                    <h1>4</h1>
+                                    <h4>[콘서트&다이닝]다…</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another5.jpeg" alt="">
+                                    <h1>5</h1>
+                                    <h4>[아트&다이닝]스페…</h4>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li>
+                                    <img src="./images/another6.jpeg" alt="">
+                                    <h1>6</h1>
+                                    <h4>[사이다경제_사계강…</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another7.jpeg" alt="">
+                                    <h1>7</h1>
+                                    <h4>마녀(魔女) Part2.T…</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another8.jpeg" alt="">
+                                    <h1>8</h1>
+                                    <h4>버즈 라이트이어</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another9.jpeg" alt="">
+                                    <h1>9</h1>
+                                    <h4>실종</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another10.jpeg" alt="">
+                                    <h1>10</h1>
+                                    <h4>[사이다경제_사계강…</h4>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li>
+                                    <img src="./images/another11.jpeg" alt="">
+                                    <h1>11</h1>
+                                    <h4>구름의 저편, 약속의…</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another12.jpeg" alt="">
+                                    <h1>12</h1>
+                                    <h4>이별의 아침에 약속…</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another13.jpeg" alt="">
+                                    <h1>13</h1>
+                                    <h4>꼭두각시</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another14.jpeg" alt="">
+                                    <h1>14</h1>
+                                    <h4>더 렛지</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another15.jpeg" alt="">
+                                    <h1>15</h1>
+                                    <h4>경아의 딸</h4>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li>
+                                    <img src="./images/another16.jpeg" alt="">
+                                    <h1>15</h1>
+                                    <h4>그대라는기억 연숙씨</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another17.jpeg" alt="">
+                                    <h1>16</h1>
+                                    <h4>벰-비컴 휴먼</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another18.jpeg" alt="">
+                                    <h1>17</h1>
+                                    <h4>아부쟁이</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another19.jpeg" alt="">
+                                    <h1>18</h1>
+                                    <h4>[아트&비어]베를린,…</h4>
+                                </li>
+                                <li>
+                                    <img src="./images/another20.jpeg" alt="">
+                                    <h1>19</h1>
+                                    <h4>스토리업쇼츠 섹션1…</h4>
+                                </li>
+                            </ul>          
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                  </div>
+
+            </div>
+        </div>
+        <!-- 특별관 -->
+        <div class = 'specialHall'>
+            <div class = 'specialHallWrap'>
+                <div class="title">
+                    <h2>특별관</h2>
+                    <a href="">전체보기</a>
+                </div>
+                <div class="contents">
+                    <div class = hallImgs>
+                        <img src="./images/hall1.png" alt="">
+                        <img src="./images/hall2.png" alt="">
+                        <img src="./images/hall3.png" alt="">
+                        <img src="./images/hall4.png" alt="">
+                    </div>
+                    <div class="hallNames"><ul>
+                        <li><a href="">
+                            <h3>SUITE CINEMA</h3>
+                            #호텔 컨셉의 프리미엄관
+                        </a></li>
+                        <li><a href="">
+                            <h3>SKY BOX</h3>
+                            #Premium #Private
+                        </a></li>
+                        <li><a href="">
+                            <h3>4DX</h3>
+                            #모션시트 #오감체험
+                        </li></a>
+                        <li class="lastone"><a href="">
+                            <h3>CINE de CHEF</h3>
+                            #쉐프가 있는 영화관
+                        </a></li>
+                    </ul></div>
+                </ul></div>
+
+            </div>
+        </div>
+        <!-- 특별관 끝 -->
+        <!-- 영화관람권 -->
+        <div class="card" style="height: 450px;">
+            <div class="cardWrap">
+                <ul>
+                    <li><h3>영화관람권</h3></li>
+                    <li><a href="">
+                        <img src="./images/card1.jpeg" alt="">
+                        <span>
+                            <p>CGV 영화관람권</p>
+                            <p>12,000원</p>
+                        </span>
+                    </a></li>
+                    <li><a href="">
+                        <img src="./images/card2.jpeg" alt="">
+                        <span>
+                            <p>CGV 영화관람권</p>
+                            <p>12,000원</p>
+                        </span>
+                    </a></li>
+                    <li><a href="">
+                        <img src="./images/card3.jpeg" alt="">
+                        <span>
+                            <p>CGV 영화관람권</p>
+                            <p>12,000원</p>
+                        </span>
+                    </a></li>
+                </ul>
+                <ul>
+                    <li><h3>기프트카드</h3></li>
+                    <li><a href="">
+                        <img src="./images/card4.jpeg" alt="">
+                        <span>
+                            <p>CGV 영화관람권</p>
+                            <p>12,000원</p>
+                        </span>
+                    </a></li>
+                    <li><a href="">
+                        <img src="./images/card5.jpeg" alt="">
+                        <span>
+                            <p>CGV 영화관람권</p>
+                            <p>12,000원</p>
+                        </span>
+                    </a></li>
+                    <li><a href="">
+                        <img src="./images/card6.jpeg" alt="">
+                        <span>
+                            <p>CGV 영화관람권</p>
+                            <p>12,000원</p>
+                        </span>
+                    </a></li>
+                </ul>
+                <ul>
+                    <li><h3>콤보</h3></li>
+                    <li><a href="">
+                        <img src="./images/card7.jpeg" alt="">
+                        <span>
+                            <p>CGV 영화관람권</p>
+                            <p>12,000원</p>
+                        </span>
+                    </a></li>
+                    <li><a href="">
+                        <img src="./images/card8.jpeg" alt="">
+                        <span>
+                            <p>CGV 영화관람권</p>
+                            <p>12,000원</p>
+                        </span>
+                    </a></li>
+                    <li><a href="">
+                        <img src="./images/card9.jpeg" alt="">
+                        <span>
+                            <p>CGV 영화관람권</p>
+                            <p>12,000원</p>
+                        </span>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 영화관람권 끝 -->
+    </div>
+    
+</body>
+<footer>
+        <!-- 바닥배너 -->
+        <div class ='footBanner'>
+            <div class="footBannerWrap">
+                <img src="./images/footbanner.png" alt="">
+            </div>
+
+        </div>
+        <!-- 바닥배너 끝 -->
+        <!-- 바닥 리스트 -->
+        <div class="list">
+            <ul>
+                <li><a href="">회사소개</a></li>
+                <li><a href="">IR</a></li>
+                <li><a href="">채용정보</a></li>
+                <li><a href="">광고/제휴/출점문의</a></li>
+                <li><a href="">이용약관</a></li>
+                <li><a href="">편성기준</a></li>
+                <li><a href="">개인정보처리방침</a></li>
+                <li><a href="">법적고지</a></li>
+                <li><a href="">이메일주소무단수집거부</a></li>
+                <li><a href="">윤리경영</a></li>
+                <li><a href="">사이버감사실</a></li>
+            </ul>
+        </div>
+        <!-- 바닥 리스트 끝 -->
+        <!-- 바닥 회사 주소등 -->
+        <div class="footInformation">
+            <ul>
+                <li>(04377)서울특별시 용산구 한강대로 23길 55,아이파크몰 6층(한강로동)</li>
+                <li>대표이사 : 허민회 · 사업자등록번호 : 104-81-45690 · 통신판매업신고번호 : 2017-서울용산-0662 <a href="" style="text-decoration : underline;">사업자정보확인</a></li>
+                <li>호스팅사업자 : CJ올리브네트웍스 · 개인정보보호 책임자 : 심준범 · 대표이메일 : cjcgvmaster@cj.net</li>
+                <li>© CJ CGV. All Rights Reserved</li>
+            </ul>
+        </div>
+        <!-- 바닥 회사 주소 끝 -->
+</footer>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="index.js"></script>
+
+</html>

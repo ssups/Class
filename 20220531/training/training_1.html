@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr= new Array();
+
+        function random(row,col){
+            for (let i = 0; i<row; i++){
+                innerArr=[];      
+                for(let i = 0; i<col; i++){
+                    num=Math.floor(Math.random()*10+1)
+                    innerArr.push(num)
+                }
+                arr[i] = innerArr;
+            }
+            return arr;
+        }
+
+        function Swap(arr){
+            let col0 = [arr[0][0],arr[1][0],arr[2][0]];
+            let col1 = [arr[0][1],arr[1][1],arr[2][1]];
+            let col2 = [arr[0][2],arr[1][2],arr[2][2]];
+            this.arr = [col2,col1,col0]
+            return this.arr
+            }     
+
+        arr1= random(3,3)
+        console.log("arr1 스왑전", arr1)
+        console.log("arr1 스왑후",new Swap(arr1));
+
+
+
+        // function swap(arr){
+        //     let col0 = [arr[0][0],arr[1][0],arr[2][0]];
+        //     let col1 = [arr[0][1],arr[1][1],arr[2][1]];
+        //     let col2 = [arr[0][2],arr[1][2],arr[2][2]];
+        //     arr[0] = col2;
+        //     arr[1] = col1;
+        //     arr[2] = col0;
+        //     return arr;
+        //     }      
+        
+
+        // console.log("arr1 스왑전", ...arr1)
+        // console.log("arr1 스왑후", swap(arr1));
+
+
+</script>

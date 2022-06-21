@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            padding: 20px;
+            margin: 10px;
+        }
+        #box1{
+            box-sizing: border-box;
+            background:red;    
+            float: left;
+        }
+        #box2{
+            box-sizing: border-box;
+            background:blue; 
+            float: left;
+                                 
+        }
+        #box3{
+            box-sizing: border-box;
+            background:gray; 
+                               
+        }
+        #box4{
+            box-sizing: border-box;
+            background:lime;  
+            clear: left;              
+        }
+    </style>
+</head>
+<!-- 
+    clear:
+    float 속성을 사용해서 웹의 요소를 왼쪽이나 오른쪽에 배치하면
+    그 다음에 넣는 다른 요소에도 똑같은 속성이 전달됨.
+    따라서 이 float 속성이 더이상 유용하지 않다 라고 알려주는게 필요함.
+    clear를 사용하면 됨.
+
+    속성
+    1. left: float-left를 해제
+    2. light: float-light를 해제
+    3. both: 둘다 해제    
+ -->
+<body>
+    <div id="box1">박스1</div>
+    <div id="box2">박스2</div>
+    <div id="box3">박스3</div>
+    <div id="box4">박스4</div>
+    
+</body>
+</html>

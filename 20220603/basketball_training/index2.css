@@ -1,0 +1,104 @@
+.scoreBoard{
+    width: 100%;
+    height: 100vh;
+}
+.scoreboard.inner{
+    background-color: antiquewhite;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    /* text-align: center 글자의 중앙 정렬 */
+    font-size: 20px;
+    border-bottom: 1px solid red;
+    box-sizing: border-box;
+}
+.scoreboard.inner2{
+    background-color: antiquewhite;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    font-size: 20px;
+    border-bottom: 1px solid red;
+    box-sizing: border-box;
+
+}
+#text{
+    margin-bottom: 5px;
+    margin-top: 0;
+}
+#text2{
+    margin-top: 0;
+    margin-bottom: 0;
+    color: red;
+}
+/* .scoreboard.inner 바로 밑의 자식 */
+/* span:first-child -> 첫번째 요소만 */
+/* span:last-child -> 중간 요소만 */
+/* span:nth-of-type(여기에 index) -> 해당 요소만 */
+.scoreboard.inner > span{
+    display: block;
+
+}
+.flex{
+    display: flex;
+    justify-content: space-around;
+}
+.play-score{
+    position: relative;
+    width: 50%;
+    height: 654px;
+    background-image:url(./images/201907291555052966.jpeg.crdownload);
+    background-position: center;
+    background-size: cover;
+    z-index: 1;
+}
+/* play-score: first-child -> play-score 첫번째 요소만 적용 */
+.play-score:first-child{
+    border-right: 1px solid red;
+}
+.pos{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* transform: translate(x포지션,y포지션) */
+    transform: translate(-50%, -50%); 
+    background-color: azure;
+    width: 200px;
+    height: 200px;
+    border: 2px solid black;
+}
+button{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0%;
+    box-sizing: border-box;
+    border: 3px solid black;
+    border-radius: 100px;
+    background-image:url("images/180px-Basketball.png");
+    background-position: center;
+    background-size:115% auto;
+    font-size:x-large;    
+    opacity: 0.8;
+
+}
+.score-name{
+    font-size: 25px;
+    text-align: center;
+    margin-top: 50px;
+
+}
+/* .computer-score,.play-score 두 클래스 모두 스타일을 적용할 수 있따. */
+.computer-score,.user-score{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 30px;
+
+}
+body{
+    margin:0;
+}
+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    fieldset{
+        width: 60%;
+        
+    }
+    table{
+        width: 500px       
+    }
+    th,td{
+        text-align: left;
+    }
+    .add{
+        width: 40%;
+    }
+</style>
+<body>
+    <form action="">
+        <h1>회원가입 신청서</h1>
+        <fieldset>
+            <legend><b>입력사항</b></legend>
+            <ul>
+                <p><label for="username"><b> 아이디</b></label>
+                <input type="text" id="username" class="add"></p>
+                <p><label for="userpw"><b> 비밀번호</b></label>
+                <input type="password" id="userpw" class="add"></p>
+                <p><label for="phonenumber"><b> 휴대폰 번호</b></label>
+                <input type="number" id="phonenumber"></p>
+                <p><label for="email"><b> 이메일</b></label>
+                <input type="text" id="email"></p>
+                <p><label for="adress"><b> 주소</b></label>
+                <input type="text" id="adress"></p>
+            </ul>
+        </fieldset>
+        <fieldset>
+            <legend><b>선택사항</b></legend>
+            <ul>
+                <table>
+                    <tr>
+                        <th>이메일수신</th>
+                        <th>문자수신</th>
+                        <th>우편수신</th>
+                        
+                    </tr>
+                    <tr>
+                        <td><label><input type="radio" value="emailyes" name="agree_email">네</label></td>
+                        <td><label><input type="radio" value="textyes" name="agree_text">네</label></td>
+                        <td><label><input type="radio" value="mailyes" name="agree_mail">네</label></td>
+
+                        
+
+                    </tr>
+                    <tr>
+                        <td><label><input type="radio" value="emailno" name="agree_email">아니요</label></td>
+                        <td><label><input type="radio" value="textno" name="agree_text">아니요</label></td>
+                        <td><label><input type="radio" value="mailno" name="agree_mail">아니요</label></td>
+
+
+
+                </table>
+
+
+            </ul>
+        </fieldset>
+        <ul ></ul>
+            <label for="submit" ></label>
+            <input type="submit" id="submit" value="완료" >
+        </ul>    
+    </form>
+</body>
+</html>
+
+<!-- 회원가입 신청서 만들기
+아이디, 이메일, 패스워드,주소, 광고성 메일을 수신 하시겠습니까?
+카카오톡, 문자 수신 등  -->

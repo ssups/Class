@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        th,
+        td{
+            border: 1px solid rgb(250, 8, 8);
+        }
+        
+     </style>
+</head>
+<!-- 일부 표에서는 제목이 표시된 셀과 자료가 표시된 셀 외에 표 아래쪽이나 합계나 요약 내용을 표시하기도 한다.
+제목과 본문, 요약이 있는 부분으로 표의 구조를 나누어 놓는 것이 좋다.
+<thead>,<tbody>,<tfoot> 
+
+행이나 열을 합치는 속성
+rowspan->행을 합치기
+colspan->열을 합치기
+<td rowspan="합칠 셀의 개수">셀의 내용</td>
+<td colspan="합칠 셀의 개수">셀의 내용</td>
+
+
+-->
+<body>
+    <h2>상품구성</h2>
+    <table>  
+     <caption>
+        선물용과 가정용 상품구성
+     </caption>
+     <thead>
+    <tr>
+        <th>용도</th>
+        <th>중량</th>
+        <th>개수</th>
+        <th>가격</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td rowspan="2">선물용</td>
+        <td>3kg</td>
+        <td>10개</td>
+        <td>350,000</td>
+    </tr>
+    <tr>
+        <td>5kg</td>
+        <td>5개</td>
+        <td>100,000</td>
+    </tr>
+    <tr>
+        <td rowspan="2">가정용</td>
+        <td>14kg</td>
+        <td>10개</td>
+        <td>300,000</td>
+    </tr>
+    <tr>
+        <td>30kg</td>
+        <td>2개</td>
+        <td>450,000</td>
+    </tr>
+    </tbody>
+    </table> 
+
+</body>
+</html>

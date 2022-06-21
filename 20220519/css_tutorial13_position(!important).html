@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+<style>
+    #content{
+        background: url("./images/image_01.jpg") no-repeat;
+        background-size: cover;
+        width: 800px;
+        height: 500px;
+        margin:0 auto;
+        position: relative;
+    }
+    h1{
+        color: white;
+        font-size: 120px;
+        /* 
+        position absolute는 상위요소의 relative를 기준으로 잡기 때문에 
+        상위요소에 postion: relative가 들어가있어야 한다.
+        */
+        position: absolute;
+        right: 100px;
+        bottom: 100px;
+    }
+</style>
+<body>
+    <div id="content">
+        <h1>안녕</h1>
+    </div>
+</body>
+</html>
+
+<!-- 
+    :link -> 방문하지 않은 링크에 스타일 적용
+    :visited -> 방문한 링크에 스타일 적용
+    :hover  
+    :active
+    :focus
+ -->

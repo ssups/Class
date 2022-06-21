@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        box-sizing: border-box;
+    }
+    div{
+        width: 200px;
+        height: 100px;
+        margin: 30px;        
+        /* 
+        마진중첩현상: 아래마진이랑 위에마진이랑 겹칠때 큰값으로 중첩된다.
+        가로마진, 오른쪽마진이랑 왼쪽마진은 겹쳐지지않고 둘다 적용된다.
+        */
+    }
+    #box1{
+        background: rgb(255, 0, 255);
+    }
+    #box2{
+        background: rgb(100, 200, 0);
+    }
+    #box3{
+        background: rgb(0, 0, 255);
+    }
+</style>
+<body>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <div id="box3"></div>
+</body>
+</html>

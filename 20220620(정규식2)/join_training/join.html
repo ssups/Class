@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="./join.css">
+<body>
+    <div class="top">
+        <div class="top_wrap">
+            <h1>회원가입</h1>
+        </div>
+    </div>
+    <div class="join">
+        <div class="join_cover">
+            <ul>
+                <li><h2><strong>Join</strong></h3></li>
+                <li>
+                    <p>ID</p>
+                    <input type="text" id="inputId">
+                    <span>(영소문자/숫자, 4~16자)</span>
+                    <p><h5 id="idWarn"></h5></p>
+                </li>
+                
+                <li>
+                    <p>PASSWORD</p>
+                    <input type="password" id="inputPassword">
+                    <span>(영문 대소문자/숫자/특수문자 하나이상 포함, 8~16자)</span>
+                    <p><h5 id="passwordWarn"></h5></p>
+                </li>
+                
+                <li>
+                    <p>PASSWORD CONFIRM</p>
+                    <input type="password" id="inputPasswordRe">
+                    <p><h5 id="passwordConfirmWarn"></h5></p>
+                </li>
+                
+                <li>
+                    <p>NAME</p>
+                    <input type="text" id="inputName">
+                    <p><h5 id="nameWarn"></h5></p>
+                </li>
+                
+                <li class="mobile">
+                    <p>MOBILE</p>
+                    <select name="" id="inputNum1">
+                        <option value="010">010</option>
+                        <option value="010">011</option>
+                        <option value="010">016</option>
+                        <option value="010">017</option>
+                        <option value="010">018</option>
+                        <option value="010">019</option>
+                    </select>
+                    -
+                    <input type="tel" id="inputNum2">
+                    -
+                    <input type="tel" id="inputNum3">
+                    <p><h5 id="mobileWarn"></h5></p> 
+                </li>
+                
+                <li>
+                    <p>E-MAIL</p>
+                    <input type="email" id="inputEmail">
+                    <p><h5 id="emailWarn"></h5></p>
+                </li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <!-- <div class="agree">
+        <div class="agree_cover">
+            <ul>
+                <div class="use_agree">
+                    <div>
+                        <h2>[필수]이용약관 동의</h2>
+                        <span>
+                            이용약관에 동의하십니까?
+                            <input type="checkbox">동의함
+                        </span>
+                    </div>
+                    <div>
+                        아라라라라라라ㅏ가라라다가라아라다가ㅏ알ㄷㄱ
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div> -->
+    <div class="finish">
+        <div class="finish_cover">
+            <ul>
+                <button id="finishBtn">완료</button>
+            </ul>
+
+        </div>
+    </div>
+
+<!-- Code injected by live-server -->
+<script type="text/javascript">
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script></body>
+<script src="./join.js"></script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>펜션예약</h1>
+    <form action="">
+        <fieldset>
+            <legend>예약정보</legend>
+            <ul>
+                <li>
+                    <label for="username">이름</label>
+                    <!-- autofocus: 칸안으로 커서를 자동으로 잡아줌. -->
+                    <input type="text" id="username" autofocus>
+                </li>
+                <li>
+                    <label for="phone">너의 전화번호</label>
+                    <!-- placeholder: 칸안에 히든텍스트 들어감 -->
+                    <input type="text" id="phone" placeholder="하이픈 빼고 입력하시오">
+                </li>
+                <!-- 
+                    readonly: 텍스트를 입력할 수 없게 할때.
+                    required: 반드시 입력해야하는 내용에 붙여줌.
+                 -->
+            </ul>
+            <label for="memo">메모</label>
+            <!-- 
+            textarea: 텍스트창 생성
+            cols: 텍스트창에 몇줄이 채워지면 넘어갈지 설정.
+            rows: 텍스트창에 몇행이 채워지면 넘어갈지 설정. 
+            -->
+            <textarea id="memo" cols="30" rows="10"></textarea>
+        </fieldset>
+    </form>
+</body>
+</html>

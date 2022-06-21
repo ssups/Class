@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //(ex) [1,2,3,4,5] = 9 return 하는 인덱스는 3,4
+        //배열 arr가 있고 어떤수 weght가 주었졌을때 합쳐서 weght가 되는 배열내
+        //두개의 인덱스를 반환하라 만약 합쳐서 weight가 되는 항목 두개가 존재하지 않는 경우
+        //-1 return
+
+         function findSum(arr,weight){
+             //2중 포문을 돌면서 다음인덱스와 비교
+             for(let i = 0; i< arr.length;i++){
+                 for(let k = i+1; k < arr.length; k++){
+                     if(arr[i] + arr[k] == weight){
+                         //만약 배열안에 들어 잇는 두개의 값이 weight 와 같다면
+                         return[i,k]; //해당 인덱스 리턴
+                     }
+                 }
+             }
+             return -1;
+         }
+        //  const arr = [1,2,3,4,5]
+        //  const test = findSum(arr,3)
+        //  console.log(test)
+
+        //  function Maxrix(row,col){
+        //      let jaggedArr = new Array(row)
+        //      for(let i  = 0;i<col;i++){
+        //          jaggedArr[i] = new Array(row)
+        //      }
+        //      return jaggedArr;
+        //  }
+        //     let a = [[1,2,3],[4,5,6],[]];
+        //     console.log(Maxrix(3,3))
+
+        /* 
+        input
+        [1,0,1],
+        [0,0,1],
+        [1,1,1],
+
+        output
+        [1,1,1],
+        [0,0,1],
+        [1,0,1],
+
+        //행렬을 왼쪽으로 90도 회전 (반시계)s
+        1. 행렬의 세번째 열이 회전된 행렬의 첫번째 행이 된다.
+        2. 행렬의 두번째 열이 회전된 형렬의 두번째 행이 된다.
+        3. 행렬의 첫번째 열이 회전된 형렬의 세번째 행이 된다.       
+        
+        */
+
+        /*
+         버블정렬
+         가장 간단하지만 전체 배열을 순회하면서 이전항목이 다음 항목보다 큰 경우 두 항목 교환
+         모든 가능한짝을 비교하기때문에 별로 좋지않는 방법이다.
+
+           6 1 2 3 4 5
+         ->1 6 2 3 4 5
+         ->1 2 6 3 4 5 ....
+         =>1 2 3 4 5 6
+         이런방식으로 하나하나 다 비교함
+        */
+       
+      
+           let arr = new Array();
+           let num;
+           let temp;
+         
+         function random(n){  
+           for(let i = 0; i<n; i++){
+               arr.push(i);
+            }
+            for(let i = 0; i<arr.length; i++){
+                num = Math.floor(Math.random()*n);
+                temp = arr[i];
+                arr[i] = arr[num];
+                arr[num] = temp;
+            }
+            return arr;
+        }
+
+
+        function bubbleSort(array) {
+        const arrlen = array.length;
+        for (let i = 0; i < arrlen; i++) {
+            for (let k = 0; k < arrlen - 1 - i; k++) {
+                if (array[k] > array[k + 1]) {
+                    let temp = array[k];
+                    array[k] = array[k + 1];
+                    array[k + 1] = temp;
+                 }
+             }
+            }
+             return array;
+        }
+
+    let bubbleSorting = random(10);
+    console.log("버블 정렬전: ", bubbleSorting);
+    // let startTime = new Date().geTime()/ 1000;
+    console.log("버블 정렬 후: ", bubbleSort(bubbleSorting))
+    // let endTime = new Date().getTime()/ 1000;
+    // console.log(`정렬시간 : ${endTime - startTime}`);
+    
+
+    /*
+    선택정렬: 가장 작은 항목을 찾아서 해당 항목을 배열의 현 위치에 삽입
+
+        7 4 5 6 8 2 1
+        1 4 5 6 8 2 7 최소값 1 -> 7 교환
+        1 2 5 6 8 4 7 다음 최소값 2 -> 4 교환
+        1 2 4 6 8 5 7 다음 최소값 4 -> 5 교환
+        1 2 4 5 8 6 7 다음 최소값 5 -> 6 교환
+        1 2 4 5 6 8 7 다음 최소값 6 -> 8 교환
+        1 2 4 5 6 7 8 다음 최소값 7 -> 8 교환
+
+    */
+
+function swap(arr, a, b){
+    let temp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = temp;
+}
+function selectSort(arr){
+    const arrlen = arr.length;
+    let min;
+
+    for(let i = 0 ; i < arrlen; i++){
+        //최소 항목을 현재 위치로 설정
+        min = i; 
+
+        //더 작은 항목이 있는지 배열의 나머지를 확인
+        for(let k = i+1; k<arrlen;k++){
+            if(arr[k]<arr[min]){
+                min = k;
+            }
+        }
+        //현재 위치가 최소항목 위치가 아니라면 항목 swap
+        if(i !=min){
+            swap(arr,i,min);
+        }
+    }
+    return arr;
+}
+let number = random(10);
+console.log("선택 정렬전: ", number);
+console.log("선택 정렬 후: ", selectSort(number));
+    </script>
+</body>
+</html>
+
+

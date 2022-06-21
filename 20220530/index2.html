@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        디스터럭처링 할딩(구조분해할당)
+        구조화된 배열과 같은 이터러블 또는 객체를 1개이상의 변수에 개별적으로 할당하는 것.
+        */
+        
+
+        // var arr = [1,2,3]
+        // var arr1 = arr[0];
+        // var arr2 = arr[1];
+        // var arr3 = arr[2];
+        
+        // console.log(arr1, arr2, arr3);
+
+        //배열 구조분해할당의 기본은 배열의 인덱스다.
+            const arr = [1, 2, 3];
+            const [one, two, three] = arr;
+            console.log(one, two, three); // 1,2,3
+
+            const [a, b] = [1 + 3, 2];
+            console.log(a, b); // 4,2
+
+            const [c, d] = [1, 3, 2];
+            console.log(c, d); // 1,3
+
+            const [apple, banana, photato = 3] = [1, 2]; //기본값은 3, 추가로 1,2 대입
+            console.log(apple, banana, photato); // 1,2,3
+
+        //객체 구조분해 할당
+            // var user = {firstName: 'hong', lastName: "soon"};
+            // var firstName = user.firstName;
+            // var lastName = user.lastName;
+            // console.log(firstName,lastName);
+
+        //ES6
+            const user={firsName: 'hong', lastName: 'soon'};
+            const{lastName, firsName} = user;
+            console.log(firsName, lastName);
+        </script>
+</body>
+</html>

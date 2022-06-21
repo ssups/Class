@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>여러가지 아이들</h1>
+    <form action="">
+        <label for="prod1">상품선택</label>
+        <!-- 
+            selcet: 콤보박스 생성
+         -->
+        <select id="prod1">
+            <option value="menu_1">사과</option>
+            <option value="menu_2">배</option>
+            <!-- 
+                selceted: 처음에 기본으로 선택되어있는 항목 지정할때
+             -->
+            <option value="f_1" selected>자동차</option>
+            <option value="f_1">비행기</option>
+        </select>
+        <!-- 
+            button: 버튼만 활성화 되고 다른 기능은 없음.
+            타입 선택을 하지 않으면 기본값은 submit으로 설정됨.
+         -->
+        <button>클릭</button>
+        <!-- 
+            <button type="submit">클릭</button>
+            <input type="submit">
+            둘이 같은 기능임.
+        -->
+        <button type="reset">이녀석은 폼에 입력한 내용을 초기화 한다.</button>
+    </form>
+</body>
+</html>

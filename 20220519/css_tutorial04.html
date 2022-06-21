@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 컨테이너 id의 자식인 ul적용
+        하위선택자 부모요소에 포함된 모든 자식(손자포함)이 적용된다.
+        
+        #container ul{
+            border: 1px solid red
+        }
+        */
+
+        /* 
+         >: 자식선택자 -> 자식요소에만 스타일을 적용한다.
+            하위선택자는 자식, 손자 적용. 자식선택자는 바로아래만(자식만) 적용
+        */
+
+        #container >ul{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <section id="container">
+        <header><h1>예약방법 및 요금</h1></header>
+        <p>예약하려면?</p>
+        <ul>
+            <li>
+                예약방법
+                <ul>
+                    <li>시장한테 직접전화</li>
+                    <li>홈페이지 예약</li>
+                </ul>
+            </li>
+            <li>
+                가격
+                <ul>
+                    <li>1인 : 4만원</li>
+                    <li>2인 : 8만원</li>
+                    <li>3인 : 16만원</li>
+                    <li>4인 : 32만원</li>
+
+                </ul>
+            </li>
+        </ul>
+
+    </section>
+</body>
+</html>

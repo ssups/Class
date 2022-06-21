@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>주문하기</h1>
+    <form action="">
+        <fieldset>
+            <legend>상품선택</legend>
+            <p><b>주문할 상품을 선택해라</b></p>
+            <!-- value에 들어가는 값은 서버에 넘겨줄 값임.
+            체크된 값을 서버에 넘겨줌.
+            영문이나 숫자만 가능, 필수로 넣어야 하는 값.
+            value 값은 고유한 값이어야 한다. -->
+            <label><input type="checkbox" value="s1">사과박스</label>
+            <label><input type="checkbox" value="s2">신발박스</label>
+            <label><input type="checkbox" value="f1">수박박스</label>
+            <label><input type="checkbox" value="f2">핸드폰</label>
+            <p><b>포장할꺼냐</b></p>    
+            <!-- radio타입에서 체크가 하나만 되도록 하려면
+            네임값에 똑같은 값을 넣어주면 됨. -->
+            <label><input type="radio" value="yes" name="gift">포장OK</label>
+            <label><input type="radio" value="no" name="gift">포장NO</label>
+        </fieldset>
+    </form>
+</body>
+</html>

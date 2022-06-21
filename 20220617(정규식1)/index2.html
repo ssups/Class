@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box"></div>
+    <input id="textbox" type="text">
+    <input id="namebox" type="text">
+    <button id="viewBtn">출력</butto>
+    <button id="chageBtn">교환</button>
+</body>
+<script>
+    // 전체를 담을 문자탑입 변수
+    let text ="";
+
+    //첫번째 input의 벨류를 담을 문자타입 변수
+    let firstValue = "";
+    //두번째 input의 벨류를 담을 문자타입 변수
+    let secondValue ="";
+
+    //출력 함수
+    function view(){
+        // 첫번째 input의 벨류를 firstValue변수에 담고
+        firstValue = textbox.value;
+        // 두번째 input의 벨류를 secondValue변수에 담고
+        secondValue = namebox.value;
+        // 클래스 box를 가지고 있는 태그에 firstValue , secondValue의 값을 담고
+        document.querySelector(".box").innerHTML = `${firstValue} ${secondValue}`
+    }
+    // id viewBtn을 가지고 있는 태그의 oncilck 함수에  view함수에 전달
+    viewBtn.onclick = view;
+
+    function chage(){
+        //text 변수에 box에 담긴 전체 문자를 담아주고
+        text = document.querySelector(".box").innerHTML
+        //탐색된 앞의 문자를 집고 "&`" 123을  456 교체
+        text = text.replace(secondValue,"$`")
+        // temp 변수에 잠깐 저장
+        let temp = firstValue;
+        //첫번째 변수에 두번째 변수 값을 넣고 
+        firstValue=secondValue;
+        secondValue=temp;
+        document.querySelector('.box').innerHTML =text;
+    }
+    chageBtn.onclick =chage
+
+</script>
+</html>

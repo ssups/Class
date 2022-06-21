@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* 
+    margin: 보더와 보더간의 간격
+    padding: 보더와 요소간의 간격
+    */
+        body{
+        margin-left: 15% ;
+        margin-right: 15%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        background-color:gray;
+        height: 800px;
+        display: flex;
+        
+    }
+    div{
+        background-color: white;
+        width: 50%;
+        
+    }
+    .box_left{
+        float:left ;
+        border-right: dotted skyblue ;
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-bottom: 1%;
+        padding-top: 1%;
+    }
+    .box_right{
+        float:right;
+        padding-left: 1%;
+        padding-right: 1%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        
+    }
+    .img_left{
+        width: 100%;
+        height: 100%;  
+    }
+    .text_table{
+        background-color: lightgray;
+    }
+    .img_table{
+        width: 100%;
+        height: 35%;
+        
+    }
+    img{
+        width: 100%;
+        height: 100%;
+    }
+  
+    
+</style>
+<body>
+    
+    <div class="box_left">
+    <img class="img_left" src="./images/main.jpg" alt="poster" height="700px"  >
+               
+        
+    </div>
+    <div class="box_right">
+        <p><h2>하울의 움직이는 섬</h2></p>
+        <p>개봉일: 2004년 12월 24일 (대한민국)</p>
+        <!-- <p style="background-color:gray; width:px;"> night </p> -->
+        <p>
+            <table class="text_table">
+                <tr>
+                    <td style="padding-top:10px; padding-bottom:10px; width:25%; text-align: center;">night</td>
+                </tr>
+            </table>
+        </p>
+        <p>감독: 미야자키 하야오</p>
+        <p>출연진: 크리스찬 베일, 에밀리 모티머, 진 시몬스, 로런 버콜</p>
+        <p>
+            <table class="text_table">
+                <tr>
+                    <td style="padding-top:30px; padding-bottom:30px">소녀가 마법에 걸린 순간, 꽃미남 마법사의 성문이 열렸다! 
+                        어느 날, 영문도 모른 채 마녀의 저주로 인해 할머니가 된 소녀'소피', 절망 속에서 길을 걷다
+                        가 거대한 마법의 성에 들어가게 된다. 그곳에서 자신과 마법사 하울의 계약
+                        을 깨주면 저주를 풀어주겠다는 불꽃악마 캘시퍼의 제안을 받고 청소부가
+                        되어 '움직이는 성'에 머물게 되는데... </td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            <table class="img_table">
+                <tr>
+                    <td><img src="./images/haul.jpg" alt="" ></td>
+                    <td><img src="./images/sofi.jpg" alt=""></td>
+                    <td><img src="./images/fire.jpg" alt=""></td>
+                    <td><img src="./images/baby.jpg" alt=""></td>
+                </tr>
+                <tr>
+                    <td><img src="./images/witch.jpg" alt=""></td>
+                    <td><img src="./images/doll.jpg" alt=""></td>
+                    <td><img src="./images/dog.jpg" alt=""></td>
+                    <td><img src="./images/principal.jpg" alt=""></td>
+                </tr>
+                
+            </table>
+        </p>
+
+
+    </div>
+</html>
+

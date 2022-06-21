@@ -1,0 +1,605 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body {
+    height: auto;
+}
+
+.pageWrap {
+    position: relative;
+    width: 100%;
+    min-width: 1000px;
+    height: auto;
+}
+div {
+    width: 100%
+}
+/* 스크롤 메뉴 */
+.scroll{
+    height: 60px;
+    position: fixed;
+    z-index: 2;
+    display: none;
+}
+.scroll a{
+    color:#eee;
+}
+#scrollMenu {
+    height: 60px;
+    background-color: red;
+    
+}
+.scrollMenu_contents {
+    position: relative;
+    width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+/* .scrollMenu_contents img{
+    width: 70px;
+    height: 35px;
+} */
+
+.scrollMenu_contents ul {
+    display: inline-flex;
+    position: absolute;
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    width: 50%;
+    left: 120px;
+    top: 19px;
+}
+
+.scrollMenu_contents li {
+    width: 80px;
+}
+.scrollSearchImg {
+    position: absolute;
+    right: 25PX;
+    background: url(./images/search.png);
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+    border: none;
+    cursor: pointer;
+}
+.scrollMini{
+    position: fixed;
+    bottom: 90px;
+    z-index: -3;
+    opacity: 0;
+    transition: 0.3s;
+}
+.scrollMini.active{
+    z-index: 2;
+    opacity: 1;
+}
+.scrollMiniWrap{
+    list-style: none;    
+    width: 1000px;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 auto;
+}
+.scrollMini a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+.reservationBtn{
+    width: 150px;
+    margin-right: 10px;
+    border-radius: 50px;
+    background-image: linear-gradient(to left, rgb(255, 115, 86), rgb(251, 67, 87));
+    color: white;
+    transition: 1s;
+    position: relative;
+    left: 60px;
+}
+.scrollMini.active .reservationBtn{
+    left: 0;
+}
+.topBtn{
+    width: 50px;
+    border-radius: 100px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    font-size: x-large;
+}
+
+
+#top_ad {
+    height: 80px;
+    background-color: black;    
+    display: flex;
+}
+#top_ad .banner{
+    background-image: url(./images/top_ad.jpeg);
+    width: 1000px;
+    height: 80px;
+    margin: 0 auto;
+}
+#top_ad button{
+    background-color: transparent;
+    color:#e9e9e9;
+    position: relative;
+    left: 953px;
+}
+/* 헤드 메뉴 */
+.header {
+    position: relative;
+    z-index: 2;
+}
+
+.header_contents {
+    margin-bottom: 14px;
+    border-bottom: 1px solid #eee;
+}
+.header_contents span{
+    font-weight: 300;
+    font-size: large;
+}
+.header_contents .contents {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 0 25px 0;
+    margin: 0 auto;
+    width: 1000px;
+    text-decoration-line: none;
+}
+
+.memberItems {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding-left: 0;
+}
+
+.memberItems li {
+    margin: 0 5px 0 5px;
+}
+
+.memberItems li a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70px;
+}
+
+.memberItems li a img {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+
+/* 네브 메뉴창 */
+
+.nav {
+    height: 40px;
+}
+.nav .cgv{
+    display: none;
+}
+.nav.active{
+    background-color: red;
+    position: fixed;
+    top: 0;
+    height: 60px;
+    padding-top: 10px;
+
+}
+.nav.active a{
+    color: white;
+}
+.nav.active .cgv{
+    display: block;
+
+}
+.nav.active .cgv img{
+    width: 70px;
+    height: 35px;
+    position: relative;
+}
+.nav .navMenuWrap{
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.navMenu {
+    display: inline-flex;
+    position: relative;
+    list-style: none;
+    text-align: center;
+    width: 50%;
+    left: -22px;
+    padding: 0;
+}
+
+.navMenu li {
+    width: 80px;
+    display: block;
+}
+.Search {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    vertical-align: baseline;
+    width: 250px;
+    height:30px;
+    border-left:1px solid #e9e9e9;
+    border-right:1px solid #e9e9e9;
+}
+.SearchText:focus{
+    opacity: 1;
+}
+
+.SearchText{
+    width: 180px;
+    height: 25px;
+    padding-right: 7px;
+    line-height: 1.500em;
+    position: absolute;
+    right: 50px;
+    border-radius: 5px;
+    border: 2px solid blue;
+    opacity: 0;
+}
+
+.SearchImg {
+    position: absolute;
+    right: 25PX;
+    background: url(./images/search.png);
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+    border: none;
+    cursor: pointer;
+}
+
+#navHidden {
+    position: relative;
+    background-color: white;
+    display: block;
+    height: 0px;
+    transition: 1s;
+    overflow: hidden;
+    top: 10px;
+    border-top: 2px solid red;
+}
+
+#navHidden .contents {
+    position: relative;
+    width: 1000px;
+    margin: 0 auto;
+
+}
+
+#navHidden .contents ul {
+    list-style: none;
+    padding: 20px 70px 20px 0;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+#navHidden .contents li {
+    list-style: none;
+    padding-top: 20px;
+}
+
+/*  예고편 동영상*/
+.main_ad {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background-color: #000;
+    border-top: 2px solid rgb(207, 29, 29);
+    z-index: 1;
+}
+
+.main_ad .contents {
+    width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.videoWrap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.videoWrap video {
+    position: relative;
+    transform: scale(1.35);
+    width: 100%;
+    height: 100%;
+}
+
+.videoWrap strong {
+    position: relative;
+    bottom: 320px;
+    font-size: 38px;
+    color: #eee;
+}
+
+.videoWrap span {
+    position: relative;
+    color: white;
+    bottom: 270px;
+    font-size: 25px;
+}
+.videoWrap p{
+    margin-top: 10px;
+}
+
+.videoWrap div {
+    position: absolute;
+    left: 220px;
+    bottom: 150px;
+}
+
+/* 무비차트 스와이퍼 */
+#anotherSwiper{
+    display: none;
+}
+.chartSwiper {
+    background-color: rgb(251, 245, 245);
+    height: 450px;
+}
+
+.chartSwiper .contents {
+    position: relative;
+    top: 50px;
+    width: 1000px;
+    height: 400px;
+    margin: 0 auto;
+    
+}
+
+.chartSwiper .top {
+    display: flex;
+    border: none;
+}
+#indexBtnLeft{
+    margin-right: 30px;
+    cursor: pointer;
+}
+#indexBtnRight{
+    cursor: pointer;
+    color:grey;
+}
+.chartSwiper .btn {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    cursor: pointer;
+}
+
+.chartSwiper .index {
+    display: flex;
+    padding-right: 20px;
+}
+.swiper {
+    width: 100%;
+    height: 100%;
+  }
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+.swiper ul{
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: -55px;
+    
+}
+.swiper ul li{
+    margin:0 15px 0 15px;
+    height: 253px;
+    background-color: #000;
+    border-radius: 10px;
+}
+.swiper ul li img{
+    width: 169px;
+    height: 253px;
+    border-radius: 10px;
+    opacity: 0.8;
+}
+.swiper ul li h1{
+    position: relative;
+    bottom: 37px;
+    left: -64px;
+    color: #eee;
+    font-style:italic;
+}
+.swiper ul li h4{
+    position: relative;
+    top: -30px;
+}
+.swiper-button-next{
+    right:-2px;
+    top: 147px;
+}
+.swiper-button-prev{
+    left:-2px;
+    top: 147px;
+}
+
+/* 특별관 */
+.specialHall{
+    height: 450px;
+}
+.specialHallWrap{
+    width:1000px;
+    height: 400px;
+    margin: 0 auto;
+    position: relative;
+    top: 50px;
+}
+.specialHallWrap .title{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+}
+.specialHall .contents{
+    display: flex;
+    justify-content: space-between;
+    height: 250px;
+}
+.specialHall .hallImgs{
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+.specialHall .hallImgs img{
+    height: 250px;
+    width: 500px;
+    margin: 0 auto;
+    display: none;
+}
+.specialHall .hallImgs img:first-child{
+    display: block;
+}
+.specialHall .hallNames{
+    height: 250px;
+    width: auto;
+}
+.specialHall .hallNames ul{
+    height: 250px;
+    width: 450px;
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
+}
+.specialHall .hallNames li{
+    border-top: 1px solid #e9e9e9;
+    border-radius: 10px;
+    height: 25%;
+    padding: 22px 15px 22px 15px;
+    cursor: pointer;
+}
+.specialHall .hallNames .lastone {
+    border-bottom: 1px solid #e9e9e9;
+}
+.specialHall .hallNames .active{
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.specialHall .hallNames a{
+    display: flex;
+    justify-content: space-between;
+}
+/* 영화관람권 */
+.cardWrap{
+    display: flex;
+    justify-content: space-between;
+    width:1000px;
+    height: 400px;
+    margin: 0 auto;
+    position: relative;
+    top: 50px;
+}
+.cardWrap ul{
+    width: 300px;
+    list-style: none;
+    border: 1px solid #e9e9e9;
+    border-radius: 5px;
+}
+.cardWrap li{
+    padding: 20px 0 20px 0;
+    left:-27px;
+    position: relative;
+
+}
+.cardWrap li:first-child{
+    padding: 20px 0 20px 0;
+    left: 0;
+}
+.cardWrap a{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.cardWrap img{
+    height: 70px;
+    width: 80px;
+}
+/* 푸터 */
+/* 바닥배너 */
+.footBanner{
+    position: relative;
+    height: 186px;
+    margin-top: 150px;
+    background-color: #FFA443;
+}
+.footBannerWrap{
+    width: 1000px;
+    height: 186px;
+    margin: 0 auto;
+    
+}
+.footBannerWrap img{
+    position: relative;
+    bottom: 59px;
+    width: 1000px;
+}
+/* 리스트 */
+footer{
+    font-weight: 400;
+    font-size: small;
+}
+.list{
+    margin:0 auto;
+    width: 1000px;
+    border-bottom:1px solid #e9e9e9;
+    padding: 25px 0 25px 0;
+}
+.list ul{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding:0 20px 0 0;
+}
+.footInformation{
+    margin:0 auto;
+    width: 1000px;
+    padding: 25px 0 25px 0;
+}
+.footInformation ul{
+    list-style: none;
+    padding: 0;
+}

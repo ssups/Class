@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 100vh;
+            margin: 0%;
+        }
+        #head{
+            box-sizing: border-box;
+            height: 10%;
+            background-color: yellow;
+            text-align: center;
+            vertical-align: middle;
+            font-size: xx-large;
+            color: black;            
+        }
+        #main{
+            height: 90%;
+            background-color: beige;
+            
+        }
+        #container{
+            margin: 0%;
+        }
+        li{
+            text-align: center;
+            vertical-align: middle;
+        }
+        td{
+            box-sizing: border-box;
+            border: 1px solid black;
+            background-color: aliceblue;
+        }
+        button{
+            box-sizing: border-box;
+        }
+
+    </style>
+</head>
+<body>
+    <div id = 'head'>스케쥴표</div>
+    <div id= 'main'>
+        <table ><ol id ='container'></ol></table>    
+        <input id= _date type="date">
+        <input id = _time type="time">
+        <input id = _text type="text">
+        <button id = 'createBtn'>추가</button>
+    </div>
+</body>
+<script>
+createBtn.onclick = function(){
+    //추가부분
+    let inputDate = _date.value
+    let inputTime = _time.value
+    let inputText = _text.value
+    let itemDate= document.createElement('td');
+    let itemTime= document.createElement('td');
+    let itemText= document.createElement('td');
+    let removeTd= document.createElement('td')
+    let items = document.createElement('li');
+    itemDate.innerHTML += inputDate
+    itemTime.innerHTML += inputTime
+    itemText.innerHTML += inputText
+
+    itemDate.style.width = '150px'
+    itemTime.style.width = '100px'
+    itemText.style.width = '800px'
+    removeTd.style.width = '40px'
+
+    items.appendChild(itemDate)
+    items.appendChild(itemTime)
+    items.appendChild(itemText)
+    
+
+
+    //삭제부분
+    let removeBtn = document.createElement('button')
+    removeBtn.innerHTML = "삭제"
+    removeBtn.onclick = function(){
+    container.removeChild(items);
+    items.removeChild(removeTd);
+    }
+    removeTd.appendChild(removeBtn);
+    items.appendChild(removeTd);
+    container.appendChild(items)
+    
+}
+</script>
+</html>

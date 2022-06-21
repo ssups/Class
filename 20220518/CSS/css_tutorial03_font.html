@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    /* 
+    font-family: 글꼴 설정
+    */
+    body{
+        font-family:"맑은 고딕" ;
+        /* 사진을 반복하지않고 고정함 */
+        background: url("style/images/image_1.jpg") no-repeat fixed;
+        /* 사진사이즈를 다 덮겠다. */
+        background-size: cover;
+        text-align: center;
+    }
+    .accent {
+        font-size: large;
+        font-weight: 800;
+        font-style: italic;
+    }
+    .color1{
+        color: white
+    }
+    .color2{
+        color: rgba(255, 255, 255, 0.3)
+    }
+    h1{
+        font-size: 3em;
+        /* color: rgba(255, 0, 0, 0.2) 투명도 설정 0~1 사이값 */
+        color: rgba(255, 0, 0, 0.2)
+    }
+    /* 
+    px, pt: 절대 크기를 나타내는 단위 
+    em, rem: 상대 크기를 나타내는 단위(모바일환경도 생각한다면 자주쓰는 단위)
+    1em==16px
+    */
+</style>
+</head>
+<body>
+    <h1 class="color1" >안녕하세요</h1>
+    <h1 class="color2">하이요</h1>
+    <div id="container">
+        <p style="color: red;">
+            1. 우량사사리기리디그로보다기더스러
+        </p>
+        <p style="color: rgb(89, 72, 151) ;">
+            2. 고곡리디기디 다가라다다가
+        </p>
+        <p class="accent">
+            3. 아나오로로로로디기디디
+        </p>
+    </div>    
+</body>
+</html>

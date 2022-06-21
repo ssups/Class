@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Promise Hell을 탈출한 코드 보고
+        //더하기 하는데 값은 아무거나
+        //값을 10번 더해보세요 더한 값을
+        //6초 뒤에 값 보여주는데
+
+
+
+        function add(num){
+            return new Promise((resolve,reject) => {
+                let sum = num + num;
+                setTimeout(() => {
+                    resolve(sum);
+                    console.log(sum);
+                },3000)
+            })
+        }
+
+        add(3) //한번더함
+        .then((result) => {
+            return add(result); //두번더함
+        })
+        .then((result) => {
+            return add(result); //세번더함
+        })
+        .then((result) => {
+            return add(result); //네번더함
+        })
+        .then((result) => {
+            return add(result); //다섯번더함
+        })
+        .then((result) => {
+            return add(result); //여섯번더함
+        })
+        .then((result) => {
+            return add(result); //일곱번더함
+        })
+        .then((result) => {
+            return add(result); //여덟번더함
+        })
+        .then((result) => {
+            return add(result); //아홉번더함
+        })
+        .then((result) => {
+            console.log("열번째!");
+            return add(result); //열번더함
+        });
+
+       
+        
+    </script>
+</body>
+</html>

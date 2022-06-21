@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 
+        내부스타일:
+        시트 전체적으로 스타일을 적용시킬때 사용
+     -->
+    <style>
+        /* 선택자{속성1: 속성값1; 속성2: 속성값2;.... }
+        세미클론으로 속성간에 끊어줘야함. */
+        /* p{ 
+         text-align: 글자 정렬 
+            text-align: center;
+            color:red;
+        }
+        */
+        /* h1{
+            background-color: black;
+            color: white;
+        }                 
+        */
+       
+    </style>
+<!-- 
+    외부 스타일 시트를 사용할 경우
+    head에서 불러오기 입력
+ -->
+ 
+</head>
+<link rel="stylesheet" href="./style/style.css">
+<link rel="stylesheet" href="20220518\CSS\style\style.css">
+<body>
+    <p>안녕</p>
+    <h1 class="accent bg">한라봉</h1>
+    <!-- 
+        인라인 스타일:
+        간단한 스타일 정보 
+        스타일 시트를 적용하지 않고 스타일을 적용할때 사용.
+     -->
+    <p style="color:blue">
+        1.라라라라라하하, 나나라 존맛탱 ㅎㅎ
+        하라라하할라하
+    </p>
+    <p>
+        2.라라라라라하하나나라 <span class="accent">존맛탱</span> ㅎㅎ
+        하라라하할라하
+    </p>
+    <p>
+        3.라라라라라하하나나라 존맛탱 ㅎㅎ
+        하라라하할라하
+    </p>
+</body>
+</html>

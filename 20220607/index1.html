@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id ="container"></div>
+    <input id="_input" type="text">
+    <button id="createBtn">생성</button>
+</body>
+<script>
+    // createElement 태그를 생성
+    // createElement(태그의 이름) div면 diㅍ태그가 만들어진다.
+    // let el = document.createElement('div');
+    // el.innerHTML = '안녕하세요'
+    // el.className += "test"
+    // let _class = "add"
+    // let add= "안녕하세요"
+    // container.innerHTML -= `<div ${_class}>${add}</div>`
+    // let aa = `${el}안녕`
+    // container.innerHTML 문자열로 태그 추가
+    // container.innerHTML = "<div>안녕하세요</div>";
+
+    // container.appendChild 오브젝트 타입의 자식 요소로 추가할수 있다.
+    // container에 자식요소로 추가 했음
+    // container.appendChild(el);
+    // removeBtn.onclick = function(){
+    //     // removeChild는 자식 요소 삭제
+    //     // container안에 있는 자식 요소를 삭제한다.
+    //     // removeChild el요소를 매개 변수로 전달 해놓으면
+    //     // 실행시 el의 요소가 삭제 된다.
+    //     container.removeChild(el)
+    // }
+    createBtn.onclick =function(){
+        //_input.value는 입력값
+        let text = _input.value;
+        el = document.createElement('div');
+        el.innerHTML = text;
+        el.className += "test"
+        let removeBtn = document.createElement('button');
+        removeBtn.innerHTML = "삭제"
+        removeBtn.onclick = function(){
+            container.removeChild(el);
+            container.removeChild(removeBtn);
+        }
+        container.appendChild(el);
+        container.appendChild(removeBtn);
+    }
+</script>
+</html>

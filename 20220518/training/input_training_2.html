@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    fieldset{
+        width: 50%; 
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10px;
+     }
+</style>
+<body>
+    <form action="">
+        <fieldset>  
+                <ul><h2>개발자 지원서</h2>
+                    사람이면 지원하세요.<hr>
+                    <h4>개인정보</h4>
+                    <ul>
+                        <p><label for="username">이름</label>
+                        <input type="text" id="username" placeholder="공백없이 입력하세요" required></p>
+                        <p><label for="usernumber">연락처</label>
+                        <input type="number" id="usernember" required></p>
+                    </ul>
+                    <h4>지원 분야</h4>
+                    <ul>
+                        <p><input type="radio" value="f"> 프론트개발자</p>
+                        <p><input type="radio" value="b"> 백엔드 개발자</p>
+                        <p><input type="radio" value="c"> 청소부</p>
+                    </ul>
+                    <h4>지원동기</h4>
+                    
+                        <p><label for="application"></label>
+                        <textarea id="application" cols="80" rows="5" placeholder="본사 지원 동기를 간략히 써 주세요."></textarea></p>
+                        <label for="submit"></label>
+                        <input type="submit" id="submit" value="접수하기">
+                        <label for="rewrite"></label>
+                        <input type="submit" id="rewirte" value="다시쓰기">
+                    
+                 </ul>
+
+            
+        </fieldset>
+    </form>
+</body>
+</html>

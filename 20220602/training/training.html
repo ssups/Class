@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let names = {
+            name: "김한결, 안주영",
+            setName: function(firstName, secondName){
+                this.name = firstName + ", " + secondName;
+            }
+        }
+
+        function showName(firstName, secondName, callBack){
+            callBack(firstName, secondName)
+        }
+
+        showName("임준우","윤병철",names.setName)
+        console.log("지역변수이름: "+names.name)
+        console.log("전역변수이름: "+window.name)
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        height: 900px;
+        margin: 50px;
+        border: 2px solid black;
+               
+    }
+    div{
+        border: 1px solid black;
+    }
+    #box_top{
+        box-sizing: border-box;
+        
+        text-align: center; 
+        height: 10%;
+    }
+    #box_main{
+        box-sizing: border-box;
+        
+        height: 80%;
+        width: 85%;
+        float: right;
+        text-align: center;
+        background: url(./images/image_01.jpg) no-repeat fixed;
+        background-size: cover;
+    }
+    #box_bottom{
+        box-sizing: border-box;
+        
+        height: 10%;
+        clear: both;
+        
+        
+    }
+    #box_navi{
+        box-sizing: border-box;
+        
+        float: left;
+        height: 80%;
+        width: 15%;
+    }
+    .navi{
+        width: 100%;
+    }
+    .navi ul{
+        margin: 0 auto;
+        padding: 0   
+        
+              
+    }
+    .navi ul p{
+        background-color: white;
+        border: 1px solid black;
+        width: 100%;
+        height: 50px;
+        margin: 0 auto;
+        padding: 0;
+        float: left;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+              
+    } 
+    .navi a:link,
+    .navi a:visited{
+        font-size: 15px;
+        padding: 10px;
+        color: black;
+        text-decoration:wavy;
+        text-align: center;  
+        font-size: 15px;
+        font-style: oblique;
+         
+    }
+    .navi a:hover,
+    .navi a:focus {
+        background-color: gray;
+        color: #fff;
+    }
+    .navi a:active{
+        background-color: red;
+    }
+
+</style>
+<body>
+    <div id="box_top"><h1>실습모음</h1></div>
+    <div id="box_navi">
+        <nav class="navi">
+            <ul>
+                <p><a href="./sub/_resume_training.html"><b>이력서</b></a></p>
+                <p><a href="./sub/input_training.html"><b>회원가입 신청서</b></a></p>
+                <p><a href="./sub/table_training.html"> <b>테이블</b></a></p>
+                <p><a href="./sub/input_training_2.html"> <b>개발자 신청서</b></a></p>               
+                <p><a href="./sub/academy_training_1.html"> <b>경일게임 양식</b></a></p>         
+                <p><a href="./sub/academy_training_2.html"> <b>경일게임 모집</b></a></p>         
+            </ul>
+        </nav>
+    </div>
+    <div id="box_main">
+        
+        
+    </div>
+    <div id="box_bottom"></div>
+</body>
+</html>
