@@ -45,6 +45,7 @@
     git remote: origin 복제한 url을 참조하기 위해 호출
     git remote add origin https://github.com/ssups/20220621.git (자신의 깃 저장소 주소)를 추가해 준다.
     iji
+    ㅐㅏ
     
     
 */
