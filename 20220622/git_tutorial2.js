@@ -74,4 +74,5 @@ git branch -d "제거할 브렌치 이름"
 ![180px-Basketball](https://user-images.githubusercontent.com/107898015/174937289-7ba395ca-51f0-4f6c-8a7f-c632ecb32f7b.png)
 이런 형식으로 뜨는데
 이걸 그대로 복사해서 리드미파일에 붙여넣으면 된다.
+ok
 */
