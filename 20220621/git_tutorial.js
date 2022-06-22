@@ -31,7 +31,7 @@
     숨긴파일 보기를 체크하면 .git
 
     git add 커밋을 추가하는데 git저장소에 추가하려고 대기
-    git add README.md 이렇게쓰면 git저장소에 README.md 추가하려고 대기
+    git add README.md 이렇게쓰면 git저장소에 README.md 추가하려고 대기(깃그래프에서 스테이징 시키는거)
 
     git commit -m 커밋 메세지를 작성할 수 있다.
     git commit -m "first commit" 이거면 저장소에 추가하면서
@@ -44,8 +44,22 @@
     origin: 복제한 원격 git 저장소의 기본 이름
     git remote: origin 복제한 url을 참조하기 위해 호출
     git remote add origin https://github.com/ssups/20220621.git (자신의 깃 저장소 주소)를 추가해 준다.
-    iji
-    ㅐㅏ
     
-    
+    git push -u origin main 깃 저장소 첫 커밋을 푸쉬
+
+    git 저장소가 초기화된 경로인지 확인 잘하고 사용
+    초기화 경로는 git init을 한 경로
+
+    cd "들어갈 폴더 경로" ->경로변경
+    cd .. -> 폴더경로를 한단계 위로 올림 
+
+    ls -> 경로에 있는 파일 구조를 볼 수 있다.
+
+    소스제어 탭을 선택시 git 그래프에 변경사항중 파일이름 옆에
+    U: 저장소에 없는 새로운 파일
+    M: 저장소에 파일은 있고 내용이 변경됐을때
+    D: 저장소에 있는 파일이 제거됐을때
+
+       
+      
 */
