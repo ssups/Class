@@ -14,4 +14,23 @@ git init
 
 git 저장소 복제(파일 내려받기)
 git clone (url)
+
+git 저장소 추가
+git remote-add origin "git저장소 url"
+
+git 사용
+스테이징에 추가
+git add 파일명(확장자 까지)
+
+커밋 메세지
+git commit -m "커밋이름"
+
+브렌치 목록 전부보기
+git branch -r
+
+현재 브렌치 변경
+git switch "브렌치 이름"
+
+브렌치 추가
+git branch "추가하고싶은 브렌치 이름"
 */
