@@ -17,6 +17,16 @@ h5{
     color: red;
     height: 16px;
 }
+.textbox{
+    font-size: x-small;
+    border: 1px solid black;
+    height: 100px;
+    overflow: auto;
+    margin-bottom: 20px;
+}
+.checkbox{
+    margin-top: 1px;
+}
 .top_wrap{
     width: 1000px;
     margin: 0 auto;
@@ -40,6 +50,13 @@ h5{
 .agree_cover{
     width: 1000px;
     margin: 0 auto;
+}
+.use_agree{
+    width: 582px;
+}
+.use_agree .Box{
+    display: flex;
+    justify-content: space-between;
 }
 .finish_cover{
     width: 1000px;
