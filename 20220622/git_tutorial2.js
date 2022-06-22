@@ -28,6 +28,9 @@ git commit -m "커밋이름"
 브렌치 목록 전부보기
 git branch -r
 
+로컬 깃 브렌치 목록 전부보기
+git branch -a
+
 현재 브렌치 변경
 git switch "브렌치 이름"
 
