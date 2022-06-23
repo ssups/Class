@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="gnb"></div>
+    <div id="ulGnb"></div>
+</body>
+<script src="./gnb.js"></script>
+<script src="./ulGnb.js"></script>
+
+<script>
+    //Gnb를 동적할당해서
+    //객체를 생성
+    //생성된 객체는 _gnb에 들어있다.
+    let _gnb = new Gnb('hello');
+    let _gnb2 = new Gnb('1');
+    let _gnb3 = new Gnb('2');
+
+    let _ulGnb = new UlGnb(3,'ul1');
+    let _ulGnb2 = new UlGnb(5,'ul2');
+    let _ulGnb3 = new UlGnb(4,'ul3')
+
+
+
+    console.log('li갯수'+_ulGnb.countLi()+'개')
+    console.log('li갯수'+_ulGnb2.countLi()+'개')
+    console.log('li갯수'+_ulGnb3.countLi()+'개')
+    console.log(_gnb.setId())
+    console.log(_gnb)
+</script>
+</html>
