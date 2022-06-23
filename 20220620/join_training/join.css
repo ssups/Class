@@ -17,16 +17,6 @@ h5{
     color: red;
     height: 16px;
 }
-.textbox{
-    font-size: x-small;
-    border: 1px solid black;
-    height: 100px;
-    overflow: auto;
-    margin-bottom: 20px;
-}
-.checkbox{
-    margin-top: 1px;
-}
 .top_wrap{
     width: 1000px;
     margin: 0 auto;
@@ -46,17 +36,28 @@ h5{
     padding: 1px 2px 1px 2px;
     
 }
-
 .agree_cover{
     width: 1000px;
     margin: 0 auto;
 }
+.checkbox{
+    margin-top: 1px;
+}
 .use_agree{
     width: 582px;
+}
+.use_agree .Box_cover{
+    margin-bottom: 20px;
 }
 .use_agree .Box{
     display: flex;
     justify-content: space-between;
+}
+.textbox{
+    font-size: x-small;
+    border: 1px solid black;
+    height: 100px;
+    overflow: auto;
 }
 .finish_cover{
     width: 1000px;

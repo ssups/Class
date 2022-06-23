@@ -145,8 +145,22 @@ finishBtn.onclick = function () {
         }
     }
 
+    //이용약관
+    if (checkBox1.checked) {
+        checkBox1Warn.innerHTML = ""
+    }
+    else {
+        checkBox1Warn.innerHTML = "체크해주세요."
+    }
+    if (checkBox2.checked) {
+        checkBox2Warn.innerHTML = ""
+    }
+    else {
+        checkBox2Warn.innerHTML = "체크해주세요."
+    }
+
     //회원가입 성공
-    if (count == 7) {
+    if (count == 7 && checkBox1.checked && checkBox2.checked) {
         alert("회원가입 성공")
         location.replace(link)
     }
