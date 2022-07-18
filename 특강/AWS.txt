@@ -1,0 +1,44 @@
+터미널에서 권한주고 실행하기
+sudo
+============apache2설치하는거=================
+
+===================================
+
+=============압축풀기기능 설치하는거===============
+
+=============================================
+
+=======업로드하는거=============
+0. 업로드할 폴더에 권한주기
+    sudo ssh -i "test.pem" ubuntu@ec2-15-164-165-111.ap-northeast-2.compute.amazonaws.com
+    ===apache2 설치==============
+    sudo apt-get update
+    sudo apt-get upgrade
+    sudo apt-get install apache2
+    ============================
+    sudo service apache2 start
+    cd /var/www
+    ls -a
+    sudo chmod 777 html
+    exit
+
+1. zip파일 집어넣기
+    sudo sftp -i "test.pem" ubuntu@ec2-15-164-165-111.ap-northeast-2.compute.amazonaws.com
+    cd /var/www/html
+    put 압축파일이름.zip
+    eixt
+
+2. zip파일 접근권한주기
+    sudo ssh -i "test.pem" ubuntu@ec2-15-164-165-111.ap-northeast-2.compute.amazonaws.com
+    sudo service apache2 start
+    cd /var/www/html
+    sudo chmod 777 압축파일이름.zip
+    ls -a 로 압축파일이름 색 변경됐는지 확인
+
+3. zip파일 풀기
+    sudo apt-get install unzip (압축푸는거 설치)
+    sudo unzip 압축파일이름.zip
+
+4. 파일 지우기
+    rm -f 파일이름.확장자명
+    rm -rf 폴더이름

@@ -1,0 +1,43 @@
+아마존 인스턴스 생성
+
+인스턴스 시작
+이름 쓰고 
+Ubuntu, 20.04버전
+t2.micro
+키페어 생성 : .pem 형식으로
+파일 넣어줄곳에 pem 파일 옮기기
+
+인스턴스 연결들어가서
+SSH 클라이언트에서 ssh 복사
+
+터미널에서 ssh 들어가기
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install apache2
+sudo service apache2 start
+
+/var/www 가서 html에 권한 주기
+cd /var/www
+sudo chmod 777 html
+
+sftp 에서 /var/www/html 에 zip파일추가
+cd /var/www/html
+put index.zip
+
+ssh 에서 /var/www/html 에서 zip 권한주기
+/var/www/html
+sudo chmod 777 index.zip
+
+zip 설치 
+sudo apt-get install unzip
+
+zip 풀기
+sudo unzip index.zip
+
+
+퍼플릭 IPv4 DNS 개방주소법 클릭
+다른곳 클릭하고 다시들어와서 htttps 의 s 지워주기
+
+보안그룹에 http 추가 안됬을때
+좌측 보안그룹 들어가기
+해당 보안그룹 클릭해서 http포트 추가
