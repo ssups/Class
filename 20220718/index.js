@@ -33,6 +33,7 @@
 // node.js에서 모듈을 가져오는 방법 require함수를 사용해서 가져온다.
 // require(경로나 이름)
 const http = require('http');
+console.log(http);
 
 // http객체 안의 createServer함수를 사용해서 서버를 만듬
 // http.createServer를 변수에 담으면 서버가 되는 부분을 반환받을 수 있다.

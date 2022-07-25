@@ -29,18 +29,17 @@ const temp = mysql.createConnection({
   database: 'test4',
 });
 
-// 내맥은 localhost가 6자리 아이피로 인식해서 host에서 직접 localhost ip를 입력해주는 방식을 쓰던가 (host:'127.0.0.1')
-// 터미널에서  sudo vim /private/etc/hosts 입력후 편집으로 ::1 localhost 라고 적혀져있는 줄을 주석처리해야 해결이 된다.
-// 현재는 밑의방법으로 해결해논 상태이다.
-
 // database: 'test4' = test4 이름의 데이터베이스를 사용하겠음
 // query함수의 첫번째 매개변수는 쿼리문을 입력해주고
 // 두번째 매개변수는 콜백함수 매개변수는 첫번째 쿼리 에러, 두번째 쿼리 결과
 // 이후 등등
-temp.query('SELECT * FROM posts', (err, res) => {
+temp.query('SELECT * FROM products', (err, res) => {
   if (err) {
-    console.log(err);
-    console.log('안됨');
+    // console.log(err);
+    console.log('에러');
+    const sql =
+      'CREATE TABLE products(id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(20), number VARCHAR(20), series VARCHAR(20))';
+    temp.query(sql);
   } else {
     console.log(res);
   }
@@ -50,8 +49,58 @@ const http = require('http');
 
 const server = http.createServer((req, res) => {
   req.statusCode = 200;
-  res.write('123');
-  res.end('456');
+  // res setHeader() 함수를 사용해서 해더의 정보를 설정할 수 있다.
+  // utf-8로 컨텐츠 내용을 인코딩하는 속성을 추가한다면.
+  res.setHeader('Content-Type', 'application/json', 'charset = utf-8'); // 한글이 안깨지도록 하는거;
+
+  // 요청된 url 확인
+  // req.url
+
+  // 요청된 method 확인
+  // req.method
+
+  // js 내용이 수정되었을때 자동으로 모니터링 해서 서버를 재시작 해주는 툴
+  // nodemon 노드모니터링
+  // nodemon 설치 명령어
+  // =======================================================
+  // 개발환경에서만 사용할꺼니깐 --dev 붙여주고
+  // npm install --dev nodemon
+  // npm install -g nodemon
+  // =======================================================
+
+  const URL = req.url;
+  switch (URL) {
+    case '/':
+      res.end('메인 페이지');
+      break;
+
+    case '/list':
+      temp.query('SELECT * FROM products', (err, data) => {
+        if (err) {
+          console.log(err);
+        } else {
+          // data에는 products 테이블의 내용
+          res.end(JSON.stringify(data));
+        }
+      });
+      break;
+
+    case '/add':
+      // (name, number, series) VALUES(?,?,?) 작성하면 이렇게 벨류의 값을
+      // 두번째 배열 타입의 매개변수로 추가할 수 있다.
+      // eslint-disable-next-line no-case-declarations
+      const sql = 'INSERT INTO products (name, number, series) VALUES(?,?,?)';
+      temp.query(sql, ['이름', '123', '123']);
+      break;
+
+    case '/mypage/modify':
+      res.end('마이페이지 수정');
+      break;
+
+    default:
+      break;
+  }
+  console.log(req.url);
 });
 
 const PORT = 3000;

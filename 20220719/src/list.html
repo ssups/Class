@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>리스트 페이지</title>
+  </head>
+  <body>
+    <table style="width: 100%" border="2px solid black">
+      <a href="/insert">추가페이지</a>
+      <tr>
+        <th>삭제</th>
+        <th>수정</th>
+        <th>아이디</th>
+        <th>이름</th>
+        <th>전화번호</th>
+        <th>시리즈</th>
+      </tr>
+      <% data.forEach(function(el, index){ %>
+      <tr>
+        <!-- <td><button onclick="del(this)">삭제</button></td> -->
+        <td><a href="/delete/<%= el.id %>">삭제</a></td>
+        <td><a href="/edit/<%= el.id %>">수정</a></td>
+        <td><%= el.id %></td>
+        <td><%= el.name %></td>
+        <td><%= el.number %></td>
+        <td><%= el.series %></td>
+      </tr>
+      <% }); %>
+    </table>
+  </body>
+  <script>
+    // function del(obj) {
+    //   console.log(obj.parent.parent);
+    //   obj.parent.parent.removeChild(obj.parent.parent);
+    // }
+  </script>
+</html>
