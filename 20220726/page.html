@@ -14,12 +14,23 @@
     </head>
     <body>
         <div>첫 페이지</div>
+        <input type="text" id="text" />
+        <input type="text" id="user" />
+        <button id="button">버턴</button>
     </body>
     <script>
         // window.onload html이 로드가 된 후
         window.onload = () => {
             // 소켓 객체를 뽑아서 클라이언트에 연결
             const socket = io.connect();
+            socket.on("hi", data => {
+                alert(data);
+            });
+            button.onclick = () => {
+                const msg = text.value;
+                const id = user.value;
+                socket.emit("hi", { msg, id });
+            };
         };
     </script>
 </html>
