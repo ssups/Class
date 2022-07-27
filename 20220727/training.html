@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        .line {
+            overflow: hidden;
+        }
+        .seat {
+            margin: 2px;
+            float: left;
+            width: 30px;
+            height: 30px;
+            border: 1px solid black;
+            border-radius: 3px;
+        }
+        .enable {
+            background-color: grey;
+        }
+        .enable:hover {
+            background-color: rgb(211, 207, 207);
+        }
+        .disable {
+            background-color: blue;
+        }
+        .contests {
+            list-style: none;
+            display: flex;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <body>
+        <div>영화관</div>
+        <div class="nav">
+            <div class="naveWrpper">
+                <ul class="contests">
+                    <li>1번째타임</li>
+                    <li>2번째타임</li>
+                    <li>3번째타임</li>
+                </ul>
+            </div>
+        </div>
+        <div class="time1"></div>
+        <div class="time2"></div>
+        <div class="time3"></div>
+    </body>
+    <script>
+        // const time1 = document.querySelector(".time1");
+        // const time2 = document.querySelector(".time2");
+        // const time3 = document.querySelector(".time3");
+
+        // const body = document.querySelector("body");
+        const socket = io.connect();
+        // 아작스 사용할것 제이쿼리로 작성
+        socket.on("reserve", data => {
+            // html태그를 만듦과 동시에 attribute도 부여해줌
+            let $target = $(
+                "div[data-x=" + data.x + "][data-y=" + data.y + "][data-time=" + data.time + "]"
+            );
+            // 클래스도 부여해줌
+            $target.removeClass("enable");
+            $target.addClass("disable");
+        });
+
+        // 초기 좌석
+        // window.onload 랑 같은 기능인데 jquery 형식으로
+        $(window).ready(function () {
+            // 좌석을 클릭했을때의 함수 만들기
+            const onClickSeat = function () {
+                // 제이쿼리 객체로 만드는 이유는 제이쿼리 함수나 기능을 사용하기 위해서
+                // $(객체) $()괄호안에 있는 dom 객체(태그)를 제이쿼리 객체로 바꿔준다.
+                // 즉 document.querySelector(this) 이거랑 같은거임
+
+                // $(this).hasClss('disable')는
+                // $(this).classList.contains('disable')랑 같은거임
+
+                // disable클래스가 붙어있으면 여기서 끝
+                if ($(this).hasClass("disable")) {
+                    return;
+                }
+                // 좌석을 클릭하면 이벤트가 발생한 좌석의 data-x, data-y attribute를 서버로 보냄
+                // $(this).attr("data-x")는
+                // $(this).getAtrribute('data-x')랑 같은거임
+                let x = $(this).attr("data-x");
+                let y = $(this).attr("data-y");
+                let time = $(this).attr("data-time");
+
+                if (confirm("이 좌석을 예매하시나요?")) {
+                    // yes를 눌렀을때
+                    socket.emit("reserve", {
+                        x,
+                        y,
+                        time,
+                        // 이렇게 쓰면 x라는 이름의 키의 value값이 x에 알아서 담김
+                        // 즉 data.x = x, data.y = y
+                    });
+                } else {
+                    // no를 눌렀을때
+                }
+            };
+
+            // 아작스 수행
+            // 더미 객채를 만들어서 서버에 전달하는 이유
+            // 같은 url에 연속적으로 요청이 발생되면 이전에 불러왔던 데이터를 제공할 가능서이 있다.
+            // 그래서 현재 시간을 기반으로 url을 매번 다른 형태로 전달.
+            $.getJSON("/seats", { dummy: new Date().getTime() }, data => {
+                // 좌석을 만들어보자
+                // $.each -> forEach랑 같은 제이쿼리문법
+
+                // data.forEach() 랑 같은말임 대상이 되는 arr가 매개변수로 들어감
+                $.each(data, (indexTime, time) => {
+                    console.log(indexTime);
+                    $.each(time, (indexY, line) => {
+                        // 문서 객체를 생성하고 변수 line에 추가
+                        let $line = $("<div></div>").addClass("line");
+
+                        $.each(line, (indexX, seat) => {
+                            let $output = $("<div></div>", {
+                                class: "seat",
+                                // data-x랑 data-y 속성을 쓴 이유는 이벤트를 실행했을때
+                                // 좌석의 위치 정보를 알기 위해서
+                                "data-x": indexX,
+                                "data-y": indexY,
+                                "data-time": indexTime,
+                            }).appendTo($line);
+
+                            // 좌석이 비어있으면 enable 클래스와 click 이벤트 추가
+
+                            if (seat == 1) {
+                                // 비어있는 좌석
+                                // 밑에는 제이쿼리로 클래스넣고 클릭이벤트 추가하는법
+                                // $output.addClass('enable').click(function(){})
+                                $output.addClass("enable").on("click", onClickSeat);
+                            } else if (seat == 2) {
+                                // 예약되어 있는 좌석
+                                $output.addClass("disable");
+                            }
+                        });
+
+                        // $line.appendTo("body");
+                        $line.appendTo(document.querySelector(`.time${indexTime + 1}`));
+                    });
+                });
+            });
+        });
+    </script>
+</html>
+
+<!-- 
+    1. 버스나 비행기 좌석 모양으로 만들고
+    2. 좌석에 번호를 붙이고
+    3. 시간별로 탭만들어서 한 3개정도 1시부터(1시,2시,3시)이렇게 바꿀수 있게 만들기
+ -->

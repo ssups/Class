@@ -1,0 +1,54 @@
+// 사용할 모듈
+// socket.io, express, fs, nodemon
+
+// 영화관 좌석 예약 만들것
+
+const socketio = require("socket.io");
+const express = require("express");
+const fs = require("fs");
+
+let seats = [
+    [1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+];
+// 1은 예약 가능한 자리 0은 예약 불가한 자리 예약된 자리는 2로 변경
+
+// 웹 서버 생성
+const app = express();
+const PORT = 3000;
+const server = app.listen(PORT, () => {
+    console.log(PORT, "번 포트 실행");
+});
+
+// socket.io 생성 및 실행
+const io = socketio(server);
+
+app.get("/", (req, res) => {
+    fs.readFile("page.html", (err, data) => {
+        res.send(data.toString());
+    });
+});
+
+// seats 라는 배열을 /seats페이지에 json 형태로 보내준다.
+app.get("/seats", (req, res) => {
+    res.send(seats);
+});
+
+io.sockets.on("connection", socket => {
+    // reserve라는 이름의 이벤트를 만들고
+    socket.on("reserve", data => {
+        seats[data.y][data.x] = 2;
+        // emit을 통해서 reserve라는 이름의 이벤트를 요청한다
+        io.sockets.emit("reserve", data);
+    });
+});
