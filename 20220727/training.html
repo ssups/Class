@@ -7,8 +7,8 @@
         <title>Document</title>
     </head>
     <style>
-        :root{
-            --color: rgb(211, 207, 207)
+        :root {
+            --color: rgb(211, 207, 207);
         }
         .line {
             overflow: hidden;
@@ -36,9 +36,8 @@
         .disable {
             background-color: blue;
         }
-        .nav{
+        .nav {
             margin-top: 50px;
-            
         }
         .btns {
             margin: 0 auto;
@@ -48,54 +47,52 @@
             list-style: none;
             padding: 0;
         }
-        .btn{
+        .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 250px;
+            width: 200px;
             height: 50px;
             cursor: pointer;
             background-color: grey;
             border: 2px solid white;
             color: white;
         }
-        .btn:hover{
+        .btn:hover {
             background-color: var(--color);
         }
-        .btn.clicked{
+        .btn.clicked {
             background-color: blue;
         }
-        .seatsDivs{
+        .seatsDivs {
             /* background-image: url(https://www.hi-airlines.com/web/hcws/img/sub/planseat.jpg);
             background-repeat: no-repeat;
-            background-position: center; */
+            background-position: center;
+            background-size: cover; */
             margin-top: 150px;
-            
         }
-        .seatsDivsWrapper{
+        .seatsDivsWrapper {
             width: 1000px;
             margin: 0 auto;
             display: flex;
             justify-content: center;
-            
         }
-        .seats{
+        .seats {
             display: none;
         }
-        .seats.open{
+        .seats.open {
             display: block;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <body>
-        
         <div class="nav">
-                <ul class="btns">
-                    <li class="btn clicked">1번째타임</li>
-                    <li class="btn">2번째타임</li>
-                    <li class="btn">3번째타임</li>
-                </ul>
+            <ul class="btns">
+                <li class="btn clicked">1번째타임</li>
+                <li class="btn">2번째타임</li>
+                <li class="btn">3번째타임</li>
+            </ul>
         </div>
         <div class="seatsDivs">
             <div class="seatsDivsWrapper">
@@ -106,20 +103,18 @@
         </div>
     </body>
     <script>
-        const alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-
+        const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
         // const body = document.querySelector("body");
         const socket = io.connect();
         // 아작스 사용할것 제이쿼리로 작성
         socket.on("reserve", data => {
             // html태그를 만듦과 동시에 attribute도 부여해줌
-            let $target = $(
-                "div[data-x=" + data.x + "][data-y=" + data.y + "][data-time=" + data.time + "]"
-            );
+            let $target = $("div[data-x=" + data.x + "][data-y=" + data.y + "][data-time=" + data.time + "]");
             // 클래스도 부여해줌
             $target.removeClass("enable");
             $target.addClass("disable");
+            $target.text("");
         });
 
         // 초기 좌석
@@ -163,18 +158,17 @@
             // 더미 객채를 만들어서 서버에 전달하는 이유
             // 같은 url에 연속적으로 요청이 발생되면 이전에 불러왔던 데이터를 제공할 가능서이 있다.
             // 그래서 현재 시간을 기반으로 url을 매번 다른 형태로 전달.
-            $.getJSON("/images",{ dummy: new Date().getTime() },data=>{
-                console.log('hi')
-                console.log(data)
-                document.querySelector('.seatsDivs').style.backgroundImage = data
-            })
+            $.getJSON("/images", { dummy: new Date().getTime() }, data => {
+                console.log("hi");
+                console.log(data);
+                document.querySelector(".seatsDivs").style.backgroundImage = data;
+            });
             $.getJSON("/seats", { dummy: new Date().getTime() }, data => {
                 // 좌석을 만들어보자
                 // $.each -> forEach랑 같은 제이쿼리문법
 
                 // data.forEach() 랑 같은말임 대상이 되는 arr가 매개변수로 들어감
                 $.each(data, (indexTime, time) => {
-                    console.log(indexTime);
                     $.each(time, (indexY, line) => {
                         // 문서 객체를 생성하고 변수 line에 추가
                         let $line = $("<div></div>").addClass("line");
@@ -196,14 +190,11 @@
                                 // 밑에는 제이쿼리로 클래스넣고 클릭이벤트 추가하는법
                                 // $output.addClass('enable').click(function(){})
                                 $output.addClass("enable").on("click", onClickSeat);
-                                $output.text ( `${indexX+1}${alphabet[indexY]}`)
-                                
-                                
+                                $output.text(`${indexX + 1}${alphabet[indexY]}`);
                             } else if (seat == 2) {
                                 // 예약되어 있는 좌석
                                 $output.addClass("disable");
-                                $output.text ( `${indexX+1}${alphabet[indexY]}`)
-                                
+                                // $output.text(`${indexX + 1}${alphabet[indexY]}`);
                             }
                         });
 
@@ -215,16 +206,19 @@
         });
     </script>
     <script>
-        const btnArr = document.querySelectorAll('.btn')
-        const seatsArr = document.querySelectorAll('.seats')
-        btnArr.forEach((el,btnIndex)=>el.onclick=function(){
-            seatsArr.forEach((element,seatsIndex) => {
-                element.classList.remove('open')
-                btnArr[seatsIndex].classList.remove('clicked')
-            });
-            el.classList.add('clicked')
-            seatsArr[btnIndex].classList.add('open')
-        })
+        const btnArr = document.querySelectorAll(".btn");
+        const seatsArr = document.querySelectorAll(".seats");
+        btnArr.forEach(
+            (el, btnIndex) =>
+                (el.onclick = function () {
+                    seatsArr.forEach((element, seatsIndex) => {
+                        element.classList.remove("open");
+                        btnArr[seatsIndex].classList.remove("clicked");
+                    });
+                    el.classList.add("clicked");
+                    seatsArr[btnIndex].classList.add("open");
+                })
+        );
     </script>
 </html>
 

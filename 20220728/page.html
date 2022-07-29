@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="/socket.io/socket.io.js"></script>
+        <!-- <link rel="stylesheet" href="./css.css" /> -->
+    </head>
+    <style>
+        body {
+            /* body 기준으로 움직이려고 */
+            position: relative;
+            height: 100vh;
+        }
+        .contents {
+            position: absolute;
+            /* 무조건 무슨일이 있어도 정중앙 */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* transform: translate(x,y) -> 자가지신 기준 (x,y)만큼 변화 */
+            /* ----------------------- */
+            width: 500px;
+            height: 500px;
+            border: 1px solid;
+        }
+        #send {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border: 1px solid;
+            box-sizing: border-box;
+            display: flex;
+        }
+        #send #msg {
+            border: 0;
+            box-sizing: border-box;
+            padding: 10px;
+            width: 90%;
+        }
+        #send #sendbtn {
+            background-color: bisque;
+            border: none;
+            box-sizing: border-box;
+            padding: 10px;
+            width: 10%;
+        }
+        #message {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        #message li {
+            padding: 5px 10px;
+            word-break: break-all;
+        }
+        #login {
+            width: 300px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .join_text {
+            background-color: grey;
+        }
+        .leave_text {
+            background-color: deepskyblue;
+            border: 1px sold rga(2, 133, 177);
+        }
+        #main {
+            display: none;
+        }
+    </style>
+    <body>
+        <div class="contents">
+            <div>동물(파충류) 카톡</div>
+            <div id="login">
+                <p>로그인</p>
+                <input type="text" id="username" />
+                <button id="loginbtn">접속</button>
+            </div>
+            <div id="main">
+                <select id="rooms">
+                    <option value="병아리 방">병아리 방</option>
+                    <option value="개구리 방">개구리 방</option>
+                </select>
+                <ul id="message"></ul>
+                <div id="send">
+                    <input type="text" id="msg" />
+                    <button id="sendbtn">보냄</button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        // io.connect()클라이언트가 접속하는 함수
+
+        window.onload = function () {
+            const socket = io.connect();
+            loginbtn.onclick = function () {
+                login.style.display = "none";
+                main.style.display = "block";
+                const name = username.value;
+                // romms이게 select 태그고 options가 select 안에 있는 option들
+                // options이건 배열
+                // rooms가 select 태그인데 selectedIndex 이건 현재 선택되어있는 옵션의 인덱스
+                let room = rooms.options[rooms.selectedIndex].value;
+                socket.emit("joinRoom", room, name);
+                rooms.onchange = function (e) {
+                    let el = e.target;
+                    console.log(el.selectedIndex);
+                    socket.emit("leaveRoom", room, name);
+                    room = rooms.options[rooms.selectedIndex].value;
+                    socket.emit("joinRoom", room, name);
+                };
+                sendbtn.onclick = function () {
+                    socket.emit("chat", room, name, msg.value);
+                    msg.value = "";
+                };
+                msg.onkeypress = function (e) {
+                    console.log(e.code);
+                    if (e.code == "Enter") {
+                        socket.emit("chat", room, name, msg.value);
+                        msg.value = "";
+                    }
+                };
+
+                socket.on("joinRoom", (room, name) => {
+                    message.innerHTML += `
+                    <li class = "join_text">
+                        ${name}님 ${room}에 들어오셨습니다.
+                    </li>
+                    `;
+                });
+
+                socket.on("leaveRoom", (room, name) => {
+                    message.innerHTML += `
+                    <li class = "leave_text">
+                        ${name}님 ${room}에서 나갔어요.
+                    </li>
+                    `;
+                });
+
+                socket.on("chat", (name, msgVal) => {
+                    message.innerHTML += `
+                    <li> 
+                        ${name}: ${msgVal}
+                    </li>
+                    `;
+                });
+            };
+        };
+    </script>
+</html>
