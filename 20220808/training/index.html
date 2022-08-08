@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./app.js"></script>
+    <!-- 
+    페이지 하나 만들고 이쁘게 꾸미던 말던 상관없고
+    로그인창 만들고
+    1. 로그인창 접속하면 광고팝업
+    2. 체크 박스가 있어서 하루동안 안뜨게
+    3. 로그인 하면 유저 이름 뜨는 nav바 위에 어서오세요 누구누구님
+    계정 아이디와 비밀번호는 욕심나면 json파일로 만들어 보세용
+ -->
+    <body>
+        <div class="login">
+            <div class="userIdBox">
+                <label for="userId">아이디: </label>
+                <input type="text" id="userId" />
+            </div>
+            <div class="userPwBox">
+                <label for="userPw">비밀번호: </label>
+                <input type="text" id="userPw" />
+            </div>
+            <button id="loginBtn">로그인</button>
+        </div>
+        <div class="welcome"></div>
+        <div class="popUp">
+            <div class="popUpWrapper">
+                <div class="top">
+                    <button id="exitBtn">X</button>
+                </div>
+                <div class="contents">광고내용</div>
+                <div class="bottom">
+                    <label for="exitBox">하루동안 보지 않기</label>
+                    <input type="checkbox" id="exitBox" />
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        const popUp = document.querySelector(".popUp");
+        const login = document.querySelector(".login");
+        const welcome = document.querySelector(".welcome");
+
+        window.onload = function () {
+            exitBtn.onclick = () => {
+                popUp.style.display = "none";
+            };
+
+            loginBtn.onclick = () => {
+                if (userId.value === "" || userPw.value === "") {
+                    alert("둘다 입력하세요");
+                    return;
+                }
+                // sessionStorage.setItem(isLogin, true);
+                login.style.display = "none";
+                welcome.innerHTML = `${userId.value}님 환영합니다`;
+                welcome.style.display = "block";
+                popUp.style.display = "block";
+
+                let popUpCookie = document.cookie.match(
+                    "(^|;) ?" + userId.value + "=([^;]*)(;|$)"
+                );
+                console.log(popUpCookie);
+                if (popUpCookie === null) {
+                    console.log("쿠키없음");
+                } else {
+                    console.log("있음");
+                    popUp.style.display = "none";
+                }
+
+                // if (sessionStorage.getItem(userId.value) === "true") {
+                //     popUp.style.display = "none";
+                // }
+
+                console.log(exitBox.checked);
+                exitBox.oninput = () => {
+                    if (exitBox.checked) {
+                        createPopUpCookie(userId.value);
+                        // sessionStorage.setItem(userId.value, true);
+                    } else if (!exitBox.checked) {
+                        deletePopUpCookie(userId.value);
+                        // sessionStorage.setItem(userId.value, false);
+                    }
+                };
+            };
+
+            function createPopUpCookie(name) {
+                let date = new Date();
+                date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+                document.cookie = `${name}  = true; expires = ${date.toUTCString()}; path =/20220808/training `;
+            }
+            function deletePopUpCookie(name) {
+                document.cookie = `${name}  = ; expires = Thu, 01 Jan 1999 00:00:10 GMT;`;
+            }
+        };
+    </script>
+</html>

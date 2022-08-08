@@ -53,6 +53,7 @@ app.use(express.static(__dirname + "/images"));
 
 // "/src" 이부분은 자신이 설정한 경로의 이름을 정의해줄수 있다.
 // __dirname + "/images2"까지의 경로가 "/src2"이 이름으로 설정된 것
+app.use("/src", express.static(__dirname + "/images"));
 app.use("/src2", express.static(__dirname + "/images2"));
 
 // 상품의 번호를 정해줄 변수
@@ -78,4 +79,54 @@ const products = [
     new Product("비타민", "/", 2000, 20),
     new Product("커피", "/", 2000, 20),
 ];
-console.log(products);
+
+let cart = [];
+// 소켓 이벤트 연결
+// connection 클라이언트가 접속했을때
+io.on("connection", socket => {
+    // 상품 구매 취소했을때 돌리는 함수
+    function onReturn(index) {
+        // 물건의 갯수를 다시 돌린다. 더해준다.
+        products[index].count++;
+        // 물건을 제거
+        // 배열 안의 값 제거 delete 배열[인덱스]
+        delete cart[index];
+        let count = products[index].count;
+        io.emit("count", {
+            index,
+            count,
+        });
+    }
+
+    // 이벤트 연결 웹소켓이 가지고 있는 이벤트
+    socket.on("cart", index => {
+        // 물건의 갯수를 감소
+        products[index].count--;
+        // 빈 객체를 하나 만들어서 해당 배열의 인덱스 자리에 넣고
+        cart[index] = {};
+        // 해당 배열의 인덱스 자리에 있는 객체에 index 키를 추가하고 벨류를 넣어준다.
+        cart[index].index = index;
+        let count = products[index].count;
+        io.emit("count", {
+            index,
+            count,
+        });
+    });
+
+    // 구매 했을때 이벤트 연결
+    socket.on("buy", index => {
+        // 카트의 해당 상품 인덱스 제거
+        delete cart[index];
+
+        let count = products[index].count;
+        io.emit("count", {
+            index,
+            count,
+        });
+    });
+
+    // 상품 구매를 취소했을때
+    socket.on("return", index => {
+        onReturn(index);
+    });
+});

@@ -6,11 +6,100 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
     </head>
+    <link
+        rel="stylesheet"
+        href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+    />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <body>
-        상점페이지
-        <img src="image.jpeg" />
-        <img src="/src2/image2.jpeg" />
-        <source />
+        상점 페이지
+        <div class="content">
+            <ul
+                id="listview"
+                data-role="listview"
+                data-inset="true"
+                data-filter="true"
+            >
+                <li data-role="list-divider">products</li>
+                <% products.forEach(function (item, index) { %>
+                <li class="product" data-index="<%= item.index %>">
+                    <a href="#">
+                        <img src="src/1.jpeg" alt="" />
+                        <h3><%= item.name %></h3>
+                        <h3><%= item.price %>원</h3>
+                        <span class="ui-li-count"><%= item.count %></span>
+                    </a>
+                    <a
+                        href="#"
+                        data-icon="heart"
+                        data-index="<%= item.index %>"
+                    ></a>
+                </li>
+                s <% }); %>
+            </ul>
+        </div>
+        <script>
+            //document 얘가 로드가 되었을때 ready
+            $(document).ready(function () {
+                // 아이콘 변경할 함수
+                function changeIcon(target, from, to) {
+                    // alert("체크");
+                    // removeClass() 클래스 지우기 클래스의 이름은 매개변수로 전달
+                    // addClass() 클래스 추가 클래스의 이름은 매개변수로 전달
+                    $(target).removeClass(from).addClass(to);
+                }
+
+                // 갯수를 변경해주는 함수
+                function changeCount(index, count) {
+                    //class="ui-li-count"이 속성을 가진 태그를 선택
+                    // 'li[data-index = ' + index + ']이게 부모 태그 한칸 띄어쓰니까
+                    // class="ui-li-count"이 속성을 가진 자식
+                    // document.querySelectorAll("li[data-index = " + index + "] .ui-li-count");
+                    // $("li[data-index = " + index + "] .ui-li-count").html(count);
+                    $(".product").eq(index).find(".ui-li-count").html(count);
+                }
+
+                // 소켓 연결 생성
+                const socket = io.connect();
+
+                // 소켓 이벤트 연결
+                // 클라이언트가 알고 있는 이벤트
+                socket.on("count", function (data) {
+                    changeCount(data.index, data.count);
+                });
+
+                // 태그 이벤트연결
+                // console.log($(".product >a").eq(0));
+                // console.log($(".product >a[data-icon]").eq(0));
+                $(".product >a[data-icon]").click(function () {
+                    let $this = $(this);
+                    let index = $this.attr("data-index");
+                    if ($this.attr("toggle") != "off") {
+                        socket.emit("cart", parseInt(index));
+                        changeIcon(this, "ui-icon-heart", "ui-icon-check");
+                        $this.attr("toggle", "off");
+                    } else {
+                        if (confirm("물건을 구매 하시나요?")) {
+                            socket.emit("buy", parseInt(index));
+                            // $this요소의 부모태그 선택 parent() 함수 반환값이 부모 태그
+                            // remove() 해당 태그를 지워줌
+                            $this.parent().remove();
+                            // 해당 태그가 listview 속성인 태그에
+                            // listview() 함수를 사용해서 실행할 속성은 매개변수로 전달
+                            $(listview).listview("refresh");
+                        } else {
+                            socket.emit("return", parseInt(index));
+                            changeIcon(this, "ui-icon-check", "ui-icon-heart");
+                            $this.attr("toggle", "on");
+                        }
+                    }
+                    // 클릭했을때 attr(어트리뷰트 속성 이름, 벨류)를 추가
+                    // $(this).attr("toggle", "on");
+                });
+            });
+        </script>
     </body>
 </html>
