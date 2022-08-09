@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <link rel="stylesheet" href="style.css" />
+    <!-- 
+    페이지 하나 만들고 이쁘게 꾸미던 말던 상관없고
+    로그인창 만들고
+    1. 로그인창 접속하면 광고팝업
+    2. 체크 박스가 있어서 하루동안 안뜨게
+    3. 로그인 하면 유저 이름 뜨는 nav바 위에 어서오세요 누구누구님
+    계정 아이디와 비밀번호는 욕심나면 json파일로 만들어 보세용
+    4. 로그인했을때 express 세션에 jwt 토큰 정보 저장 
+    .env 사용해서 시크릿 키는 따로 빼놓기
+ -->
+    <body>
+        <form class="login" method="post" action="/login">
+            <div class="userIdBox">
+                <label for="userId">아이디: </label>
+                <input type="text" id="userId" name="userId" />
+            </div>
+            <div class="userPwBox">
+                <label for="userPw">비밀번호: </label>
+                <input type="text" id="userPw" name="userPw" />
+            </div>
+            <button id="loginBtn">로그인</button>
+        </form>
+        <!-- <div class="welcome"></div>
+        <div class="popUp">
+            <div class="popUpWrapper">
+                <div class="top">
+                    <button id="exitBtn">X</button>
+                </div>
+                <div class="contents">광고내용</div>
+                <div class="bottom">
+                    <label for="exitBox">하루동안 보지 않기</label>
+                    <input type="checkbox" id="exitBox" />
+                </div>
+            </div>
+        </div>
+        <form class="logout">
+            <input id="logoutBtn" type="submit" value="로그아웃" />
+        </form> -->
+    </body>
+    <!-- <script>
+        const popUp = document.querySelector(".popUp");
+        const login = document.querySelector(".login");
+        const welcome = document.querySelector(".welcome");
+        const logout = document.querySelector(".logout");
+
+        window.onload = function () {
+            if (sessionStorage.getItem("logined") === "true") {
+                login.style.display = "none";
+                let userId = sessionStorage.getItem("userId");
+                welcome.innerHTML = `${userId}님 환영합니다`;
+                welcome.style.display = "block";
+                logoutBtn.style.display = "block";
+                pop(userId);
+            }
+            loginBtn.onclick = () => {
+                if (userId.value === "" || userPw.value === "") {
+                    alert("둘다 입력하세요");
+                    return;
+                }
+                sessionStorage.setItem("logined", true);
+                sessionStorage.setItem("userId", userId.value);
+                login.style.display = "none";
+                welcome.innerHTML = `${userId.value}님 환영합니다`;
+                welcome.style.display = "block";
+                logoutBtn.style.display = "block";
+                pop(userId.value);
+            };
+
+            exitBox.oninput = () => {
+                let userId = sessionStorage.getItem("userId");
+                if (exitBox.checked) {
+                    createPopUpCookie(userId);
+                } else if (!exitBox.checked) {
+                    deletePopUpCookie(userId);
+                }
+            };
+            exitBtn.onclick = () => {
+                popUp.style.display = "none";
+            };
+            logoutBtn.onclick = () => {
+                window.sessionStorage.clear();
+            };
+        };
+        function createPopUpCookie(name) {
+            let date = new Date();
+            date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+            document.cookie = `${name}  = true; expires = ${date.toUTCString()}; path =/20220808/training `;
+        }
+        function deletePopUpCookie(name) {
+            document.cookie = `${name}  = ; expires = Thu, 01 Jan 1999 00:00:10 GMT;`;
+        }
+        function pop(name) {
+            console.log("팝실행");
+            let popUpCookie = document.cookie.match(
+                "(^|;) ?" + name + "=([^;]*)(;|$)"
+            );
+            console.log(popUpCookie);
+            if (popUpCookie === null) {
+                popUp.style.display = "block";
+            } else {
+                console.log("있음");
+                popUp.style.display = "none";
+            }
+        }
+    </script> -->
+</html>
