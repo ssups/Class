@@ -15,6 +15,8 @@
     2. 체크 박스가 있어서 하루동안 안뜨게
     3. 로그인 하면 유저 이름 뜨는 nav바 위에 어서오세요 누구누구님
     계정 아이디와 비밀번호는 욕심나면 json파일로 만들어 보세용
+    4. 로그인했을때 express 세션에 jwt 토큰 정보 저장 
+    .env 사용해서 시크릿 키는 따로 빼놓기
  -->
     <body>
         <div class="login">
@@ -41,63 +43,74 @@
                 </div>
             </div>
         </div>
+        <form class="logout">
+            <input id="logoutBtn" type="submit" value="로그아웃" />
+        </form>
     </body>
     <script>
         const popUp = document.querySelector(".popUp");
         const login = document.querySelector(".login");
         const welcome = document.querySelector(".welcome");
+        const logout = document.querySelector(".logout");
 
         window.onload = function () {
-            exitBtn.onclick = () => {
-                popUp.style.display = "none";
-            };
-
+            if (sessionStorage.getItem("logined") === "true") {
+                login.style.display = "none";
+                let userId = sessionStorage.getItem("userId");
+                welcome.innerHTML = `${userId}님 환영합니다`;
+                welcome.style.display = "block";
+                logoutBtn.style.display = "block";
+                pop(userId);
+            }
             loginBtn.onclick = () => {
                 if (userId.value === "" || userPw.value === "") {
                     alert("둘다 입력하세요");
                     return;
                 }
-                // sessionStorage.setItem(isLogin, true);
+                sessionStorage.setItem("logined", true);
+                sessionStorage.setItem("userId", userId.value);
                 login.style.display = "none";
                 welcome.innerHTML = `${userId.value}님 환영합니다`;
                 welcome.style.display = "block";
-                popUp.style.display = "block";
-
-                let popUpCookie = document.cookie.match(
-                    "(^|;) ?" + userId.value + "=([^;]*)(;|$)"
-                );
-                console.log(popUpCookie);
-                if (popUpCookie === null) {
-                    console.log("쿠키없음");
-                } else {
-                    console.log("있음");
-                    popUp.style.display = "none";
-                }
-
-                // if (sessionStorage.getItem(userId.value) === "true") {
-                //     popUp.style.display = "none";
-                // }
-
-                console.log(exitBox.checked);
-                exitBox.oninput = () => {
-                    if (exitBox.checked) {
-                        createPopUpCookie(userId.value);
-                        // sessionStorage.setItem(userId.value, true);
-                    } else if (!exitBox.checked) {
-                        deletePopUpCookie(userId.value);
-                        // sessionStorage.setItem(userId.value, false);
-                    }
-                };
+                logoutBtn.style.display = "block";
+                pop(userId.value);
             };
 
-            function createPopUpCookie(name) {
-                let date = new Date();
-                date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
-                document.cookie = `${name}  = true; expires = ${date.toUTCString()}; path =/20220808/training `;
-            }
-            function deletePopUpCookie(name) {
-                document.cookie = `${name}  = ; expires = Thu, 01 Jan 1999 00:00:10 GMT;`;
-            }
+            exitBox.oninput = () => {
+                let userId = sessionStorage.getItem("userId");
+                if (exitBox.checked) {
+                    createPopUpCookie(userId);
+                } else if (!exitBox.checked) {
+                    deletePopUpCookie(userId);
+                }
+            };
+            exitBtn.onclick = () => {
+                popUp.style.display = "none";
+            };
+            logoutBtn.onclick = () => {
+                window.sessionStorage.clear();
+            };
         };
+        function createPopUpCookie(name) {
+            let date = new Date();
+            date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+            document.cookie = `${name}  = true; expires = ${date.toUTCString()}; path =/20220808/training `;
+        }
+        function deletePopUpCookie(name) {
+            document.cookie = `${name}  = ; expires = Thu, 01 Jan 1999 00:00:10 GMT;`;
+        }
+        function pop(name) {
+            console.log("팝실행");
+            let popUpCookie = document.cookie.match(
+                "(^|;) ?" + name + "=([^;]*)(;|$)"
+            );
+            console.log(popUpCookie);
+            if (popUpCookie === null) {
+                popUp.style.display = "block";
+            } else {
+                console.log("있음");
+                popUp.style.display = "none";
+            }
+        }
     </script>
 </html>
