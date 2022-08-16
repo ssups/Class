@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <form action="/login" method="post">
+            <!-- body 안에 키값이 name -->
+            <!-- 
+            body = {userId:input의 value, password:input의 value}
+            -->
+            <input type="text" name="userId" />
+            <input type="text" name="password" />
+            <button>로그인</button>
+            <a href="/join">회원가입</a>
+        </form>
+        <form action="/check" method="get">
+            <button>체크</button>
+        </form>
+    </body>
+</html>
