@@ -33,7 +33,7 @@ const crypto = require("crypto"); // 내부에 이미 설치되어 있는 모듈
 const pw = "2324214"; // 임이의 비밀번호
 
 // 단순 해싱으로 비밀번호 해싱
-let hashAlgor = crypto.createHash("sha512");
+// let hashAlgor = crypto.createHash("sha512");
 // 사용할 해시 알고리즘은 sha512 암호 알고리즘을 쓸건데
 // (md5, sha1, csha256, sha512 등이 있는데)
 // sha512 알고리즘은 국가안보국(NSA)에서 설계한 암호 해쉬함수이다.
@@ -41,9 +41,9 @@ let hashAlgor = crypto.createHash("sha512");
 // 일반적으로 길이가 128자리인 16진수로 랜더링 된다.
 
 // 선택된 알고리즘으로 해싱한다.
-let hashing = hashAlgor.update(pw); // 인수로 암호화 시킬 문자열 사용
+// let hashing = hashAlgor.update(pw); // 인수로 암호화 시킬 문자열 사용
 
-let hashStirng = hashing.digest("base64"); // 보여줄 인코딩 설정
+// let hashStirng = hashing.digest("base64"); // 보여줄 인코딩 설정
 // 인코딩할 알고리즘을 넣어준것이 base64
 // digest함수를 사용해서
 // 해싱된 객체를 base64를 통해서 문자열로 반환해준다
@@ -116,7 +116,7 @@ crypto.randomBytes(32, (err, byte) => {
     crypto.pbkdf2(
         pw, // 해싱하려고 한 문자열 (패스워드)
         byte.toString("base64"), // 문자열로 변환하는데 인코딩 방식은 base64
-        1453, // 반복횟수를 지정, 반복횟수가 많아질수록 복호화하기 어려워 지는데 시간도 많이 걸린다.
+        1000, // 반복횟수를 지정, 반복횟수가 많아질수록 복호화하기 어려워 지는데 시간도 많이 걸린다.
         64, // 길이를 설정
         "sha512", // 암호화 알고리즘 설정
         (err, hashed) => {
@@ -130,9 +130,10 @@ crypto.randomBytes(32, (err, byte) => {
 const createSalt = () => {
     // 암호화를 처리하는데 시간이 걸리기 때문에
     // Promise를 사용해서 비동기 처리를 한다.
-    new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         // 랜덤 바이트 생성길이는 64
         crypto.randomBytes(64, (err, byte) => {
+            console.log(byte.toString("base64"));
             if (err) {
                 // 실패시 err 값 반환
                 reject(err);
@@ -147,39 +148,44 @@ const createSalt = () => {
 // 비밀번호를 해싱해주는 함수
 const pwHashed = (userId, password) => {
     // Promise를 사용해서 비동기 처리를 한다.
-    new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         // 유저 테이블에서 user_id 값이 있는지 확인
         const sql = "SELECT * FROM users WHERE user_id=?";
         client.query(sql, [userId], async (err, result) => {
             if (result[0]?.salt) {
-                // 해당 유저 아이디에 대응되는 salt값이 있으면 그 값을 가져온다
+                // 해당 유저 아이디에 대응되는 salt값이 있으면 그 값을 가져온다 (salt값은 암호화할때마다 바뀌기때문에 가져와서 비교하고)
+                // (비밀번호값은 같은 값을 암호화하면 같은 결과갑을 가지기때문에 입력값을 다시 암호화시켜서 비교한다)
                 const salt = await result[0].salt;
                 // pdkdf2 암호화를 하는데 해싱 알고리즘은 sha512
-                // 길이: 64, 반복횟수: 23412
+                // 길이: 64, 반복횟수: 1000
                 crypto.pbkdf2(
                     password,
                     salt,
-                    23412,
+                    1000,
                     64,
                     "sha512",
                     (err, key) => {
-                        resolve(key.toString("base64"));
+                        if (key.toString("base64") === result[0].password) {
+                            resolve(key.toString("base64"));
+                        } else {
+                            reject("첫번째err");
+                        }
                     }
                 );
             } else {
-                reject("err");
+                reject("두번째err");
             }
         });
     });
 };
 const createPwHashed = password => {
     // 비동기처리
-    new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         const salt = await createSalt(); //여기서 salt값을 만들고
         // 여기서 33244 만큼 반복시키는 key stretching
         // 비밀번호에 문자를 더해서 암호화시키는 기법 salt 사용
         // 여기서 salt는 랜덤값이다
-        crypto.pbkdf2(password, salt, 33244, 64, "sha512", (err, key) => {
+        crypto.pbkdf2(password, salt, 1000, 64, "sha512", (err, key) => {
             if (err) {
                 reject("err");
             } else {
@@ -204,6 +210,17 @@ const PORT = 4000;
 const mysql = require("mysql2");
 const fs = require("fs");
 
+const client = mysql.createConnection({
+    user: "root",
+    password: "!!Min159357",
+    database: "test8",
+    multipleStatements: true,
+});
+// 테이블 만들기(1회성)
+// const sql = `CREATE TABLE users (id INT AUTO_INCREMENT PRIMARY KEY,
+//      user_id VARCHAR(255), password VARCHAR(255), salt VARCHAR(255))`;
+// client.query(sql);
+
 app.listen(PORT, () => {
     console.log(`${PORT}번 포트에 서버 열림`);
 });
@@ -221,10 +238,20 @@ app.get("/login", (req, res) => {
     });
 });
 
-app.post("/join", (req, res) => {});
-const client = mysql.createConnection({
-    user: "root",
-    password: "!!Min159357",
-    database: "test8",
-    multipleStatements: true,
+app.post("/join", async (req, res) => {
+    const { password, salt } = await createPwHashed(req.body.user_pw);
+    const sql = "INSERT INTO users (user_id, password, salt)VALUE(?,?,?)";
+    client.query(sql, [req.body.user_id, password, salt], () => {
+        res.redirect("/login");
+    });
+});
+app.post("/login", (req, res) => {
+    const { user_id, user_pw } = req.body;
+    pwHashed(user_id, user_pw)
+        .then(result => {
+            res.send(result + "로그인 됐어요");
+        })
+        .catch(err => {
+            res.send(err);
+        });
 });
