@@ -53,9 +53,15 @@ class User extends Sequelize.Model {
                 paranoid: false,
                 // charset, collate : 각각 utf-8, utf_general_ci 이렇게 설정해줘야 한글입력이 가능하다.
                 // 이모티콘도 사용하려면 utf8md4, utf8md4_general_ci 이렇게 설정해줘야 한다.
-                charset: "utf-8",
+                charset: "utf8",
                 collate: "utf8_general_ci",
             }
         );
     }
+    // associate 함수에서 다른 모델과 관계를 적어둔다.
+    // mysql에서는  JOIN이라는 기능으로 여러 테이블간의 관계를 만들어준다.
+    // sequelize는 테이블간의 관계성만 알려준다면 JOIN 기능도 알아서 구현한다.
+    static associate(db) {}
 }
+
+module.exports = User;

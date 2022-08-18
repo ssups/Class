@@ -7,7 +7,7 @@ const config = {
         multipleStatement: true,
     },
     dev2: {
-        user: "root",
+        username: "root",
         password: process.env.DB_PASSWORD,
         database: "test10",
         // 호스트 주소
