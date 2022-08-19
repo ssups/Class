@@ -3,7 +3,7 @@ const app = express();
 const PORT = 4000;
 const ejs = require("ejs");
 const path = require("path"); // path는 기본 경로를 다룰수 있게 도와주는 모듈
-const { sequelize } = require("./model"); // 이렇게 폴더경로까지만 적으면 그안에있는 index.js 를 기본으로 불러옴
+const { sequelize, User, Post } = require("./model"); // 이렇게 폴더경로까지만 적으면 그안에있는 index.js 를 기본으로 불러옴
 // model안에 index.js에서 db 객체를 export했으니깐 그안에 있는 sequelize 키벨류만 빼올라면 객체형태로 적어줘야함
 
 app.listen(PORT, () => {
@@ -50,3 +50,55 @@ sequelize
     .catch(err => {
         console.log(err);
     });
+
+app.get("/", (req, res) => {
+    // 위에 app.use()구문 때문에 경로가 알아서 view 폴더로 잡혀있다.
+    res.render("create");
+});
+app.post("/create", (req, res) => {
+    // create함수 -> sequelize에 있는 메서드
+    // create함수 사용하면 해당 테이블에 컬럼을 추가할수 있다.
+    // 쿼리문 대신 사용 가능
+    const { name, age, msg } = req.body;
+    const create = User.create({
+        // 컬럼에 각각 대입
+        name,
+        age,
+        msg,
+    });
+});
+// 클라이언트에서 입력한 데이터 받아서 넘기기
+app.get("/user", (req, res) => {
+    // 여기서는 추가된 유저들을 봐야하니깐
+    // 전체를 조회한다.
+    // findAll 사용
+    // findAll은 인수로 검색할 옵션을 받는다.
+    // 인수에 아무것도 안적으면 데이터 다가지고온다.
+    User.findAll({})
+        .then(e => {
+            res.render("page", { data: e });
+        })
+        .catch(() => {
+            // 실패하면 에러 페이지를 보여주면 된다.
+            res.render("데이터불러오기 실패~!");
+        });
+});
+
+app.post("/create_post", (req, res) => {
+    const { name, text } = req.body;
+    console.log(name, text);
+    // User테이블이랑 Post랑 연결되있는데
+    // User는 소스키가 id(기본키였고) Post는 user_id
+    // 테이블에서 하나의 컬럼값 가져온다.
+    // findOne하나를 검색할때 사용
+    // find는 인수로 검색할 옵션
+    User.findOne({
+        where: { name: name },
+    }).then(e => {
+        Post.create({
+            msg: text,
+            // foreignkey는 user_id 이고 유저의 아이디와 연결한다고 정의를 해놓았기때문에
+            user_id: e.id,
+        });
+    });
+});

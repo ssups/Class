@@ -1,10 +1,11 @@
 const Sequelize = require("sequelize");
+const db = require("../model");
 // User 클래스에서 시퀄라이즈 안에 모듈 객체의 기능을 상속시켜주기 위해서
 // User 클래스에 Sequelize.Model 기능을 상속시켜준다.
 class User extends Sequelize.Model {
     // static init 매서드에서 테이블을 생성해주는건데
     // 사용하면 테이블을 생성 및 연결까지(매핑) 구성
-    static init(db) {
+    static init(sequelize) {
         // 상속받은 함수(부모의 함수)를 쓰려면 super를 사용해야함
 
         // init함수에 들어가는 첫번째 인수는 테이블의 구성
@@ -55,8 +56,8 @@ class User extends Sequelize.Model {
                 // },
             },
             {
-                // sequelize 이건 위에서 매변수 쓴걸 연결시켜주는 옵션
-                db,
+                // sequelize 이건 위에서 매개변수 쓴걸 연결시켜주는 옵션
+                sequelize: sequelize,
                 // timestamps 는 생성시간뿐만 아니라 업데이트 시간도 생성해줌
                 timestamps: true,
                 // underscored 시퀄라이즈는 timestamp의 표기법임. 디폴트가 카멜표기법, true로하면 스네이크표기법
@@ -70,10 +71,19 @@ class User extends Sequelize.Model {
                 // 밑에 두개 설정해주면 한글입력이 가능하게 되고,
                 // 이모티콘 쓸려면 utf8 뒤에 mb4만 붙여주면 된다.
                 // 글자가 깨진다면 밑의 인코딩방식의 문제임으로 여기를 수정해줘야 한다.
-                charset: "utf-8",
+                charset: "utf8",
                 collate: "utf8_general_ci",
             }
         );
+    }
+    static associate() {
+        // foreignkey: 외부 테이블의 키(테이블구성때 만드는 키가 아니라 테이블 구성을 위해서, 다른테이블과의 연동을 위한 키)
+        // 1:N 관계 (hasMany, belongsTo)
+        // 시퀄라이즈에서 1:N 관계를 hasMany 함수로 정의를 한다.
+        // hasMany 함수를 이용해서 테이블의 관계를 정의해준다.
+        // 1번째 인수: 연결할 테이블
+        // Post의 user_Id 랑  User의 id 랑 연동(둘의 값은 동일해야한다)
+        db.User.hasMany(db.Post, { foreignKey: "user_id", sourceKey: "id" });
     }
 }
 
