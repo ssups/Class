@@ -76,6 +76,7 @@ app.get("/user", (req, res) => {
     // 인수에 아무것도 안적으면 데이터 다가지고온다.
     User.findAll({})
         .then(e => {
+            // page.html에 객체형태로 뽑은 데이터 전송
             res.render("page", { data: e });
         })
         .catch(() => {
