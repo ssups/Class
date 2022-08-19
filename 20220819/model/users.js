@@ -76,7 +76,7 @@ class User extends Sequelize.Model {
             }
         );
     }
-    static associate() {
+    static associate(db) {
         // foreignkey: 외부 테이블의 키(테이블구성때 만드는 키가 아니라 테이블 구성을 위해서, 다른테이블과의 연동을 위한 키)
         // 1:N 관계 (hasMany, belongsTo)
         // 시퀄라이즈에서 1:N 관계를 hasMany 함수로 정의를 한다.
