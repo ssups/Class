@@ -18,6 +18,7 @@ app.listen(PORT, () => {
 
 // 정적 폴더인 css폴더를 사용하겠다
 app.use(express.static("css"));
+// app.use(express.static(__dirname));
 // bodyParser 사용
 app.use(
     bodyParser.urlencoded({
