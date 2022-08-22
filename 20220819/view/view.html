@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    </head>
+    <body>
+        작성자: <%= data.name %>
+        <ul>
+            <% data.forEach(function(post){ %>
+            <li class="item" data-item="<%= post.id %>">
+                <p class="text"><%= post.msg %></p>
+                <input class="msg" type="text" /><button class="item-btn">
+                    수정
+                </button>
+                <button class="delBtn">삭제</button>
+            </li>
+            <% }) %>
+        </ul>
+    </body>
+    <script>
+        window.onload = () => {
+            let items = document.querySelectorAll(".item");
+            items.forEach(e => {
+                e.querySelector(".item-btn").onclick = () => {
+                    // data 속성 사용 js에서 값을 가져다쓰겠따 할때 사용
+                    let id = e.dataset.item;
+                    // 수정할 내용을 가진 msg input에 value를 가져와서 담고
+                    let msg = e.querySelector(".msg").value;
+                    // 수정하기 전 내용도 같이 가져와서 담아준다.
+                    let text = e.querySelector(".text").innerHTML;
+                    // 제이쿼리 안에 있는 ajax 함수 사용 내용은 요청 url, 요청 type, post면
+                    // 전달할 data값
+                    console.log(id, msg, text);
+                    $.ajax({
+                        url: "/view_update",
+                        type: "post",
+                        data: { id, msg, text },
+                    });
+                    location.href = "/user";
+                };
+                e.querySelector(".delBtn").onclick = () => {
+                    const postId = e.dataset.item;
+                    location.href = `/del/${postId}`;
+                };
+            });
+        };
+    </script>
+</html>
