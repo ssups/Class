@@ -10,7 +10,7 @@
     <body>
         작성자: <%= data.name %>
         <ul>
-            <% data.forEach(function(post){ %>
+            <% data.Posts.forEach(function(post){ %>
             <li class="item" data-item="<%= post.id %>">
                 <p class="text"><%= post.msg %></p>
                 <input class="msg" type="text" /><button class="item-btn">
@@ -22,6 +22,7 @@
         </ul>
     </body>
     <script>
+        console.log("<%= data.name %>");
         window.onload = () => {
             let items = document.querySelectorAll(".item");
             items.forEach(e => {

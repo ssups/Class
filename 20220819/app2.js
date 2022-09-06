@@ -103,3 +103,56 @@ app.post("/create_post", (req, res) => {
         });
     });
 });
+
+// 유저별 포스팅 보기
+app.get("/view/:name", (req, res) => {
+    //params 쓰는거(/view/:키값)
+    // 해당 유저의 이름을 조회하고
+    User.findOne({
+        where: {
+            // 조건문(누구 찾을건지)
+            // params로 전달받은 name 키값에 있는 벨류로 이름을 검색
+            name: req.params.name,
+        },
+        // raw: true, // 리턴값을 단일 객체로 볂여해서 보여준다.
+        // 관계형 모델 불러오기
+        // 관계를 맺어놓은 테이블(Post)을 조회할 수 있다.
+        // 해당 검색된 name 을 기반으로 Post 테이블 안에있는 같은키값의 애들을 조회
+        include: [
+            {
+                // post 모델 조회
+                model: Post,
+            },
+        ],
+    }).then(e => {
+        // console.log(e.dataValues.Posts);
+        e.dataValues.Posts = e.dataValues.Posts.map(i => i.dataValues); // 밖으로 빼주는거
+        const Posts = e.dataValues;
+        // const Posts = e.dataValues.Posts.map(i => i.dataValues); // 이렇게 써도 됨
+        // console.log(Posts);
+        res.render("view", { data: Posts });
+    });
+});
+
+// 포스팅 수정
+app.post("/view_update", (req, res) => {
+    const { id, msg, text } = req.body;
+    // 수정 쿼리문 사용
+    // 객체가 들어가는데
+    // 첫번째 인수는 객체가 수정할 내용
+    // 두번째 인수는 객체가 검색할 조건
+    // 밑에 검색 조건 내용은 아이디와 메세지 둘다 검색해서 맞는 애 탐색
+    Post.update({ msg: msg }, { where: { id: id, msg: text } });
+});
+
+// 포스팅 삭제
+app.get("/del/:id", (req, res) => {
+    // 삭제 쿼리문
+    // 매개변수 객체 내용은 검색 조건
+    Post.destroy({
+        where: { id: req.params.id },
+    }).then(() => {
+        // 잘 끝나면 유저 페이지로 이동
+        res.redirect("/user");
+    });
+});

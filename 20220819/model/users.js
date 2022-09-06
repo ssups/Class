@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const db = require("../model");
+
 // User 클래스에서 시퀄라이즈 안에 모듈 객체의 기능을 상속시켜주기 위해서
 // User 클래스에 Sequelize.Model 기능을 상속시켜준다.
 class User extends Sequelize.Model {
