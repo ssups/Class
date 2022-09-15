@@ -195,12 +195,14 @@ const middleware = (req, res, next) => {
             // 본인의 방향성으로 페이지 구성 하시면 됩니다.
             // res.send("에로로 들어감 다시 로그인 해 주세요");
             jwt.verify(
+                //여기선 env에 저장된 정보로 refresh토큰 점검
                 refresh_token,
                 process.env.REFRESH_TOKEN,
                 (err, ref_decoded) => {
                     if (err) {
                         res.send("다시 로그인 해주세요");
                     } else {
+                        //여기선 데이터베이서에 저장된 정보로 refresh 토큰 점검
                         const sql = "SELECT * FROM users WHERE user_id=?";
                         client.query(
                             sql,
@@ -212,6 +214,7 @@ const middleware = (req, res, next) => {
                                     );
                                 } else {
                                     if (result[0].refresh == refresh_token) {
+                                        // accessToken 재발급
                                         const accessToken = jwt.sign(
                                             {
                                                 userId: ref_decoded.userId,
@@ -220,6 +223,7 @@ const middleware = (req, res, next) => {
                                             { expiresIn: "5s" }
                                         );
                                         req.session.access_token = accessToken;
+                                        // 데이터베이스에 업데이트도 해줘야함 여기선 생략됨
                                         next();
                                     } else {
                                         res.send("다시 로그인 하세요");

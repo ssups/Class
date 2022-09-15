@@ -145,7 +145,7 @@ const createSalt = () => {
     });
 };
 
-// 비밀번호를 해싱해주는 함수
+// 비밀번호를 해싱해주는 함수(데이터베이스에있는 솔트값이랑 입력받는 비밀번호랑 결합해서 다시 해싱)
 const pwHashed = (userId, password) => {
     // Promise를 사용해서 비동기 처리를 한다.
     return new Promise((resolve, reject) => {
@@ -178,6 +178,8 @@ const pwHashed = (userId, password) => {
         });
     });
 };
+
+// 암호화된 솔트값이랑 해싱된 비밀번호를 합쳐서 복합적인 비밀번호 생성
 const createPwHashed = password => {
     // 비동기처리
     return new Promise(async (resolve, reject) => {
