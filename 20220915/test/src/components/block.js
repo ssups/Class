@@ -10,6 +10,8 @@ const Block = data => {
         // console.log(count);
         setnum(num1 + 1);
         console.log(num1);
+        // setnum함수는 비동기적으로 돌아가서 console 로 찍은값이 변하기전에 동작한다
+        // 따라서 콘솔로 찍는 값은 하나씩 밀린다.
     }
     const [num1, setnum] = useState(count);
     // useState 리액트에게 값을 주시하게 만들고 변하면 해당값만 다시 그리게 해준다
