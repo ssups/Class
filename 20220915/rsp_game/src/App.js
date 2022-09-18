@@ -74,7 +74,11 @@ function App() {
     function betMoney(e) {
         const currentBetAmount = selectForBet.current.value * 1;
         if (currentBetAmount > userMoney) {
-            alert("소지금보다 배팅금이 많습니다");
+            alert("유저 소지금보다 배팅금이 많습니다");
+            return;
+        }
+        if (currentBetAmount > comMoney) {
+            alert("유저 소지금보다 배팅금이 많습니다");
             return;
         }
         setBetAmount(currentBetAmount);
@@ -260,7 +264,7 @@ function App() {
                     {caption}
                 </h1>
                 <div>
-                    <h3>유저돈: {userMoney}</h3>
+                    <h3>유저 소지금: {userMoney}</h3>
                     <h3>
                         배팅금:
                         <select ref={selectForBet} disabled={isBetted}>
@@ -273,7 +277,7 @@ function App() {
                             확인
                         </button>
                     </h3>
-                    <h3>컴터돈: {comMoney}</h3>
+                    <h3>컴터 소지금: {comMoney}</h3>
                 </div>
             </div>
             <div className={`computerBoxes isAttacker-${isComAttack}`}>
