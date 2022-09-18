@@ -1,5 +1,4 @@
 import "./App.css";
-// useRef는 특정 DOM 셀렉할수 있게 해주는 Hook
 import { React, useState, useRef, useEffect } from "react";
 
 function Box(data) {
@@ -33,13 +32,14 @@ function Box(data) {
 }
 
 function App() {
-    const interval = useRef();
     const arr = Array(4).fill();
     const [stage, setStage] = useState(0);
     const [isOnGame, setIsOnGame] = useState(false);
+    const [isBetted, setisBetted] = useState(false);
     const [isComAttack, setIsComAttack] = useState(false);
     const [isUserAttack, setIsUserAttack] = useState(false);
     const [caption, setCaption] = useState("배팅금을 설정해주세요~");
+    const [captionColor, setCaptionColor] = useState(0);
     const [comMoney, setComMoney] = useState(10000);
     const [userMoney, setUserMoney] = useState(10000);
     const [userColor, setUserColor] = useState("");
@@ -50,8 +50,19 @@ function App() {
     const [comSelection, setComSelection] = useState("selection");
     const [userposition, setUserposition] = useState(0);
     const [composition, setComPosition] = useState(0);
+    // useRef는 특정 DOM 셀렉할수 있게 해주는 Hook으로 주로 사용?
+    // 콘솔로 찍어보면 얘가 지금 속해있는 App 컴포넌트 안에있는 모든 자식 요소중 하나라도 리렌더링 되는순간
+    // App 컴포넌트가 리렌더 되는순간 그때의 current 값을 계속 뱉어냄
     const selectForBet = useRef();
+    const interval = useRef();
 
+    // 캡션색깔 변경
+    function changeCaptionColor() {
+        setCaptionColor(current => (current % 365) + 1);
+    }
+    // 랜덤이미지돌리기
+    // setInterval을 그냥 써버리면 setInterval로 인해 App컴포넌트가 리렌더링되는데 이때 setInterval이 다시 실행되면서 계속 쌓임(졸라많이실행됨)
+    // useEffect를 써서 App컴포넌트가 처음 렌더링 될대만 setInterval이 실행되도록 함
     useEffect(() => {
         interval.current = setInterval(comSelect, 100);
         return () => {
@@ -68,6 +79,7 @@ function App() {
         }
         setBetAmount(currentBetAmount);
         setIsOnGame(true);
+        setisBetted(true);
         setCaption("가위 바위~ 보");
     }
     // 컴퓨터 랜덤포지션
@@ -105,6 +117,7 @@ function App() {
     function reset() {
         setStage(0);
         setIsOnGame(false);
+        setisBetted(false);
         setIsComAttack(false);
         setIsUserAttack(false);
         setCaption("배팅금을 설정해주세요~");
@@ -114,6 +127,7 @@ function App() {
         setComPosition(0);
         setUserColor("");
         setComColor("");
+        setCaptionColor(0);
     }
     function resetMoney() {
         setComMoney(10000);
@@ -132,12 +146,14 @@ function App() {
             const userSelection = boxClassLi[1];
             const comPosition = comSelect();
             const RSP_result = return_RSP_result(selectedPos, comPosition);
-            // 슬롯 멈추기
+            // 슬롯 멈추고 게임잠시 정지
             clearInterval(interval.current);
-            // 슬롯 다시 재생
+            setIsOnGame(false);
+            // 슬롯, 게임 다시 재생 (1초뒤에)
             setTimeout(() => {
                 interval.current = setInterval(comSelect, 100);
-            }, 1000);
+                setIsOnGame(true);
+            }, 500);
             setUserSelection(userSelection);
             setUserposition(selectedPos);
             let colorCount = Math.floor(Math.random() * 12 + 1) * 30;
@@ -167,15 +183,20 @@ function App() {
                 case 1:
                     if (RSP_result === 0) {
                         setUserMoney(userMoney + betAmount);
+                        // 밑에형식처럼 콜백형식으로 써주면 좋은점은
+                        // 한번에 여러개의 setState(useState()에서 업데이트시키는 함수)를 사용하면
+                        // 모든 setState를 que에 저장했다가 한번에 리렌더링하는데 이때
+                        // 콜백형식으로 써준다면 리렌더링이 순서대로 일어나도록 해준다.
+                        // 참고로 setState는 비동기로 동작한다.
                         setComMoney(current => current - betAmount);
                         setTimeout(() => {
                             alert("유저 승리!");
+                            reset();
                             if (comMoney - betAmount <= 0) {
                                 alert("컴퓨터돈 전부소진 유저 최종 승리");
                                 resetMoney();
                             }
-                        }, 10);
-                        reset();
+                        }, 510);
                     } else {
                         setStage(RSP_result);
                         setCaption(
@@ -191,13 +212,12 @@ function App() {
                         setComMoney(current => current + betAmount);
                         setTimeout(() => {
                             alert("패배~");
-                            console.log("유저돈" + userMoney);
+                            reset();
                             if (userMoney - betAmount <= 0) {
                                 alert("유저돈 전부소진 컴퓨터 최종 승리");
                                 resetMoney();
                             }
-                        }, 10);
-                        reset();
+                        }, 510);
                     } else {
                         setStage(RSP_result);
                         setCaption(
@@ -214,7 +234,11 @@ function App() {
     }
 
     return (
-        <div className="App" onClick={select} data-stage={stage}>
+        <div
+            className="App"
+            onClick={select}
+            data-stage={stage}
+            onMouseMove={changeCaptionColor}>
             <div className={`userBoxes isAttacker-${isUserAttack}`}>
                 <span>유저</span>
                 <div className="boxes">
@@ -232,28 +256,30 @@ function App() {
                 </div>
             </div>
             <div className="textDom">
-                <h1>{caption}</h1>
+                <h1 style={{ color: `hsl(${captionColor},100%,45%)` }}>
+                    {caption}
+                </h1>
                 <div>
-                    <h3>컴터돈: {comMoney}</h3>
+                    <h3>유저돈: {userMoney}</h3>
                     <h3>
                         배팅금:
-                        <select ref={selectForBet} disabled={isOnGame}>
+                        <select ref={selectForBet} disabled={isBetted}>
                             <option value="1000">1000</option>
                             <option value="2000">2000</option>
                             <option value="3000">3000</option>
                             <option value="5000">5000</option>
                         </select>
-                        <button disabled={isOnGame} onClick={betMoney}>
+                        <button disabled={isBetted} onClick={betMoney}>
                             확인
                         </button>
                     </h3>
-                    <h3>유저돈: {userMoney}</h3>
+                    <h3>컴터돈: {comMoney}</h3>
                 </div>
             </div>
             <div className={`computerBoxes isAttacker-${isComAttack}`}>
                 <span>컴퓨터</span>
                 <div className="boxes">
-                    {arr.map((el, index) => (
+                    {/* {arr.map((el, index) => (
                         <Box
                             divider={index + 1}
                             key={index}
@@ -261,9 +287,18 @@ function App() {
                             selection={comSelection}
                             position={composition}
                             color={comColor}
-                            isOnGame={isOnGame}
+                            isOnGame={true}
                         />
-                    ))}
+                    ))} */}
+                    <Box
+                        divider={4}
+                        key={5}
+                        player="computer"
+                        selection={comSelection}
+                        position={composition}
+                        color={comColor}
+                        isOnGame={true}
+                    />
                 </div>
             </div>
         </div>

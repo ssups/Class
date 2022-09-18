@@ -13,14 +13,23 @@
     justify-content: space-around;
     align-items: center;
 }
+.App > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .App > div > .boxes {
     display: flex;
 }
 .App > div > span {
-    font-size: 30px;
+    font-size: 35px;
     font-weight: 900;
+    margin-bottom: 20px;
 }
 
+.App > div.isAttacker-true > .boxes {
+    border: 10px solid red;
+}
 .App > div.isAttacker-true > .boxes > .box {
     background-color: red;
 }
@@ -28,17 +37,19 @@
     color: red;
 }
 .App > div > .boxes > .box:first-child {
-    border-left: 1px solid black;
+    border-left: 2px solid black;
 }
 .App > div > .boxes > .box:last-child {
-    border-left: 1px solid black;
-    margin-left: 120px;
+    border-left: 2px solid black;
     opacity: 1;
+}
+.App > .userBoxes > .boxes > .box:last-child {
+    margin-left: 120px;
 }
 .box {
     width: 170px;
     height: 170px;
-    border: 1px solid black;
+    border: 2px solid black;
     border-left: none;
     opacity: 0.5;
     background-position: center;
