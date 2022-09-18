@@ -76,8 +76,7 @@ function App() {
         if (currentBetAmount > userMoney) {
             alert("유저 소지금보다 배팅금이 많습니다");
             return;
-        }
-        if (currentBetAmount > comMoney) {
+        } else if (currentBetAmount > comMoney) {
             alert("유저 소지금보다 배팅금이 많습니다");
             return;
         }
