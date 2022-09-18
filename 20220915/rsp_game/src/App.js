@@ -1,6 +1,6 @@
 import "./App.css";
 // useRef는 특정 DOM 셀렉할수 있게 해주는 Hook
-import { React, useState, useRef } from "react";
+import { React, useState, useRef, useEffect } from "react";
 
 function Box(data) {
     const { position, player, selection, divider, color, isOnGame } = data;
@@ -33,6 +33,7 @@ function Box(data) {
 }
 
 function App() {
+    const interval = useRef();
     const arr = Array(4).fill();
     const [stage, setStage] = useState(0);
     const [isOnGame, setIsOnGame] = useState(false);
@@ -41,9 +42,9 @@ function App() {
     const [caption, setCaption] = useState("배팅금을 설정해주세요~");
     const [comMoney, setComMoney] = useState(10000);
     const [userMoney, setUserMoney] = useState(10000);
-    const [userColor, setUserColor] = useState("none");
-    const [comColor, setComColor] = useState("none");
-    const [betAmount, setBetAmount] = useState("0");
+    const [userColor, setUserColor] = useState("");
+    const [comColor, setComColor] = useState("");
+    const [betAmount, setBetAmount] = useState(0);
     // selection은 문자로 표기(rock, sissor, paper) postion은 숫자로 표기(1,2,3)
     const [userSelection, setUserSelection] = useState("selection");
     const [comSelection, setComSelection] = useState("selection");
@@ -51,9 +52,21 @@ function App() {
     const [composition, setComPosition] = useState(0);
     const selectForBet = useRef();
 
+    useEffect(() => {
+        interval.current = setInterval(comSelect, 100);
+        return () => {
+            clearInterval(interval.current);
+        };
+    }, []);
+
     // 배팅금설정
     function betMoney(e) {
-        setBetAmount(selectForBet.current.value * 1);
+        const currentBetAmount = selectForBet.current.value * 1;
+        if (currentBetAmount > userMoney) {
+            alert("소지금보다 배팅금이 많습니다");
+            return;
+        }
+        setBetAmount(currentBetAmount);
         setIsOnGame(true);
         setCaption("가위 바위~ 보");
     }
@@ -90,17 +103,22 @@ function App() {
     }
     // 리셋
     function reset() {
+        setStage(0);
+        setIsOnGame(false);
+        setIsComAttack(false);
+        setIsUserAttack(false);
+        setCaption("배팅금을 설정해주세요~");
         setUserSelection("selection");
         setComSelection("selection");
         setUserposition(0);
         setComPosition(0);
-        setStage(0);
         setUserColor("");
         setComColor("");
-        setIsOnGame(false);
-        setCaption("배팅금을 설정해주세요~");
-        setIsComAttack(false);
-        setIsUserAttack(false);
+    }
+    function resetMoney() {
+        setComMoney(10000);
+        setUserMoney(10000);
+        setBetAmount(0);
     }
     // 가위바위보 고르기
     function select(e) {
@@ -114,6 +132,12 @@ function App() {
             const userSelection = boxClassLi[1];
             const comPosition = comSelect();
             const RSP_result = return_RSP_result(selectedPos, comPosition);
+            // 슬롯 멈추기
+            clearInterval(interval.current);
+            // 슬롯 다시 재생
+            setTimeout(() => {
+                interval.current = setInterval(comSelect, 100);
+            }, 1000);
             setUserSelection(userSelection);
             setUserposition(selectedPos);
             let colorCount = Math.floor(Math.random() * 12 + 1) * 30;
@@ -142,12 +166,16 @@ function App() {
                     break;
                 case 1:
                     if (RSP_result === 0) {
+                        setUserMoney(userMoney + betAmount);
+                        setComMoney(current => current - betAmount);
                         setTimeout(() => {
                             alert("유저 승리!");
-                            setUserMoney(userMoney + betAmount);
-                            setComMoney(current => current - betAmount);
-                            reset();
+                            if (comMoney - betAmount <= 0) {
+                                alert("컴퓨터돈 전부소진 유저 최종 승리");
+                                resetMoney();
+                            }
                         }, 10);
+                        reset();
                     } else {
                         setStage(RSP_result);
                         setCaption(
@@ -159,13 +187,17 @@ function App() {
                     break;
                 case 2:
                     if (RSP_result === 0) {
-                        console.log(betAmount);
+                        setUserMoney(userMoney - betAmount);
+                        setComMoney(current => current + betAmount);
                         setTimeout(() => {
                             alert("패배~");
-                            setUserMoney(userMoney - betAmount);
-                            setComMoney(current => current + betAmount);
-                            reset();
+                            console.log("유저돈" + userMoney);
+                            if (userMoney - betAmount <= 0) {
+                                alert("유저돈 전부소진 컴퓨터 최종 승리");
+                                resetMoney();
+                            }
                         }, 10);
+                        reset();
                     } else {
                         setStage(RSP_result);
                         setCaption(
