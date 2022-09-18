@@ -1,0 +1,92 @@
+* {
+    box-sizing: border-box;
+}
+.App {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.App > div > .boxes {
+    display: flex;
+}
+.App > div > span {
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.App > div.isAttacker-true > .boxes > .box {
+    background-color: red;
+}
+.App > div.isAttacker-true > span {
+    color: red;
+}
+.App > div > .boxes > .box:first-child {
+    border-left: 1px solid black;
+}
+.App > div > .boxes > .box:last-child {
+    border-left: 1px solid black;
+    margin-left: 120px;
+    opacity: 1;
+}
+.box {
+    width: 170px;
+    height: 170px;
+    border: 1px solid black;
+    border-left: none;
+    opacity: 0.5;
+    background-position: center;
+    background-size: cover;
+}
+.userBoxes .box.choose.box.isOnGame-true {
+    cursor: pointer;
+}
+.userBoxes .box.choose.isOnGame-true:hover {
+    background-color: black;
+}
+.box.rock {
+    background-image: url(./images/rock.png);
+}
+.box.sissor {
+    background-image: url(./images/sissor.png);
+}
+.box.paper {
+    background-image: url(./images/paper.png);
+}
+.box.isOnGame-true {
+    opacity: 1;
+}
+.App > .textDom {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.App > .textDom > h1 {
+    font-size: 40px;
+}
+.App > .textDom > div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.App > .textDom > div > h3 > select {
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+    margin-left: 5px;
+}
+.App > .textDom > div > h3 > button {
+    width: 50px;
+    height: 30px;
+    font-size: 15px;
+    margin-left: 5px;
+}
