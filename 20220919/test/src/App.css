@@ -1,0 +1,15 @@
+/* .App {
+    display: flex;
+} */
+.boxes {
+    display: flex;
+}
+.Block {
+    border: 1px solid;
+    min-height: 230px;
+}
+.Block > img {
+    width: 200px;
+    height: 200px;
+    border: none;
+}
