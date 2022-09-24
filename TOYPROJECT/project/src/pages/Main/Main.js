@@ -6,6 +6,7 @@ import "./Main.css";
 const Main = () => {
     const main = useRef();
     const [scrollY, setScrollY] = useState(0);
+    const [boxHeight, setBoxHeight] = useState(0);
     function slide(e) {
         // console.log("실행");
         // console.log(e.target.onwheel);
@@ -16,12 +17,14 @@ const Main = () => {
         //     isScrollUp ? current + moveAmount : current - moveAmount
         // );
         setScrollY(window.scrollY);
+        setBoxHeight(e.target.offsetHeight);
     }
     useEffect(() => {
-        console.log(scrollY);
+        // console.log(scrollY);
         // window.scrollTo({ top: scrollY, behavior: "smooth" });
-        window.scrollIntoView({ top: scrollY, behavior: "smooth" });
+        scrollFunc();
     }, [scrollY]);
+    function scrollFunc() {}
 
     return (
         <div className="Main" ref={main} onWheel={slide}>
