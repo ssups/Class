@@ -1,0 +1,30 @@
+.joinWrap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.joinForm > .inputs {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 220px;
+}
+.joinForm > .inputs > span {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.joinForm > .buttons {
+    display: flex;
+    justify-content: space-between;
+}
+.joinForm > .buttons > button {
+    width: 100px;
+    height: 30px;
+}

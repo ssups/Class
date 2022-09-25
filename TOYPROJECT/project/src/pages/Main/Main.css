@@ -1,6 +1,6 @@
 .Main > div {
-    height: calc(100vh);
     width: 100%;
+    height: calc(100vh - 250px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,4 +19,7 @@
 }
 .Main > div:nth-child(5) {
     background-color: purple;
+}
+.Footer {
+    position: fixed;
 }

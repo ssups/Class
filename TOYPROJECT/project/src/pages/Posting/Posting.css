@@ -1,0 +1,54 @@
+.Posting {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    padding: 20px;
+    width: 1000px;
+    height: 600px;
+}
+.Posting > .title {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bolder;
+}
+.Posting > .title > input {
+    width: 500px;
+    height: 30px;
+    border-top: 1px solid black;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-left: 20px;
+}
+.Posting > .subTitle {
+    width: 100%;
+    height: 30px;
+    border-bottom: 2px solid black;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.Posting > .contents {
+    margin-top: 10px;
+    display: flex;
+}
+/* .Posting > .contents > img {
+    width: 500px;
+    height: 400px;
+}
+.Posting > .contents > .text {
+    margin-left: 20px;
+} */
+.Posting > .contents > .text > textarea {
+    width: 960px;
+    height: 400px;
+    resize: none;
+}

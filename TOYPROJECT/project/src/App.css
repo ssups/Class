@@ -5,20 +5,66 @@
 body {
     margin: 0;
 }
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
 .Header {
     width: 100%;
     height: 150px;
     background-color: black;
     color: white;
     position: fixed;
+    top: 0;
 }
-.Header > a {
+.Header a {
     color: white;
-    text-decoration: none;
-    cursor: pointer;
 }
+.HeaderContents {
+    width: 1400px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.HeaderContents > .logo {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+}
+.HeaderContents > .menu {
+    width: 500px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.HeaderContents > .attributes {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.HeaderContents > .attributes > .welcomeMsg {
+    margin-bottom: 15px;
+}
+.HeaderContents > .attributes > .btns {
+    display: flex;
+}
+.HeaderContents > .attributes > .btns > a:nth-child(2) {
+    margin-left: 20px;
+}
+.Body {
+    height: calc(100vh - 150px - 100px);
+    position: relative;
+    /* margin-top: 150px; */
+    top: 150px;
+}
+.Body a {
+    color: black;
+}
+/*  */
 .Footer {
-    position: fixed;
     bottom: 0;
     width: 100%;
     height: 100px;
