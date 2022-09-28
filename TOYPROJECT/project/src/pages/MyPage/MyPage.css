@@ -1,0 +1,17 @@
+.MyPage {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.MyPage > .pwCheckBox {
+    border: 1px solid black;
+    width: 300px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.MyPage > .pwCheckBox > span > button {
+    margin-left: 10px;
+}

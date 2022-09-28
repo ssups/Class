@@ -1,4 +1,4 @@
-import { React, useState, useRef } from "react";
+import { React, useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Join.css";
 const Join = ({ userData, setUserData }) => {
@@ -6,17 +6,17 @@ const Join = ({ userData, setUserData }) => {
     const inputId = useRef();
     const inputNickName = useRef();
     const inputPw = useRef();
-    const [canJoin, setCanJoin] = useState(true);
+    const [joinBtnOff, setJoinBtnOff] = useState(true);
     function cancle() {
         nav("/");
     }
     // 빈칸검사
     function onInput() {
-        inputId.current.value.length !== 0 &&
-        inputNickName.current.value.length !== 0 &&
-        inputPw.current.value.length !== 0
-            ? setCanJoin(current => false)
-            : setCanJoin(current => true);
+        inputId.current.value !== "" &&
+        inputNickName.current.value !== "" &&
+        inputPw.current.value !== ""
+            ? setJoinBtnOff(current => false)
+            : setJoinBtnOff(current => true);
     }
     // 회원가입클릭
     function onClick() {
@@ -88,7 +88,7 @@ const Join = ({ userData, setUserData }) => {
                     </span>
                 </div>
                 <div className="buttons">
-                    <button onClick={onClick} disabled={canJoin}>
+                    <button onClick={onClick} disabled={joinBtnOff}>
                         회원가입
                     </button>
                     <button onClick={cancle}>취소</button>

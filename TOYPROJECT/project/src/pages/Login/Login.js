@@ -21,7 +21,6 @@ const Login = ({ setIsLogined, userData, setLoginedUserData }) => {
     }
     function success(data) {
         setIsLogined(curruent => !curruent);
-        console.log(data);
         setLoginedUserData(current => data);
         nav("/");
     }

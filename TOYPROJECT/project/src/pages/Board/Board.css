@@ -3,20 +3,22 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    height: calc(100vh - 250px);
+    overflow: scroll;
 }
 .PostWrap {
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
-    width: 800px;
-    height: calc(100vh - 250px);
-    /* overflow: scroll; */
+    /* width: 1000px; */
+    margin-top: 15px;
 }
 .Post {
     border: 2px solid black;
     padding: 20px;
     width: 1000px;
+    margin-bottom: 20px;
 }
 .Post > .title {
     height: 100px;
@@ -32,7 +34,21 @@
     display: flex;
     flex-direction: row-reverse;
 }
+.Post > .subTitle > .contents {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.Post > .subTitle > .contents > button {
+    width: 100px;
+}
+.Post > .subTitle > .contents > span {
+    margin-left: 20px;
+    width: 200px;
+}
 .Post > .contents {
+    height: 400px;
     margin-top: 10px;
     display: flex;
 }
