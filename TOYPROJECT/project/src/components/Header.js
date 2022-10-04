@@ -1,11 +1,15 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const Header = ({ isLogined, setIsLogined, loginedUserData }) => {
+const Header = () => {
     const location = useLocation();
     const nav = useNavigate();
+    const dispatch = useDispatch();
+    const isLogined = useSelector(state => state.isLogined);
+    const loginedUserData = useSelector(state => state.loginedUserData);
     function logout() {
-        setIsLogined(curruent => !curruent);
+        dispatch({ type: "LOGOUT" });
         nav(location.pathname);
     }
     function write() {

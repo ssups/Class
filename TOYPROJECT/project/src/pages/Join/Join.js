@@ -1,11 +1,14 @@
 import { React, useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./Join.css";
-const Join = ({ userData, setUserData }) => {
+const Join = () => {
     const nav = useNavigate();
     const inputId = useRef();
     const inputNickName = useRef();
     const inputPw = useRef();
+    const dispatch = useDispatch();
+    const userData = useSelector(state => state.userData);
     const [joinBtnOff, setJoinBtnOff] = useState(true);
     function cancle() {
         nav("/");
@@ -47,13 +50,10 @@ const Join = ({ userData, setUserData }) => {
     }
     // 유저데이타 배열에 인풋값 추가
     function addData(id, nick_name, pw) {
-        setUserData(current =>
-            current.concat({
-                id,
-                nick_name,
-                pw,
-            })
-        );
+        dispatch({
+            type: "JOIN",
+            payload: userData.concat({ id, nick_name, pw }),
+        });
         reset();
         // 로그인페이지로 보내기
         nav("/login");

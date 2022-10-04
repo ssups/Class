@@ -1,20 +1,18 @@
 import { React, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import "./MyPage.css";
 
-const MyPage = ({
-    userData,
-    setUserData,
-    loginedUserData,
-    setIsLogined,
-    setPostData,
-}) => {
+const MyPage = ({ setPostData }) => {
     const nav = useNavigate();
     const [isPwChecked, setIsPwChecked] = useState(false);
     const [modifyBtnOff, setModifyBtnOff] = useState(true);
     const pwForCheck = useRef();
     const inputNickName = useRef();
     const inputPw = useRef();
+    const dispatch = useDispatch();
+    const userData = useSelector(state => state.userData);
+    const loginedUserData = useSelector(state => state.loginedUserData);
     // console.log(userData);
     // 비밀번호 확인
     function checkPw() {
@@ -55,17 +53,14 @@ const MyPage = ({
     }
     // 바꾼정보 적용
     function modifyData(nick_name, pw) {
-        setUserData(current =>
-            current.map(el =>
-                el.id === loginedUserData.id
-                    ? {
-                          id: loginedUserData.id,
-                          nick_name,
-                          pw,
-                      }
-                    : el
-            )
-        );
+        dispatch({
+            type: "MODIFY_USER_DATA",
+            payload: userData.map(eachData =>
+                eachData.id === loginedUserData.id
+                    ? { id: loginedUserData.id, nick_name, pw }
+                    : eachData
+            ),
+        });
         setPostData(current =>
             current.map(el => {
                 if (el.nick_name === loginedUserData.nick_name) {
@@ -76,7 +71,7 @@ const MyPage = ({
         );
         reset();
         // 로그인 풀기
-        setIsLogined(current => !current);
+        dispatch({ type: "LOGOUT" });
         // 로그인페이지로 보내기
         nav("/login");
     }

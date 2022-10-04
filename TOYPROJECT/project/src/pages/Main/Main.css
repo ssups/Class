@@ -1,3 +1,12 @@
+body {
+    overflow: hidden;
+}
+.Main {
+    overflow: auto;
+    height: 100vh;
+    /* 이거 두개 꼭 설정해야 main에서 휠이벤트 컨트롤가능함 */
+    padding-top: 150px;
+}
 .Main > div {
     width: 100%;
     height: calc(100vh - 250px);

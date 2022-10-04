@@ -32,6 +32,9 @@ const PostModify = ({ postData, setPostData }) => {
         );
         nav("/board");
     }
+    function cancle() {
+        nav("/board");
+    }
     return (
         <div className="Posting">
             <div className="title">
@@ -53,7 +56,7 @@ const PostModify = ({ postData, setPostData }) => {
             </div>
             <div className="btns">
                 <button onClick={modifyPost}>수정</button>
-                <button>취소</button>
+                <button onClick={cancle}>취소</button>
             </div>
         </div>
     );

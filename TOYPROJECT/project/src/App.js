@@ -5,13 +5,6 @@ import { Header, Footer } from "./components";
 import { useState } from "react";
 
 function App() {
-    const defaultUserData = [
-        {
-            id: "admin",
-            nick_name: "어드민",
-            pw: "123",
-        },
-    ];
     const defaultPostData = [
         {
             post_id: 1,
@@ -21,50 +14,18 @@ function App() {
             text: "게시판 첫글~",
         },
     ];
-    const [isLogined, setIsLogined] = useState(false);
-    const [loginedUserData, setLoginedUserData] = useState(null);
-    const [userData, setUserData] = useState(defaultUserData);
     const [postData, setPostData] = useState(defaultPostData);
     return (
         <div className="App">
-            <Header
-                isLogined={isLogined}
-                setIsLogined={setIsLogined}
-                loginedUserData={loginedUserData}
-            />
+            <Header />
             <div className="Body">
                 <Routes>
                     <Route path="/" element={<Main />} />
-                    <Route
-                        path="/join"
-                        element={
-                            <Join
-                                userData={userData}
-                                setUserData={setUserData}
-                            />
-                        }
-                    />
-                    <Route
-                        path="/login"
-                        element={
-                            <Login
-                                userData={userData}
-                                setIsLogined={setIsLogined}
-                                setLoginedUserData={setLoginedUserData}
-                            />
-                        }
-                    />
+                    <Route path="/join" element={<Join />} />
+                    <Route path="/login" element={<Login />} />
                     <Route
                         path="/mypage"
-                        element={
-                            <MyPage
-                                userData={userData}
-                                setUserData={setUserData}
-                                loginedUserData={loginedUserData}
-                                setIsLogined={setIsLogined}
-                                setPostData={setPostData}
-                            />
-                        }
+                        element={<MyPage setPostData={setPostData} />}
                     />
                     <Route
                         path="/board"
@@ -72,7 +33,6 @@ function App() {
                             <Board
                                 postData={postData}
                                 setPostData={setPostData}
-                                loginedUserData={loginedUserData}
                             />
                         }
                     />
@@ -82,7 +42,6 @@ function App() {
                             <Posting
                                 postData={postData}
                                 setPostData={setPostData}
-                                loginedUserData={loginedUserData}
                             />
                         }
                     />

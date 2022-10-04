@@ -1,9 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./Board.css";
 
-const Board = ({ postData, setPostData, loginedUserData }) => {
+const Board = ({ postData, setPostData }) => {
     console.log(postData);
+    const loginedUserData = useSelector(state => state.loginedUserData);
     const nav = useNavigate();
     function goModify(postId) {
         nav(`/posting/modify/${postId}`);

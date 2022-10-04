@@ -1,11 +1,14 @@
 import { React, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import "./Login.css";
 
-const Login = ({ setIsLogined, userData, setLoginedUserData }) => {
+const Login = () => {
     const nav = useNavigate();
     const inputId = useRef();
     const inputPw = useRef();
+    const dispatch = useDispatch();
+    const userData = useSelector(state => state.userData);
     console.log(userData);
     function checkId(id) {
         const matchingData = userData.filter(el => el.id === id)[0];
@@ -20,8 +23,7 @@ const Login = ({ setIsLogined, userData, setLoginedUserData }) => {
         checkId(inputId.current.value);
     }
     function success(data) {
-        setIsLogined(curruent => !curruent);
-        setLoginedUserData(current => data);
+        dispatch({ type: "LOGIN", payload: data });
         nav("/");
     }
     return (

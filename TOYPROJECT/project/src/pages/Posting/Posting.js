@@ -1,11 +1,13 @@
 import { React, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./Posting.css";
 
-const Posting = ({ setPostData, loginedUserData }) => {
+const Posting = ({ setPostData }) => {
     const inputTitle = useRef();
     const inputText = useRef();
     const nav = useNavigate();
+    const loginedUserData = useSelector(state => state.loginedUserData);
     function registerPost() {
         const title = inputTitle.current.value;
         const text = inputText.current.value;
@@ -28,6 +30,9 @@ const Posting = ({ setPostData, loginedUserData }) => {
         );
         nav("/board");
     }
+    function cancle() {
+        nav("/board");
+    }
     return (
         <div className="Posting">
             <div className="title">
@@ -42,7 +47,7 @@ const Posting = ({ setPostData, loginedUserData }) => {
             </div>
             <div className="btns">
                 <button onClick={registerPost}>등록</button>
-                <button>취소</button>
+                <button onClick={cancle}>취소</button>
             </div>
         </div>
     );

@@ -5,29 +5,45 @@ import "./Main.css";
 
 const Main = () => {
     const main = useRef();
-    const [scrollY, setScrollY] = useState(0);
-    const [boxHeight, setBoxHeight] = useState(0);
-    function slide(e) {
-        // console.log("실행");
-        // console.log(e.target.onwheel);
-        // console.log(main.onwheel);
-        // const moveAmount = e.target.offsetHeight;
-        // const isScrollUp = e.deltaY > 0 ? true : false;
-        // setScrollY(current =>
-        //     isScrollUp ? current + moveAmount : current - moveAmount
-        // );
-        setScrollY(window.scrollY);
-        setBoxHeight(e.target.offsetHeight);
-    }
+    // const [scrollAmount, setScrollAmount] = useState(0);
+    const animationBreak = 800;
+    let lastTime = 0;
+
     useEffect(() => {
-        // console.log(scrollY);
-        // window.scrollTo({ top: scrollY, behavior: "smooth" });
-        scrollFunc();
-    }, [scrollY]);
-    function scrollFunc() {}
+        // console.log(sections[1]);
+        // console.log(box.current.offsetTop);
+
+        const sections = main.current.children;
+        const wheelHandler = e => {
+            const currentTime = new Date().getTime();
+            const isAnimationEnable = currentTime - lastTime > animationBreak;
+            // console.log(isAnimationEnable);
+            if (!isAnimationEnable) return;
+            if (e.deltaY > 0) {
+                console.log(sections[1]);
+                // sections[1].scrollIntoView({ behavior: "smooth" });
+                e.preventDefault();
+                console.log("실행");
+                console.log(sections[1].offsetTop - 150);
+                main.current.scrollTo({
+                    top: sections[1].offsetTop - 150,
+                    left: 0,
+                    behavior: "smooth",
+                });
+            } else
+                main.current.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth",
+                });
+            lastTime = currentTime;
+        };
+
+        main.current.addEventListener("wheel", wheelHandler);
+    }, []); //배열에 아무것도 안넣어주면 최초렌더때만 실행
 
     return (
-        <div className="Main" ref={main} onWheel={slide}>
+        <div className="Main" ref={main}>
             <div>Main</div>
             <div>Main</div>
             <div>Main</div>
@@ -38,3 +54,5 @@ const Main = () => {
 };
 
 export default Main;
+
+const s = "sdfwer";
