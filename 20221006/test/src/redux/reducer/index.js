@@ -1,13 +1,10 @@
-let init = {};
+// redux에서 지원해주는 함수
+// 리듀서들(함수)을 하나로 합쳐준다.
+// combineReducers 함수 안에 인수로 리듀서들을 객체형태로 담아서 넣어주면 합쳐진다.
 
-function reducer(state = init, { type, payload }) {
-    switch (type) {
-        case "value":
-            return;
+import { combineReducers } from "redux";
+import login from "./login";
+import weather from "./weather";
+const rootReducer = combineReducers({ login, weather });
 
-        default:
-            return state;
-    }
-}
-
-export default reducer;
+export default rootReducer;
