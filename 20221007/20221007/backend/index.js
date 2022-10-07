@@ -37,8 +37,16 @@ const options = {
 app.use(express.json()); // 전달받은 객체 형태를 해석해서 사용할수 있게 설정하는거
 app.use(cors(options));
 
-app.get("/", (req, res) => {
-  res.send({ id: "aaa" });
+app.post("/login", async (req, res) => {
+  let { id, pw } = req.body;
+  const users = await User.findOne({
+    where: { user_id: id, user_pw: pw },
+  });
+  if (users) {
+    res.send(true);
+  } else {
+    res.send(false);
+  }
 });
 
 app.post("/signUp", async (req, res) => {
