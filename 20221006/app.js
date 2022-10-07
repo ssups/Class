@@ -1,5 +1,5 @@
 // 리액트 환경 설치
-// npx create-react-app
+// npx create-react-app 생성할폴더명
 
 // 리덕스 미들웨어
 
@@ -33,3 +33,10 @@
 // 3. 리듀서 js 만들고 만든 저장소에 매개변수로 전달
 // 4. 완성된 저장소를 index.js에 가져와서 App 컴포넌트에 적용(Provider 컴포넌트 활용)
 // 5.
+
+// 리덕스를 사용할때 유용한 툴 redux devtools(크롬 확장프로그램으로도 깔기)
+// action으로 변경한 state 값을 바로바로 볼수있다.
+// npm 설치 명령어
+// npm i redux-devtools-extension
+// import {composeWithDevTools} from 'redux-devtools-extensions'
+// 설치하고 미들웨어를 composeWithDevTools 함수로 감싸주면 된다.
