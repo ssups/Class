@@ -42,6 +42,7 @@ app.post("/login", async (req, res) => {
   const users = await User.findOne({
     where: { user_id: id, user_pw: pw },
   });
+  // sdfsd
   if (users) {
     res.send(true);
   } else {
