@@ -1,6 +1,6 @@
 import axios from "axios";
 
-function logIn(id, pw) {
+function logIn(id, pw, lastLocation, nav) {
   return async (dispatch, getState) => {
     const user = await axios({
       method: "post",
@@ -9,6 +9,7 @@ function logIn(id, pw) {
     });
     if (user.data) {
       dispatch({ type: "LOGIN", payload: { id, pw } });
+      nav(lastLocation);
     } else {
       alert("가입된 정보가 없음니다 회원가입 하세요");
     }

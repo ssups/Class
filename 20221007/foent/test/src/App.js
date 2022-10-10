@@ -1,12 +1,20 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import { Main, Shop } from "./pages";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Main, Shop, Register } from "./pages";
 import { Header } from "./components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
+  const location = useLocation();
+  const dispatch = useDispatch();
   const isLogin = useSelector(state => state.loginReducer.isLogin);
-  const LoginRedirect = () => {
-    return isLogin === true ? <Shop /> : loginMessage();
+  const LoginRedirect = ({ component }) => {
+    // return isLogin === true ? component : loginMessage();
+    if (isLogin) return component;
+    else {
+      // 컴포넌트 렌더링중에 state값 업데이트해서 오류뜨는거 같은데 실행은 됨 어케고칠까?
+      dispatch({ type: "UPDATE_LOCATION", payload: location.pathname });
+      return loginMessage();
+    }
   };
   function loginMessage() {
     alert("로그인 하자");
@@ -18,7 +26,8 @@ function App() {
       <Header isLogin={isLogin} />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/shop" element={<LoginRedirect />} />
+        <Route path="/shop" element={<LoginRedirect component={<Shop />} />} />
+        <Route path="/register" element={<LoginRedirect component={<Register />} />} />
       </Routes>
     </div>
   );

@@ -2,6 +2,7 @@ let init = {
   id: "",
   pw: "",
   isLogin: false,
+  lastLocation: "/",
 };
 
 function reducer(state = init, action) {
@@ -13,6 +14,9 @@ function reducer(state = init, action) {
     case "LOGOUT":
       console.log("여긴 로그아웃");
       return { isLogin: false };
+    case "UPDATE_LOCATION":
+      console.log("로케이션업데이트");
+      return { ...state, lastLocation: payload };
     default:
       return state;
   }

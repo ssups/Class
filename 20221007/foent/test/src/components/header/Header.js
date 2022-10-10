@@ -10,15 +10,18 @@ import {
 import { useNavigate } from "react-router-dom";
 import { loginAction } from "../../redux/middleware";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const Header = ({ isLogin }) => {
   const nav = useNavigate();
+  const location = useLocation();
   const idInput = useRef();
   const pwInput = useRef();
   const dispatch = useDispatch();
   // 로그인할수있는 상태와 회원가입할수있는 상태 구분
   const [wrapState, setWrapState] = useState(true);
   const userName = useSelector(state => state.loginReducer.id);
+  const lastLocation = useSelector(state => state.loginReducer.lastLocation);
 
   const resetInput = () => {
     idInput.current.value = "";
@@ -36,10 +39,11 @@ const Header = ({ isLogin }) => {
       alert("아이디 비밀번호 입력하세요");
       return;
     }
-    dispatch(loginAction.logIn(idInput.value, pwInput.value));
+    dispatch(loginAction.logIn(idInput.value, pwInput.value, lastLocation, nav));
     resetInput();
   };
   const logOut = () => {
+    dispatch({ type: "UPDATE_LOCATION", payload: location.pathname });
     dispatch(loginAction.logOut());
   };
   const singUp = () => {
@@ -73,7 +77,10 @@ const Header = ({ isLogin }) => {
           {isLogin ? (
             <>
               <div>{userName}로그인 됨</div>
-              <button onClick={logOut}>로그아웃</button>
+              <Button onClick={logOut}>로그아웃</Button>
+              {location.pathname === "/shop" ? (
+                <Button onClick={() => nav("/register")}>상품등록</Button>
+              ) : null}
             </>
           ) : (
             <>
