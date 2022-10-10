@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const { sequelize, User } = require("./public");
+const { sequelize, User, Item } = require("./public");
 
 // cors 에러 해결 방법(보안상의 문제때문에 발생)
 // cors 설정을 해주어야 한다.
@@ -49,7 +49,6 @@ app.post("/login", async (req, res) => {
     res.send(false);
   }
 });
-
 app.post("/signUp", async (req, res) => {
   let { id, pw } = req.body;
   const users = await User.findOne({
@@ -65,6 +64,28 @@ app.post("/signUp", async (req, res) => {
   } else {
     res.send("동일한 아이디가 있음");
   }
+});
+app.post("/register", async (req, res) => {
+  const { itemName, writer, description, price, amount } = req.body;
+  const sameItemName = await Item.findOne({
+    where: { item_name: itemName },
+  });
+  if (!sameItemName) {
+    Item.create({
+      item_name: itemName,
+      writer,
+      description,
+      price,
+      amount,
+    }).then(() => res.send("등록 완료"));
+  } else {
+    res.send("상품명 중복");
+  }
+});
+
+app.get("/shop", async (req, res) => {
+  const items = await Item.findAll({ raw: true });
+  res.send(items);
 });
 
 app.listen(8000, () => {
