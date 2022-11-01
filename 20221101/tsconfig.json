@@ -1,0 +1,57 @@
+{
+  "exclude": ["node_modules"], // TS컴파일 제외할 폴더
+  "compilerOptions": {
+    "outDir" : "./build/",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "ES6",
+    "removeComments": true,
+    "lib": ["ES6","DOM"],
+    "allowJs": true,
+    "typeRoots": ["./node_modules/@types","./@types"],
+    "baseUrl": ".",
+    "paths": {
+      "@myUrl/*":["src/views"],
+      "*": ["@types/*"]
+    }
+  },
+  "ts-node": {
+    "files": true, //전역 상태로 declare한 type들을 ts-node에서 찾을 수 있게끔 해준다.
+    "require": ["tsconfig-paths/register"]
+  }
+}
+
+// include : TS가 해당 디렉토리 안에 모든 파일을 확인한다는 것을 의미
+// exclude : 컴파일 대상에서 제외하는 설정값
+
+// compilerOptions : 컴파일 대상 파일들을 어떻게 변환할지 세세히 정하는 옵션
+// outDir : 빌드한 파일 (js 파일)이 생성될 디렉토리 지정
+// exModuleInterop : commonJs 방식으로 내보낸 모듈을 ES 모듈 방식의 import로 가져올 수
+// 있게 해줌
+// "exModuleInterop" : true로 설정해주면 ES6 모듈 사양을 준수해서 commonJs 모듈을 가져올 수 있게 된다.
+// moduleResolution : 모듈을 import하거나 export할때 어떤 방식으로 처리할 것인가
+// strict : 엄격모드
+// removeComments: 컴파일시 주석제거
+// lib : 타입 정의 파일(.d.ts)이 목표로 하는 런타임 환경을 알려줌
+// "lib" : ["ES6","DOM"] = ES6를 지원하고 DOM에서 코드를 실행시키겠다는 의미
+
+// allowJs : js 파일도 컴파일 대상이라는 의미
+// typeRoots : 타입을 저장할 디렉토리 지정. typeRoots에 작성된 경로에서 정의되있는 타입을 찾게한다.
+// 만약 외부 라이브러리를 사용해서 추가적인 타입을 정의한다면 @type와 같이 별도의 타입 디렉토리를 만들고
+// 그안에 .d.ts파일을 생성한 뒤 디렉토리를 typeRoots에 추가하면된다.
+// baseUrl : 외부 모듈이 아닌이상 상대겨로로 모듈 가져와야 하는데 baseUrl은 외부 모듈이 아닌 모듈을 가져올때
+// 절대 경로로 참조할 수 있게 해준다 만약 src 폴더를 설정경우에 src/를 기준으로 절대 경로로 모듈 참조가 가능
+
+// paths: 모듈을 참조할 때 baseUrl을 기준으로 다시 매핑 가능 경로에 별칭을 붙여서 사용하는 것이 가능
+//      "@myPaths/* " : ['src/views/*'] @myPaths/ 라는 별칭으로 src 디렉토리 안에 있는
+//  /views 디렉토리의 안의 모든 파일
+
+// .d.ts
+// 전역 변수나 전역함수에 대한 타입 선언이 가능
+// import로 받아오거나 export로 내보내지 않아도 전역변수나 전역함수에 대한 타입 선언가능
+// .d.ts 파일은 타입만 저장할 수 있는 파일
+// .d.ts 파일은 import 나 export가 없어도 되는 로컬 모듈
+//  다른 타입스크립트 파일에서 import로 가져와서 사용해야하는데
+// 옵션을 통해 글로벌 모듈로 만들 수 있다. => typeRoots로 설정
