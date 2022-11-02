@@ -82,6 +82,24 @@ app.post("/register", async (req, res) => {
     res.send("상품명 중복");
   }
 });
+app.post("/shop/buy", async (req, res) => {
+  const { itemId, amount: buyAmount } = req.body;
+  const { amount } = await Item.findOne({
+    where: { id: itemId },
+    attributes: ["amount"],
+    raw: true,
+  });
+  await Item.update(
+    {
+      amount: amount * 1 - buyAmount,
+    },
+    {
+      where: { id: itemId },
+    }
+  )
+    .then(() => res.send({ msg: "구매 완료", amount: amount * 1 - buyAmount }))
+    .catch(err => console.log(err));
+});
 
 app.get("/shop", async (req, res) => {
   const items = await Item.findAll({ raw: true });

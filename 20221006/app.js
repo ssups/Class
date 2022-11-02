@@ -39,4 +39,4 @@
 // npm 설치 명령어
 // npm i redux-devtools-extension
 // import {composeWithDevTools} from 'redux-devtools-extensions'
-// 설치하고 미들웨어를 composeWithDevTools 함수로 감싸주면 된다.
+// 설치하고 store 에서 미들웨어를 composeWithDevTools 함수로 감싸주면 된다.

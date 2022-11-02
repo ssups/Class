@@ -21,4 +21,17 @@ function getList() {
   };
 }
 
-export const shopAction = { register, getList };
+function buyItem(itemId, amount) {
+  return async (dispatch, geState) => {
+    const response = await axios({
+      method: "post",
+      url: "http://localhost:8000/shop/buy",
+      data: { itemId, amount },
+    });
+    alert(response.data.msg);
+    // if (response.data.msg === "구매 완료")
+    //   dispatch({ type: "BUY_ITEM", payload: { itemId, amount: response.data.amount } });
+  };
+}
+
+export const shopAction = { register, getList, buyItem };

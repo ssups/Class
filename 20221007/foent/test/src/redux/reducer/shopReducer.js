@@ -11,6 +11,9 @@ function reducer(state = init, { type, payload }) {
       return { ...state, list: payload };
     //   state.list = payload;
     //   return state;
+    case "BUY_ITEM":
+      console.log("바이 아이템");
+    //   return { ...state, list: payload };
     default:
       return state;
   }
