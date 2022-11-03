@@ -1,5 +1,14 @@
 // 제네시스 블록은 여기다가
 
+// 난이도 조절 블록 범위 (불록 10개마다 조정)
+export const DIFFICULTY_ADJUSTMENT_INTERVAL: number = 10;
+
+// 블록 생성 시간(분) 10*60 == 600 (10분으로 할당했으니깐 600초)
+export const BLOCK_GENERATION_INTERVAL: number = 10;
+
+// 블록 생성 시간(초)
+export const BLOCK_GENERATION_TIME_UNIT: number = 60;
+
 export const GENESIS: IBlock = {
   version: "1.0.0",
   height: 0,
