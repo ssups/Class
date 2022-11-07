@@ -14,7 +14,7 @@ describe("Chain 검증", () => {
     console.log(node.getLastestBlock());
   });
   it("체인 블록 추가 함수 테스트", () => {
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 100; i++) {
       node.addBlock([`${i}번째 블록`]);
       console.log(node.getChain().at(-1));
 
