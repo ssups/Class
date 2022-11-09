@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- axios 스크립트 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>지갑</h1>
+    <button id="walletBtn">지갑 생성</button>
+    <ul id="walletList">
+      <li>코인 : 비트코인</li>
+      <li>account : <span class="account"></span></li>
+      <li>privateKey : <span class="privateKey"></span></li>
+      <li>publicKey : <span class="publicKey"></span></li>
+      <li>balance : <span class="balance"></span></li>
+    </ul>
+    <form id="transactionForm" action="" method="">
+      <ul>
+        <li>received : <input id="received" placeholder="보낼 계정" /></li>
+        <li>amount : <input id="amount" placeholder="보낼 금액" /></li>
+      </ul>
+      <input type="submit" value="전송" />
+    </form>
+
+    <h1>생성된 지갑 목록</h1>
+    <button id="walletListBtn">지갑 목록 버튼</button>
+    <div>
+      <ul id="walletListAll">
+        목록 버튼 눌러주세요
+      </ul>
+    </div>
+  </body>
+  <script>
+    const account = document.querySelector(".account");
+    const publicKey = document.querySelector(".publicKey");
+    const privateKey = document.querySelector(".privateKey");
+    const balance = document.querySelector(".balance");
+    const createWallet = async () => {
+      const response = await axios.post("/newWallet", null);
+      view(response.data);
+      console.log(response.data);
+    };
+
+    const submitHandler = async e => {
+      e.prventDefault();
+      const publicKey = publicKey.innerHTML;
+      const account = account.innerHTML;
+      const data = {
+        sender: {
+          publicKey,
+          account,
+        },
+        received: e.target.received.value,
+        amount: parseInt(e.target.amount.value),
+      };
+
+      const response = await axios.post("/sendTransaction", data);
+    };
+    const view = wallet => {
+      account.innerHTML = wallet.account;
+      publicKey.innerHTML = wallet.publicKey;
+      privateKey.innerHTML = wallet.privateKey;
+      balance.innerHTML = wallet.balance;
+    };
+
+    const getView = async () => {
+      // 계정 정보
+      const response = await axios.get(`/wallet/${account}`);
+      view(response.data);
+    };
+
+    const getWalletList = async () => {
+      const walletListAll = document.querySelector("#walletListAll");
+      const walletBtn = document.querySelector("#walletBtn");
+      const walletListBtn = document.querySelector("#walletListBtn");
+      const transactionForm = document.querySelector("#transactionForm");
+      const response = await axios.post("/walletListAll", null);
+
+      const list = response.data
+        .map(account => {
+          return `<li onClick="getView(${account})">${account}</li>`;
+        })
+        .join()
+        .replaceAll(",", "</br>");
+      walletListAll.innerHTML = list;
+    };
+
+    walletBtn.addEventListener("click", createWallet);
+    walletListBtn.addEventListener("click", getWalletList);
+    transactionForm.addEventListener("submit", submitHandler);
+  </script>
+</html>

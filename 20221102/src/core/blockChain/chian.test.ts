@@ -11,14 +11,14 @@ describe("Chain 검증", () => {
     console.log(node.getLength());
   });
   it("체인 마지막 블록 가져오기 함수 테스트", () => {
-    console.log(node.getLastestBlock());
+    console.log(node.getLatestBlock());
   });
   it("체인 블록 추가 함수 테스트", () => {
     for (let i = 0; i < 100; i++) {
       node.addBlock([`${i}번째 블록`]);
       console.log(node.getChain().at(-1));
 
-      // console.log(node.getLastestBlock());
+      // console.log(node.getLatestBlock());
     }
     console.log("추가완료된 체인", node.getChain());
   });
