@@ -35,24 +35,24 @@
     </div>
   </body>
   <script>
-    const account = document.querySelector(".account");
-    const publicKey = document.querySelector(".publicKey");
+    const accountDom = document.querySelector(".account");
+    const publicKeyDom = document.querySelector(".publicKey");
     const privateKey = document.querySelector(".privateKey");
     const balance = document.querySelector(".balance");
     const createWallet = async () => {
       const response = await axios.post("/newWallet", null);
       view(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     };
 
     const submitHandler = async e => {
-      e.prventDefault();
-      const publicKey = publicKey.innerHTML;
-      const account = account.innerHTML;
+      e.preventDefault();
+      const _publicKey = document.querySelector(".publicKey").innerHTML;
+      const _account = document.querySelector(".account").innerHTML;
       const data = {
         sender: {
-          publicKey,
-          account,
+          publicKey: _publicKey,
+          account: _account,
         },
         received: e.target.received.value,
         amount: parseInt(e.target.amount.value),
@@ -60,15 +60,17 @@
 
       const response = await axios.post("/sendTransaction", data);
     };
+
     const view = wallet => {
-      account.innerHTML = wallet.account;
-      publicKey.innerHTML = wallet.publicKey;
+      accountDom.innerHTML = wallet.account;
+      publicKeyDom.innerHTML = wallet.publicKey;
       privateKey.innerHTML = wallet.privateKey;
       balance.innerHTML = wallet.balance;
     };
 
-    const getView = async () => {
+    const getView = async account => {
       // 계정 정보
+      console.log("실행");
       const response = await axios.get(`/wallet/${account}`);
       view(response.data);
     };
@@ -82,7 +84,7 @@
 
       const list = response.data
         .map(account => {
-          return `<li onClick="getView(${account})">${account}</li>`;
+          return `<li onclick="getView('${account}')" style="cursor:pointer; width:max-content;">${account}</li>`;
         })
         .join()
         .replaceAll(",", "</br>");

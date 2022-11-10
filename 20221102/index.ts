@@ -4,7 +4,7 @@ import { ReceivedTx, Wallet } from "@core/wallet/wallet";
 import express from "express";
 
 const app = express();
-const PORT = 8000;
+const PORT = 3000;
 const ws = new P2PServer();
 
 // 터미널에서 실행시킬때 ts-node index.ts 이런식으로 타입스크립트 노드로 실행시켜줘야함
@@ -30,9 +30,11 @@ app.use((req, res, next) => {
 
 // sendTransaction 라우터
 app.post("/sendTransaction", (req, res) => {
+  //   console.log(req.body);
   try {
     const receivedTx: ReceivedTx = req.body;
     Wallet.sendTransaction(receivedTx);
+    // console.log(receivedTx);
   } catch (err) {
     if (err instanceof Error) console.log(err.message);
   }
