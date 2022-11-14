@@ -18,5 +18,6 @@ export const GENESIS: IBlock = {
   merkleRoot: "0".repeat(64),
   difficulty: 0,
   nonce: 0,
-  data: ["The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"],
+  // data: ["The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"],
+  data: [],
 };

@@ -47,14 +47,19 @@
 
     const submitHandler = async e => {
       e.preventDefault();
+      // 보내는 계정
       const _publicKey = document.querySelector(".publicKey").innerHTML;
       const _account = document.querySelector(".account").innerHTML;
       const data = {
         sender: {
+          // 공개키
           publicKey: _publicKey,
+          // 주소
           account: _account,
         },
+        // 보낼 계정
         received: e.target.received.value,
+        // 보낼 금액
         amount: parseInt(e.target.amount.value),
       };
 

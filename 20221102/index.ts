@@ -34,7 +34,7 @@ app.post("/sendTransaction", (req, res) => {
   try {
     const receivedTx: ReceivedTx = req.body;
     Wallet.sendTransaction(receivedTx);
-    // console.log(receivedTx);
+    console.log(receivedTx);
   } catch (err) {
     if (err instanceof Error) console.log(err.message);
   }

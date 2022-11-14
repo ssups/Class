@@ -4,6 +4,9 @@ export class BlockHeader implements IBlockHeader {
   public height: number;
   public timestamp: number;
   public previousHash: string;
+  // 블록 만들때 바디와 헤더영역으로 나눴는데
+  // 이해도를 높이기 위해 나눠놓음
+  // 헤더에는 이전블록의 정보가 필요해서 생성단계에서 IBlock의 형태인 previousBlock을 인수로 받는다.
   constructor(_previousBlock: IBlock) {
     this.version = BlockHeader.getVersion();
     this.timestamp = BlockHeader.getTimestamp();
