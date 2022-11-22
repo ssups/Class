@@ -136,3 +136,67 @@ const genesis = {
 // 나는 전부 /usr/local/bin 안에 다들어가있음
 
 // puppeth 실행하고 json 파일 생성하면 내가 터미널 킨 위치에 생김 (cd ~/Library/Ethereum 여기에 puppeth_json폴더로 생성시킴)
+
+// josn 파일 가지고 geth 생성하기
+// geth --datadir node init "josn경로" -> 이걸로 노드 폴더 생성
+// geth --datadir node 로 실행하기
+
+// web3 통신하고
+// IPC를 사용해서 로컬에 실행시킨 geth 프라이빗 네트워크를
+// 블록체인 네트워크에서 메타마스크나 다른 PC도 통신할려면 설정이 필요함
+// geth를 실행할때 옵션을 설정해주면 된다.
+
+// 설정 명령어
+// --http.addr"0.0.0.0" -> 모든 ip허용
+// --http.port 8000 ->사용할 포트를 8000으로 설정
+// --http.corsdomain"*"  ->cors설정 모든 도메인 허용
+// --http.api"admin,txpool,web3" -> 외부에서 어떤 모듈을 사용할수 있게 설정할것인지
+// --syncmode -> 동기화 모드 full
+// --networkId ->체인아이디와 동일한값 이력해주면 된다. 네트워크 아이디
+
+// 실행 명령어
+// 위에서 --datadir node init로 생성한 node 폴더가 있는 경로에서
+// geth --datadir ./myDataDir --networkid 12345 console 2 --rpc --rpcport 9000 --rpcaddr 127.0.0.1 혹은
+// geth --networkid 12345 console 2 --rpc --rpcport 9000 --rpcaddr 127.0.0.1 혹은
+// geth --datadir node --http --http.addr "0.0.0.0" --http.port 9000 --http.corsdomain "*" --http.api "admin,miner,txpool,web3,personal,eth,net" --syncmode full --networkid 12345
+// 스냅샷 오류뜨면 뒤에 --snapshot=false 이것도 달아주기
+// 그담에 터미널 하나 더 열어서
+// geth attach http://127.0.0.1:9000 실행
+
+// 프라이빗 네트워크에서 통신할수있는 상태가 된거고
+// nodejs나 메타마스크에서 프라이빗 네트워크에 통신 하는것이 가능한 상태
+
+// npm ini -y
+// 테스트코드 작성으로 jest 사용
+// npm i jest
+// 통신을 해야하니깐 web3설치
+// npm i web3
+
+// 코인베이스 계정(최초 계정)으로 채굴하기 (geth attach http://127.0.0.1:9000 실행한 창에서 하는거)
+
+// 코인베이스 계정을 마이너로 설정
+// miner.setEtherbase(eth.accounts[0] or eth.coinbase)
+
+// 마이닝 시작
+// miner.start(1); start(인수로 들어가는 숫자는 스레드 갯수)
+// 스레드갯수가 많은건 일해주는 일력이 많다는 뜻임
+
+// 마이닝 스탑
+// miner.stop()
+
+// 코인베이스 계정이 채굴한 잔고를 확인해보자
+// eth.getBalance(eth.accounts[0] or eth.coinbase)
+// web3.fromWei(eth.getBalance(eth.coinbase),"ether") 단위변경
+
+// 코인 베이스 계정의 잔고에서 트랜젝션을 발생시켜서 잔고를 발송시켜 보자
+// eth.sendTransaction({from: eth.accounts[0], to: eth.accounts[1], value: web3.toWei(10,"ether")})
+// 일단 계정이 비번으로 잠겨있어서 안보내짐
+
+// 계정 잠금 해제하고 실행하려면 geth 열때 설정값 하나 더 넣어줘야함 --allow-insecure-unlock
+// geth --datadir node --http --allow-insecure-unlock --http.addr "0.0.0.0" --http.port 9000 --http.corsdomain "*" --http.api "admin,miner,txpool,web3,personal,eth,net" --syncmode full --networkid 12345
+// 다시 열고
+// personal.unlockAccount(eth.coinbase) 치고 비밀번호 입력해서 계정 풀어주고 (비번 123으로 설정함)
+// 다시 보내기
+// eth.sendTransaction({from: eth.coinbase, to: eth.accounts[1], value: web3.toWei(10,"ether")})
+// 전송중인 트젝 볼려면 txpool 치면 status값에 나와있음
+// 트젝 pending 상태에서 넘어갈려면 마이닝을 실행해야함.
