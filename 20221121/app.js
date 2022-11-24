@@ -195,8 +195,31 @@ const genesis = {
 // 계정 잠금 해제하고 실행하려면 geth 열때 설정값 하나 더 넣어줘야함 --allow-insecure-unlock
 // geth --datadir node --http --allow-insecure-unlock --http.addr "0.0.0.0" --http.port 9000 --http.corsdomain "*" --http.api "admin,miner,txpool,web3,personal,eth,net" --syncmode full --networkid 12345
 // 다시 열고
-// personal.unlockAccount(eth.coinbase) 치고 비밀번호 입력해서 계정 풀어주고 (비번 123으로 설정함)
+// personal.unlockAccount(eth.coinbase) 치고 비밀번호 입력해서 계정 풀어주고 (비번 1으로 설정함)
 // 다시 보내기
 // eth.sendTransaction({from: eth.coinbase, to: eth.accounts[1], value: web3.toWei(10,"ether")})
 // 전송중인 트젝 볼려면 txpool 치면 status값에 나와있음
 // 트젝 pending 상태에서 넘어갈려면 마이닝을 실행해야함.
+
+// 특정 계정 (0,1번 계정) unlock 시켜주기
+// 비밀번호 적어놓은 txt 파일 만들어주기(터미널에서 echo 로 만들어야함)
+// geth --datadir node --http --http.addr "0.0.0.0" --http.port 9000 --http.corsdomain "*" --http.api "admin,miner,txpool,web3,personal,eth,net" --syncmode full --networkid 12345 --port 30300 --ws --ws.addr "127.0.0.1" --ws.port 9005 --ws.origins "*" --ws.api "admin,eth,debug,miner,miner,net,txpool,personal,web3" --allow-insecure-unlock --unlock "0,1" --password "./node/password.txt"
+
+// geth attach 한 자바스크립트 콘솔창에
+// bytecode = "0x뒤에 솔리디티로 컴파일한 bin 파일의 내용을 붙여넣어 준다." (bytecode 변수에 값 할당한거)
+// abi = 솔리디티로 컴파일한 abi파일의 내용을 붙여넣어준다.
+
+// 트랜젝션 객체를 만들어준다
+// from 키값과 data 키값으로 객체를 생성해준다.
+// txObject = {from: eth.coinbase, data: bytecode}
+// eth.sendTransaction(인수로 위에서 만든 트랜젝션 객체(txObject) 넣기)
+
+// 트랜젝션 확인하기
+// eth.getTransaction(트랜젝션의 해쉬값(send transaction 하고나면 뜨는 문자열) 넣기) (해쉬값 "0xf659439fc518f58408f2745e856346269da48a2de213ae7283a0b7a5b00c42db")
+
+// contract 변수에 eth.contract(위의 abi 값)을 할당하고 -> contract = eth.contract(abi)
+// 만들어진 contract 가 컨트랙트 객체가 된다.
+// contract.at() at매서드를 사용해서 스마트컨트렉트 코드에 접근이 가능하다.
+
+// contractAddress값은 eth.getTransactionReceipt(트젝 해쉬값)한 값을 할당해주기 => contractAddress = eth.getTransactionReceipt(해쉬값)
+// instance 변수에 contract.at(contractAddress)값 할당
