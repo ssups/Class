@@ -4,7 +4,6 @@ const { Client } = require("./controll/client");
 const [abi, bytecode] = Contract.compile("test.sol");
 
 const client = new Client("ws://127.0.0.1:9005");
-const client2 = new Client("ws://127.0.0.1:9005");
 
 const contract = new client.web3.eth.Contract(abi);
 // console.log(contract);
