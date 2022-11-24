@@ -1,0 +1,17 @@
+{
+  "name": "20221124",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^10.1.0",
+    "keythereum": "^2.0.0",
+    "solc": "^0.8.17",
+    "web3": "^1.8.1"
+  }
+}
