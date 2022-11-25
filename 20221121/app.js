@@ -223,3 +223,15 @@ const genesis = {
 
 // contractAddress값은 eth.getTransactionReceipt(트젝 해쉬값)한 값을 할당해주기 => contractAddress = eth.getTransactionReceipt(해쉬값)
 // instance 변수에 contract.at(contractAddress)값 할당
+
+// 상태변수를 가져오는것과 변경하는것은 차이가 있는데
+// 상태변수의 값을 바꾼다는건 저장공간에 값이 달라진다는 것이기 때문에
+// 네트워크에서 저장공간은 한계가 있어서 저장 용량을 바꾸기 위해서 추가적으로 비용을 지불해야 한다.
+// EVM을 실행시키기 위한 비용을 지불하는것
+// 상태변수의 값을 바꾸려면 트랜젝션을 발생시켜 수수료를 지불해야 한다.
+
+// call 함수는 데이터를 불러오는 함수이고
+// 값을 전달해서 상태변수를 바꾸는건 send 이다.
+
+// 순서는 처음에 마이닝 종료상태여야하고 instance.setText("ㄴㅇㄹ",{from:eth.coinbase}) 로 트젝 발생시켜주고
+// 마이닝 재시작해서 블록 하나 생성해주고 마이닝 종료한다음에 instance.getText()

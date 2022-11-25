@@ -13,5 +13,9 @@ contract("HelloWorld", account => {
     it("get value", async () => {
       console.log(await hello.value.call());
     });
+    it("set value", async () => {
+      await hello.setValue("내가 바로 바뀐값이다 22");
+      console.log(await hello.value.call());
+    });
   });
 });

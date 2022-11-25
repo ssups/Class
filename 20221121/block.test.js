@@ -3,7 +3,7 @@ const Web3 = require("web3");
 describe("블록 테스트", () => {
   let web3;
 
-  it("web3 연결", async () => {
+  it("web3 연결", asysnc () => {
     web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:9000"));
     const block_number = await web3.eth.getBlockNumber();
 
@@ -12,3 +12,5 @@ describe("블록 테스트", () => {
     console.log(block);
   });
 });
+
+Object.keys();
