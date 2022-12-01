@@ -1,0 +1,17 @@
+div {
+  margin-bottom: 30px;
+}
+input {
+  width: 50px;
+}
+select {
+  margin-left: 20px;
+}
+.buyBtn {
+  margin-left: 20px;
+}
+.Wrap {
+  width: 700px;
+  display: flex;
+  justify-content: space-between;
+}
