@@ -17,6 +17,7 @@ contract Counter {
         _count += 1;
         emit Count(_count);
         // 변한 상태변수의 값이 로그에 찍힌다.
+        // 전역변수로 선언된 count의 값이 변하면 프론트에 web3.eth.subscribe('logs',...)이벤트에 로그값으로 받아올수있따.
     }
 
     function decrement() public {
