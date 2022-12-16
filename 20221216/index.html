@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <label for="">마이닝 스캐너</label>
+    <input id="miner_count" type="number" />
+    <button id="miner_start">마이닝 시작</button>
+    <button id="miner_stop">마이닝 중지</button>
+    <div id="block"></div>
+  </body>
+  <script>
+    const web3 = new Web3(new Web3.providers.WebsocketProvider("ws://127.0.0.1:9005"));
+    //웹소켓같은거 해당 서버에서 발생하는 이벤트 listening하기 위함
+    web3.eth.subscribe("newBlockHeaders", (err, res) => {
+      if (!err) {
+        block.innerHTML += JSON.stringify(res);
+      }
+    });
+
+    miner_start.onclick = async () => {
+      const res = await axios.post("http://localhost:9000", {
+        jsonrpc: "2.0",
+        id: 1, // 요청 아이디를 지정하고 서버에서 응답받을때 구별할려고 사용
+        method: "miner_start",
+        params: [miner_count.value * 1], // 실행시킬 method의 인수로 들어갈값 마이닝할 스레드의 갯수
+      });
+      console.log(res);
+      console.log("난 시작");
+    };
+    miner_stop.onclick = () => {
+      axios.post("http://localhost:9000", {
+        jsonrpc: "2.0",
+        id: 1,
+        method: "miner_stop",
+        params: [],
+      });
+      console.log("난 끝");
+    };
+    //지금까지 만든거에서 접속중인 계정을 가져와서
+    //접속중인 계정이 블록 마이닝을해서 채굴하고
+    //실시간으로 잔액 보여주는 UI 만들기
+    //계정 주소를 직접 입력해서 해도 괜찮고
+    //아니면 메타마스크를 이용해서 접속중인 계정으로 세팅해도 괜찮고.
+  </script>
+</html>
