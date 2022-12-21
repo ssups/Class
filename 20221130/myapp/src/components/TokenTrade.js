@@ -15,7 +15,6 @@ const TokenTrade = () => {
   useEffect(() => {
     setTradeAmount(isEthBase ? 0.1 : 10);
   }, [isEthBase]);
-
   return (
     <div
       style={{

@@ -47,6 +47,7 @@ contract SaleToken {
     }
 
     // 토큰구매함수
+    // 이 함수 실행전에 setApprovalForAll 으로 
     function PurchaseToken(uint _tokenId) public payable {
         address tokenOwner = Token.ownerOf(_tokenId); // 토큰 소유자 EOa
 
@@ -66,7 +67,6 @@ contract SaleToken {
         // 토큰 전달을 하고
         Token.transferFrom(tokenOwner, msg.sender, _tokenId);
         //이게 지금 토큰전송하는 함수를 어떻게보면 외부컨트렉트에서 실행하는건데
-        // transferFrom 함수를 살펴보면 해당 함수를 호출하는 계정이 토큰 소유계정인지 확인하는 부분이 있어서 보안이 안전하다.
 
         tokenPrices[_tokenId] = 0;
         // 판매가격을 0으로 만들면 해당토큰은 판매중이 아닌걸로 된다.
@@ -77,6 +77,8 @@ contract SaleToken {
         for(uint i = 0; i< SaleTokenList.length; i++){
             if(SaleTokenList[i] == _tokenId){
                 SaleTokenList[i] = SaleTokenList[SaleTokenList.length -1];
+                // 세일토큰리스트에 제일 마지막에있는 토큰을 판매취소할려는 토큰위치에 복사해주고
+                // 세일토큰리스트 제일 마지막 꺼를 제거해주면 내가원하는 토큰만 배열에서 제거됨
                 SaleTokenList.pop();
                 return true;
             }
