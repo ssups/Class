@@ -23,6 +23,8 @@ contract SaleToken {
 
     // token의 아이디 => price(토큰의 가격);
     mapping(uint => uint) public tokenPrices;
+    // 판매중인 NFT의 토큰아이디 값을 담아놓은 상태변수
+    uint[] public SaleTokenList;
 
     // 판매 등록 함수
     function SalesToken(uint _tokenId, uint _price) public {
@@ -140,6 +142,5 @@ contract SaleToken {
         return TokenInfo(tokenId,Rank,Type,price);
     }
 
-    // 판매중인 NFT의 토큰아이디 값을 담아놓은 상태변수
-    uint[] public SaleTokenList;
+    
 }
